@@ -99,7 +99,7 @@ def add_food():
 
   return jsonify({
     "message":"資料新增成功",
-    "creature": {
+    "data": {
       "id": foodId,
       "name": name,
       "content": content,

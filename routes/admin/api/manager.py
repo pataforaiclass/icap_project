@@ -78,7 +78,7 @@ def register_manager():
 
   return jsonify({
     "message":"帳號資料新增成功",
-    "creature": {
+    "data": {
       "id": userId,
       "account": account,
       "pwd": "*****",

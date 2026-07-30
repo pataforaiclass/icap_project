@@ -81,7 +81,7 @@ def add_event():
 
   return jsonify({
     "message":"資料新增成功",
-    "creature": {
+    "data": {
       "id": eventId,
       "title": title,
       "content": content,

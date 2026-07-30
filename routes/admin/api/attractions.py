@@ -96,7 +96,7 @@ def add_attr():
 
   return jsonify({
     "message":"資料新增成功",
-    "creature": {
+    "data": {
       "id": attId,
       "name": name,
       "content": content,
