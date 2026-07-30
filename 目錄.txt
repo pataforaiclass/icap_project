@@ -1,0 +1,101 @@
+icap_project/
+│
+├── app.py                  # Flask 主程式
+├── config.py               # 設定檔(之後可放金鑰、資料庫設定)
+├── requirements.txt
+│
+├── database/
+│   ├── database.db
+│   └── init.py             # 建立資料表
+│
+├── templates/
+│   │
+│   ├── layout/
+│   │   ├── base.html
+│   │   ├── navbar.html
+│   │   ├── footer.html
+│   │   └── sidebar.html
+│   │
+│   ├── front/
+│   │   ├── index.html
+│   │   ├── event.html
+│   │   ├── attractions.html
+│   │   ├── food.html
+│   │   ├── accommodation.html
+│   │   ├── traffic.html
+│   │   └── member.html
+│   │
+│   ├── admin/
+│   │   ├── login.html
+│   │   ├── dashboard.html
+│   │   ├── event.html
+│   │   ├── food.html
+│   │   └── attractions.html
+│   │
+│   └── error/
+│       ├── 404.html
+│       └── 500.html
+│
+├── static/
+│   │
+│   ├── css/
+│   │   ├── bootstrap.min.css
+│   │   ├── common.css
+│   │   ├── front.css
+│   │   └── admin.css
+│   │
+│   ├── js/
+│   │   ├── bootstrap.bundle.min.js
+│   │   ├── vue.global.js
+│   │   ├── layout/
+│   │   │   └── navbar.js
+│   │   │
+│   │   ├── front/
+│   │   │   ├── index.js
+│   │   │   ├── event.js
+│   │   │   ├── food.js
+│   │   │   └── attractions.js
+│   │   │
+│   │   └── admin/
+│   │       ├── login.js
+│   │       ├── dashboard.js
+│   │       └── member.js
+│   │
+│   ├── image/
+│   │   ├── logo.png
+│   │   ├── banner/
+│   │   ├── icon/
+│   │   ├── attractions/
+│   │   ├── food/
+│   │   └── member/
+│   │
+│   ├── font/
+│   └── pdf/
+│
+├── routes/
+│   ├── __init__.py
+│   ├── web.py            # 整個網站的 routes 集合
+│   ├── front/            # 前台頁面
+│   │   ├── __init__.py
+│   │   ├── page.py
+│   │   └── api/
+│   │       ├── __init__.py
+│   │       ├── member.py
+│   │       ├── event.py
+│   │       ├── attractions.py
+│   │       └── food.py
+│   │
+│   └── admin/            # 管理員
+│       ├── __init__.py
+│       ├── page.py
+│       └── api/
+│           ├── __init__.py
+│           ├── manager.py
+│           ├── event.py
+│           ├── attractions.py
+│           └── food.py
+│
+└── utils/
+    ├── datetime.py
+    ├── validator.py
+    └── helper.py

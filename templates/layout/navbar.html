@@ -1,0 +1,56 @@
+<div id="navbarApp">
+  <!-- Top Bar -->
+  <nav class="navbar top-navbar">
+    <div class="container-fluid top-wrap">
+      <div class="gov-name">
+        台中市政府觀光旅遊局
+      </div>
+
+      <div class="lang-group">
+        <a href="#">EN</a>
+        <span>|</span>
+        <a href="#">日本語</a>
+        <span>|</span>
+        <a href="#">한국어</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Navbar -->
+  <nav class="navbar navbar-expand-lg main-navbar">
+    <div class="container-lg">
+
+      <a class="navbar-brand logo-group" href="#">
+        <img src="[[ url_for('static', filename='image/Logo_S.png') ]]" alt="Logo">
+        <div class="logo-text">
+          <div class="tw">台中旅遊</div>
+          <div class="en">TAICHUNG TOURISM</div>
+        </div>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav mx-auto">
+          {% if current_page == "index" %}
+          {% for key, value in nav_items %}
+          <a class="nav-link" href="#scroll[[ loop.index0 ]]">
+            [[ value ]]
+          </a>
+          {% endfor %}
+          {% else %}
+          {% for key, value in nav_items %}
+          <a class="nav-link {% if current_page == key %}active{% endif %}" href="[[ url_for(key) ]]">
+            [[ value ]]
+          </a>
+          {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+
+    </div>
+  </nav>
+</div>
+<script src="[[ url_for('static', filename='js/layout/navbar.js') ]]"></script>

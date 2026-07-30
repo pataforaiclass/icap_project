@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>台中市政府觀光旅遊局</title>
+  <link rel="stylesheet" href="[[ url_for('static', filename='css/bootstrap.min.css') ]]">
+  <link rel="stylesheet" href="[[ url_for('static', filename='css/all.min.css') ]]">
+  <style>
+    /* ===========================
+      Top Navbar
+    =========================== */
+
+    .top-navbar {
+      background: #195d32;
+      height: 28px;
+      padding: 0;
+      font-size: 13px;
+    }
+
+    .top-wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+    }
+
+    .gov-name {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .lang-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .lang-group span {
+      color: rgba(255, 255, 255, .45);
+    }
+
+    .lang-group a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    .lang-group a:hover {
+      opacity: .8;
+    }
+
+
+    /* ===========================
+      Main Navbar
+    =========================== */
+
+    .main-navbar {
+      background: #fff;
+      height: 64px;
+      border-bottom: 1px solid #ececec;
+      padding: 0;
+    }
+
+    .main-navbar .container-lg {
+      display: flex;
+      align-items: center;
+    }
+
+
+    /* ===========================
+      Logo
+    =========================== */
+
+    .logo-group {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .logo-group img {
+      width: 48px;
+      height: 48px;
+      margin-right: 10px;
+    }
+
+    .logo-text {
+      line-height: 1.1;
+    }
+
+    .logo-text .tw {
+      color: #e96521;
+      font-size: 26px;
+      font-weight: 700;
+    }
+
+    .logo-text .en {
+      margin-top: 4px;
+      color: #8a8a8a;
+      font-size: 11px;
+      letter-spacing: 1px;
+    }
+
+
+    /* ===========================
+      Menu
+    =========================== */
+
+    .navbar-nav {
+      gap: 12px;
+    }
+
+    .nav-link {
+      color: #333;
+      font-weight: 600;
+      font-size: 16px;
+      padding: 12px 18px !important;
+      border-radius: 999px;
+      transition: .25s;
+    }
+
+    .nav-link:hover {
+      color: #f26522;
+    }
+
+    .nav-link.active {
+      background: #f26522;
+      color: #fff !important;
+    }
+
+
+    /* ===========================
+      Mobile
+    =========================== */
+
+    @media (max-width:991px) {
+
+      .main-navbar {
+        height: auto;
+        padding: 10px 0;
+      }
+
+      .navbar-nav {
+        margin-top: 15px;
+        gap: 0;
+      }
+
+      .nav-link {
+        padding: 10px 5px !important;
+        border-radius: 3px;
+      }
+
+      .search-btn {
+        margin: 15px auto 0;
+        display: block;
+      }
+
+      .logo-text .tw {
+        font-size: 22px;
+      }
+
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <!-- Top Bar -->
+    <nav class="navbar top-navbar">
+      <div class="container-fluid top-wrap">
+        <div class="gov-name">
+          台中市政府觀光旅遊局
+        </div>
+
+        <div class="lang-group">
+          <a href="#">EN</a>
+          <span>|</span>
+          <a href="#">日本語</a>
+          <span>|</span>
+          <a href="#">한국어</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Navbar -->
+    <nav class="navbar navbar-expand-lg main-navbar">
+      <div class="container-lg">
+
+        <a class="navbar-brand logo-group" href="#">
+          <img src="[[ url_for('static', filename='image/Logo_S.png') ]]" alt="Logo">
+          <div class="logo-text">
+            <div class="tw">台中旅遊</div>
+            <div class="en">TAICHUNG TOURISM</div>
+          </div>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav mx-auto">
+            <template v-if="nav_type == 0">
+              <a v-for="(value,key,index) in nav_items" class="nav-link" :class="{active:nav_active==index}"
+                :href="'#scroll'+index" @click="nav_active=index">{{ value }}</a>
+            </template>
+            <template v-if="nav_type == 1">
+              <a v-for="(value,key) in nav_items" class="nav-link" :class="{active:nav_active==key}" :href="key">{{
+                value }}</a>
+            </template>
+          </div>
+        </div>
+
+      </div>
+    </nav>
+  </div>
+  <!--  -->
+  <script src="[[ url_for('static', filename='js/bootstrap.bundle.min.js') ]]"></script>
+  <script src="[[ url_for('static', filename='js/vue.global.js') ]]"></script>
+  <script>
+    const App = {
+      data() {
+        return {
+          nav_type: 0, // 0:首頁 1:其他
+          nav_active: 0,
+          nav_items: {
+            event: "年度活動",
+            attr: "熱門景點",
+            food: "美食巡禮",
+            acco: "旅遊住宿",
+            traffic: "交通情報"
+          }
+        }
+      },
+      mounted() {
+        if (window.location.pathname.endsWith("index")) {
+          // console.log("目前是 index.html");
+          this.nav_type = 0;
+        } else {
+          console.log("目前不是 index.html");
+          webList = window.location.pathname.split("/");
+          target = webList[1].split("#");
+          this.nav_active = target[0];
+          this.nav_type = 1;
+        }
+      }
+    }
+    Vue.createApp(App).mount("#app");
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,153 @@
+/* ===========================
+  Top Navbar
+=========================== */
+
+.top-navbar {
+  background: #195d32;
+  height: 28px;
+  padding: 0;
+  font-size: 13px;
+}
+
+.top-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.gov-name {
+  color: #fff;
+  font-weight: 600;
+}
+
+.lang-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.lang-group span {
+  color: rgba(255, 255, 255, .45);
+}
+
+.lang-group a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.lang-group a:hover {
+  opacity: .8;
+}
+
+
+/* ===========================
+  Main Navbar
+=========================== */
+
+.main-navbar {
+  background: #fff;
+  height: 64px;
+  border-bottom: 1px solid #ececec;
+  padding: 0;
+}
+
+.main-navbar .container-lg {
+  display: flex;
+  align-items: center;
+}
+
+
+/* ===========================
+  Logo
+=========================== */
+
+.logo-group {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logo-group img {
+  width: 48px;
+  height: 48px;
+  margin-right: 10px;
+}
+
+.logo-text {
+  line-height: 1.1;
+}
+
+.logo-text .tw {
+  color: #e96521;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.logo-text .en {
+  margin-top: 4px;
+  color: #8a8a8a;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+
+/* ===========================
+  Menu
+=========================== */
+
+.navbar-nav {
+  gap: 12px;
+}
+
+.nav-link {
+  color: #333;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 12px 18px !important;
+  border-radius: 999px;
+  transition: .25s;
+}
+
+.nav-link:hover {
+  color: #f26522;
+}
+
+.nav-link.active {
+  background: #f26522;
+  color: #fff !important;
+}
+
+
+/* ===========================
+  Mobile
+=========================== */
+
+@media (max-width:991px) {
+
+  .main-navbar {
+    height: auto;
+    padding: 10px 0;
+  }
+
+  .navbar-nav {
+    margin-top: 15px;
+    gap: 0;
+  }
+
+  .nav-link {
+    padding: 10px 5px !important;
+    border-radius: 3px;
+  }
+
+  .search-btn {
+    margin: 15px auto 0;
+    display: block;
+  }
+
+  .logo-text .tw {
+    font-size: 22px;
+  }
+
+}
