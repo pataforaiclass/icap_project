@@ -1,12 +1,15 @@
 from flask import Blueprint, request, jsonify
 import sqlite3
 import re
+from werkzeug.security import generate_password_hash
 from utils.datetime import get_tw_time
+from utils.auth import api_manager_required
 
 bp = Blueprint('manager', __name__)
 
 # 建檔，目前只能用 post man 使用
 @bp.post('/')
+@api_manager_required
 def register_manager():
   # 資料格式驗證
   try:
@@ -26,19 +29,20 @@ def register_manager():
   email = data.get('email')
   mobile = data.get('mobile')
   # 資料內容驗證
-  if not isinstance(account,str) or account.isspace():
+  if not isinstance(account,str) or not account.strip():
     return jsonify({"error":"帳號必須是非純空白文字格式"}), 400
-  if not isinstance(pwd,str) or pwd.isspace():
+  if not isinstance(pwd,str) or not pwd.strip():
     return jsonify({"error":"密碼必須是非純空白文字格式"}), 400
   pwdPa1 = r'^[^\s]{8,20}$'
-  if re.fullmatch(pwdPa1) is None:
+  if re.fullmatch(pwdPa1,pwd) is None:
     return jsonify({"error":"密碼不符合長度"}), 400
   pwdPa2 = r'^[A-Za-z\d!@#$%^&*()_+\-=\[\]{};\':"\\|,.<>/?`~]+$'
-  if re.fullmatch(pwdPa2) is None:
+  if re.fullmatch(pwdPa2,pwd) is None:
     return jsonify({"error":"密碼不符合格式"}), 400
-  if not isinstance(userName,str) or userName.isspace():
+  pwd_hash = generate_password_hash(pwd)
+  if not isinstance(userName,str) or not userName.strip():
     return jsonify({"error":"用戶名稱必須是非純空白文字格式"}), 400
-  if not isinstance(email,str) or email.isspace():
+  if not isinstance(email,str) or not email.strip():
     return jsonify({"error":"電子信箱必須是非純空白文字格式"}), 400
   emailPa = r'[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}'
   if re.fullmatch(emailPa, email) is None:
@@ -50,7 +54,7 @@ def register_manager():
     return jsonify({"error":"手機號碼不符合格式"}), 400
 
   # 連線資料庫
-  conn = sqlite3.connect("database.db")
+  conn = sqlite3.connect("database/database.db")
   cursor = conn.cursor()
   dateNow = get_tw_time()
 
@@ -69,7 +73,7 @@ def register_manager():
     INSERT INTO manager(account, pwd, userName, email, mobile, createTime)
     VALUES (?, ?, ?, ?, ?, ?)
   """,(
-    account, pwd, userName, email, mobile, dateNow
+    account, pwd_hash, userName, email, mobile, dateNow
   ))
   conn.commit()
   # 抓取最後一筆新增資料的 id
@@ -81,7 +85,6 @@ def register_manager():
     "data": {
       "id": userId,
       "account": account,
-      "pwd": "*****",
       "userName": userName,
       "email": email,
       "mobile": mobile,

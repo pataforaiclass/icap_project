@@ -1,0 +1,2798 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>台中市政府觀光旅遊局</title>
+  <link rel="stylesheet" href="[[ url_for('static', filename='css/bootstrap.min.css') ]]">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="[[ url_for('static', filename='css/all.min.css') ]]">
+
+  <style>
+    /* =========================================================
+  基本設定
+========================================================= */
+
+    :root {
+      --primary: #f26b21;
+      --primary-dark: #e6530e;
+      --green: #13794b;
+
+      --body-bg: #ffffff;
+      --section-bg: #f7f8f8;
+      --warm-bg: #fff8f2;
+
+      --text-dark: #222;
+      --text-gray: #777;
+
+      --border: #e8e8e8;
+
+      --footer-bg: #101b2d;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family:
+        "Noto Sans TC",
+        "Microsoft JhengHei",
+        Arial,
+        sans-serif;
+
+      color: var(--text-dark);
+      background: var(--body-bg);
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+    }
+
+    #navbarApp {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    /* =========================================================
+   Front Navbar
+   ========================================================= */
+
+    .top-navbar {
+      background-color: #173f3d;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .main-navbar {
+      position: relative;
+      z-index: 1000;
+
+      min-height: 92px;
+
+      background: rgba(255, 255, 255, 0.96) !important;
+
+      border-bottom: 1px solid #e2eeeb;
+
+      box-shadow: 0 3px 18px rgba(39, 94, 88, 0.06);
+
+      backdrop-filter: blur(12px);
+    }
+
+
+    /* Logo */
+
+    .logo-group {
+      display: flex;
+      align-items: center;
+
+      gap: 10px;
+
+      color: #23413f !important;
+    }
+
+    .logo-group img {
+      width: 48px;
+      height: 48px;
+
+      object-fit: contain;
+    }
+
+    .logo-text {
+      line-height: 1.15;
+    }
+
+    .logo-text .tw {
+      color: #23413f;
+
+      font-size: 18px;
+      font-weight: 800;
+
+      letter-spacing: 2px;
+    }
+
+    .logo-text .en {
+      margin-top: 4px;
+
+      color: #6c8581;
+
+      font-size: 7px;
+      font-weight: 700;
+
+      letter-spacing: 1.5px;
+    }
+
+
+    /* Navbar menu */
+
+    .main-navbar .navbar-nav {
+      gap: 5px;
+    }
+
+    .main-navbar .nav-link {
+      position: relative;
+
+      padding: 12px 16px !important;
+
+      color: #526d69 !important;
+
+      font-size: 13px;
+      font-weight: 600;
+
+      transition:
+        color 0.2s ease,
+        background 0.2s ease;
+    }
+
+    .main-navbar .nav-link::after {
+      content: "";
+
+      position: absolute;
+
+      left: 50%;
+      bottom: 4px;
+
+      width: 0;
+      height: 2px;
+
+      transform: translateX(-50%);
+
+      border-radius: 5px;
+
+      background: #168f8a;
+
+      transition: width 0.25s ease;
+    }
+
+    .main-navbar .nav-link:hover,
+    .main-navbar .nav-link.active {
+      color: #168f8a !important;
+    }
+
+    .main-navbar .nav-link:hover::after,
+    .main-navbar .nav-link.active::after {
+      width: 22px;
+    }
+
+
+    /* 語言 */
+
+    .lang-group {
+      display: flex;
+      align-items: center;
+
+      gap: 7px;
+
+      margin-left: 15px;
+
+      color: #8ca09d;
+
+      font-size: 10px;
+    }
+
+    .lang-group a {
+      color: #637976;
+
+      transition: color 0.2s ease;
+    }
+
+    .lang-group a:hover {
+      color: #168f8a;
+    }
+
+
+    /* 手機選單按鈕 */
+
+    .main-navbar .navbar-toggler {
+      padding: 7px 9px;
+
+      border: 1px solid #d8e9e6;
+      border-radius: 8px;
+    }
+
+    .main-navbar .navbar-toggler:focus {
+      box-shadow: 0 0 0 3px rgba(22, 143, 138, 0.12);
+    }
+
+
+    /* =========================================================
+   Navbar RWD
+   ========================================================= */
+
+    @media (max-width: 991.98px) {
+
+      .main-navbar {
+        min-height: 75px;
+      }
+
+      .logo-group img {
+        width: 42px;
+        height: 42px;
+      }
+
+      .logo-text .tw {
+        font-size: 16px;
+      }
+
+      .main-navbar .navbar-nav {
+        padding: 15px 0;
+      }
+
+      .main-navbar .nav-link {
+        padding: 10px 5px !important;
+      }
+
+      .main-navbar .nav-link::after {
+        left: 0;
+
+        transform: none;
+      }
+
+      .lang-group {
+        justify-content: center;
+
+        margin: 0 0 15px;
+      }
+    }
+
+
+    @media (max-width: 575.98px) {
+
+      .main-navbar {
+        min-height: 68px;
+      }
+
+      .logo-group img {
+        width: 38px;
+        height: 38px;
+      }
+
+      .logo-text .tw {
+        font-size: 15px;
+      }
+
+      .logo-text .en {
+        font-size: 6px;
+      }
+    }
+
+    /* =========================================================
+   Footer
+   ========================================================= */
+
+    footer {
+      background: #173f3d;
+
+      color: #d9e9e6;
+    }
+
+    footer img {
+      width: 48px;
+      height: 48px;
+
+      object-fit: contain;
+    }
+
+
+    /* Footer 主區 */
+
+    footer .footer-title {
+      position: relative;
+
+      margin-bottom: 17px;
+
+      color: #ffffff;
+
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    footer .footer-title::after {
+      content: "";
+
+      display: block;
+
+      width: 25px;
+      height: 2px;
+
+      margin-top: 8px;
+
+      border-radius: 5px;
+
+      background: #53b6a5;
+    }
+
+
+    footer strong {
+      color: #ffffff;
+
+      font-size: 20px;
+      font-weight: 800;
+
+      letter-spacing: 2px;
+    }
+
+
+    footer p {
+      margin-top: 12px;
+
+      color: #a9c4c0;
+
+      font-size: 11px;
+      line-height: 1.9;
+    }
+
+
+    /* Footer Links */
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+
+      gap: 9px;
+    }
+
+    .footer-links a {
+      color: #a9c4c0;
+
+      font-size: 11px;
+
+      transition:
+        color 0.2s ease,
+        padding-left 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      padding-left: 4px;
+
+      color: #72cabb;
+    }
+
+
+    /* Social */
+
+    .social-icons {
+      display: flex;
+      gap: 8px;
+
+      margin-top: 17px;
+    }
+
+    .social-icons a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 34px;
+      height: 34px;
+
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 50%;
+
+      background: rgba(255, 255, 255, 0.06);
+
+      color: #d9e9e6;
+
+      transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .social-icons a:hover {
+      background: #168f8a;
+
+      color: #fff;
+
+      transform: translateY(-3px);
+    }
+
+
+    /* Copyright */
+
+    .copyright {
+      margin-top: 45px;
+      padding-top: 18px;
+
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+      color: #88aaa5;
+
+      font-size: 9px;
+
+      text-align: center;
+    }
+
+
+    @media (max-width: 575.98px) {
+
+      footer .footer-title {
+        margin-top: 15px;
+      }
+
+      footer strong {
+        font-size: 18px;
+      }
+
+      .copyright {
+        margin-top: 30px;
+
+        line-height: 1.7;
+      }
+    }
+
+    /* =========================================================
+   台中旅遊首頁
+   Natural Fresh Travel Style
+   ========================================================= */
+
+    :root {
+      --travel-primary: #168f8a;
+      --travel-primary-dark: #0f716e;
+      --travel-secondary: #4fae9f;
+
+      --travel-blue: #3c8dad;
+      --travel-blue-light: #eaf7fa;
+
+      --travel-green: #5aaa8b;
+      --travel-green-light: #edf8f3;
+
+      --travel-bg: #f5faf9;
+      --travel-bg-blue: #f1f8fa;
+      --travel-bg-green: #f2f9f6;
+
+      --travel-white: #ffffff;
+      --travel-text: #23413f;
+      --travel-text-light: #6f8582;
+
+      --travel-border: #dcebe8;
+
+      --travel-shadow: 0 8px 28px rgba(39, 94, 88, 0.08);
+      --travel-shadow-hover: 0 16px 36px rgba(39, 94, 88, 0.14);
+    }
+
+
+    /* =========================================================
+   共用
+   ========================================================= */
+
+    #app {
+      background: var(--travel-white);
+      color: var(--travel-text);
+    }
+
+    #app a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .pointer {
+      cursor: pointer;
+    }
+
+
+    /* =========================================================
+   Hero Carousel
+   ========================================================= */
+
+    .top-area {
+      overflow: hidden;
+    }
+
+    .hero-carousel {
+      position: relative;
+
+      height: calc(100svh - 92px);
+      min-height: 520px;
+      max-height: 820px;
+
+      background: #dcefed;
+    }
+
+    .hero-carousel .carousel-inner,
+    .hero-carousel .carousel-item {
+      height: 100%;
+    }
+
+    .hero-carousel .carousel-item {
+      position: relative;
+    }
+
+    .hero-carousel img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+      transition: transform 8s ease;
+    }
+
+    .hero-carousel .carousel-item.active img {
+      transform: scale(1.035);
+    }
+
+
+    /* 圖片遮罩 */
+
+    .hero-carousel .carousel-item::after {
+      content: "";
+
+      position: absolute;
+      inset: 0;
+
+      background:
+        linear-gradient(90deg,
+          rgba(12, 45, 47, 0.68) 0%,
+          rgba(12, 45, 47, 0.42) 35%,
+          rgba(12, 45, 47, 0.12) 72%,
+          rgba(12, 45, 47, 0.03) 100%);
+
+      z-index: 1;
+    }
+
+
+    /* Hero 文字 */
+
+    .hero-content {
+      position: absolute;
+
+      z-index: 5;
+
+      top: 50%;
+      left: 9%;
+
+      transform: translateY(-50%);
+
+      max-width: 570px;
+
+      color: #fff;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+
+      padding: 7px 15px;
+
+      margin-bottom: 18px;
+
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 50px;
+
+      background: rgba(255, 255, 255, 0.14);
+
+      backdrop-filter: blur(8px);
+
+      font-size: 12px;
+      font-weight: 700;
+
+      letter-spacing: 1px;
+    }
+
+    .hero-content h1 {
+      margin-bottom: 15px;
+
+      font-size: clamp(34px, 4.5vw, 62px);
+      line-height: 1.2;
+
+      font-weight: 800;
+      letter-spacing: 2px;
+
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .hero-content p {
+      max-width: 510px;
+
+      margin-bottom: 28px;
+
+      font-size: 15px;
+      line-height: 1.9;
+
+      color: rgba(255, 255, 255, 0.92);
+    }
+
+
+    /* Hero Button */
+
+    .hero-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+
+      padding: 12px 23px;
+
+      border-radius: 50px;
+
+      background: var(--travel-primary);
+      color: #fff !important;
+
+      font-size: 13px;
+      font-weight: 700;
+
+      box-shadow: 0 8px 22px rgba(22, 143, 138, 0.28);
+
+      transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        box-shadow 0.25s ease;
+    }
+
+    .hero-btn i {
+      transition: transform 0.25s ease;
+    }
+
+    .hero-btn:hover {
+      background: var(--travel-primary-dark);
+
+      transform: translateY(-2px);
+
+      box-shadow: 0 12px 28px rgba(22, 143, 138, 0.36);
+    }
+
+    .hero-btn:hover i {
+      transform: translateX(4px);
+    }
+
+
+    /* Carousel 左右按鈕 */
+
+    .hero-carousel .carousel-control-prev,
+    .hero-carousel .carousel-control-next {
+      width: 70px;
+
+      z-index: 10;
+
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    .hero-carousel:hover .carousel-control-prev,
+    .hero-carousel:hover .carousel-control-next {
+      opacity: 1;
+    }
+
+    .hero-carousel .carousel-control-prev-icon,
+    .hero-carousel .carousel-control-next-icon {
+      width: 42px;
+      height: 42px;
+
+      padding: 12px;
+
+      border-radius: 50%;
+
+      background-color: rgba(20, 55, 56, 0.5);
+      background-size: 45%;
+
+      backdrop-filter: blur(5px);
+    }
+
+
+    /* =========================================================
+   Section 共用
+   ========================================================= */
+
+    .section {
+      position: relative;
+
+      padding: 85px 0;
+    }
+
+    .section-gray {
+      background: var(--travel-bg);
+    }
+
+    .section-warm {
+      background: var(--travel-bg-green);
+    }
+
+
+    /* Section Header */
+
+    .section-title {
+      position: relative;
+
+      display: flex;
+      align-items: center;
+
+      margin-bottom: 8px;
+      padding-left: 15px;
+    }
+
+    .section-title::before {
+      content: "";
+
+      position: absolute;
+
+      left: 0;
+      top: 50%;
+
+      width: 5px;
+      height: 30px;
+
+      transform: translateY(-50%);
+
+      background: linear-gradient(180deg,
+          var(--travel-primary),
+          var(--travel-secondary));
+
+      border-radius: 10px;
+    }
+
+    .section-title h2 {
+      margin: 0;
+
+      color: var(--travel-text);
+
+      font-size: 27px;
+      line-height: 1.4;
+
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .section-subtitle {
+      margin-bottom: 28px;
+
+      color: var(--travel-text-light);
+
+      font-size: 12px;
+      line-height: 1.7;
+
+      letter-spacing: 0.5px;
+    }
+
+    .section-more {
+      display: inline-flex;
+      align-items: center;
+
+      margin-bottom: 28px;
+
+      color: var(--travel-primary) !important;
+
+      font-size: 12px;
+      font-weight: 700;
+
+      transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .section-more:hover {
+      color: var(--travel-primary-dark) !important;
+
+      transform: translateX(4px);
+    }
+
+
+    /* =========================================================
+   最新消息
+   ========================================================= */
+
+    .news-card {
+      position: relative;
+
+      height: 100%;
+
+      overflow: hidden;
+
+      border: 1px solid var(--travel-border);
+      border-radius: 16px;
+
+      background: var(--travel-white);
+
+      box-shadow: 0 3px 12px rgba(39, 94, 88, 0.04);
+
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+    }
+
+    .news-card:hover {
+      transform: translateY(-6px);
+
+      box-shadow: var(--travel-shadow-hover);
+    }
+
+    .news-image {
+      display: block;
+
+      width: 100%;
+      height: 170px;
+
+      object-fit: cover;
+
+      transition: transform 0.45s ease;
+    }
+
+    .news-card:hover .news-image {
+      transform: scale(1.04);
+    }
+
+    .news-body {
+      padding: 18px;
+    }
+
+    .news-tag {
+      display: inline-block;
+
+      padding: 5px 10px;
+
+      border-radius: 50px;
+
+      background: var(--travel-green-light);
+      color: var(--travel-primary);
+
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .news-date {
+      margin-left: 7px;
+
+      color: #9aaba8;
+
+      font-size: 10px;
+    }
+
+    .news-title {
+      display: -webkit-box;
+
+      margin: 11px 0 0;
+
+      overflow: hidden;
+
+      color: var(--travel-text);
+
+      font-size: 15px;
+      line-height: 1.7;
+
+      font-weight: 700;
+
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+
+      transition: color 0.2s ease;
+    }
+
+    .news-card:hover .news-title {
+      color: var(--travel-primary);
+    }
+
+
+    /* 最新消息列表 */
+
+    .news-list {
+      height: 100%;
+
+      padding: 22px;
+
+      border: 1px solid var(--travel-border);
+      border-radius: 16px;
+
+      background: #fff;
+
+      box-shadow: 0 3px 12px rgba(39, 94, 88, 0.04);
+    }
+
+    .news-list-title {
+      position: relative;
+
+      padding-bottom: 13px;
+      margin-bottom: 8px;
+
+      color: var(--travel-text);
+
+      font-size: 15px;
+      font-weight: 800;
+
+      border-bottom: 1px solid var(--travel-border);
+    }
+
+    .news-list-title::after {
+      content: "";
+
+      position: absolute;
+
+      left: 0;
+      bottom: -1px;
+
+      width: 45px;
+      height: 2px;
+
+      background: var(--travel-primary);
+    }
+
+    .news-list a {
+      display: block;
+
+      padding: 11px 0;
+
+      border-bottom: 1px dashed #e4eeec;
+
+      color: #607572;
+
+      font-size: 12px;
+      line-height: 1.6;
+
+      transition:
+        color 0.2s ease,
+        padding-left 0.2s ease;
+    }
+
+    .news-list a:last-child {
+      border-bottom: none;
+    }
+
+    .news-list a:hover {
+      padding-left: 5px;
+
+      color: var(--travel-primary);
+    }
+
+
+    /* =========================================================
+   分類 Tabs
+   ========================================================= */
+
+    .category-tabs {
+      display: flex;
+      flex-wrap: wrap;
+
+      gap: 8px;
+
+      margin-bottom: 28px;
+    }
+
+    .category-tabs a {
+      padding: 7px 16px;
+
+      border: 1px solid var(--travel-border);
+      border-radius: 50px;
+
+      background: #fff;
+
+      color: #657b78;
+
+      font-size: 11px;
+
+      transition: all 0.2s ease;
+    }
+
+    .category-tabs a.active,
+    .category-tabs a:hover {
+      border-color: var(--travel-primary);
+
+      background: var(--travel-primary);
+      color: #fff;
+    }
+
+
+    /* =========================================================
+   景點卡片
+   ========================================================= */
+
+    .spot-card {
+      height: 100%;
+
+      overflow: hidden;
+
+      border: 1px solid var(--travel-border);
+      border-radius: 16px;
+
+      background: #fff;
+
+      box-shadow: 0 3px 12px rgba(39, 94, 88, 0.04);
+
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+    }
+
+    .spot-card:hover {
+      transform: translateY(-7px);
+
+      box-shadow: var(--travel-shadow-hover);
+    }
+
+    .spot-image {
+      display: block;
+
+      width: 100%;
+      height: 180px;
+
+      object-fit: cover;
+
+      transition: transform 0.5s ease;
+    }
+
+    .spot-card:hover .spot-image {
+      transform: scale(1.045);
+    }
+
+    .spot-body {
+      padding: 18px;
+    }
+
+    .spot-body h3 {
+      margin-bottom: 8px;
+
+      color: var(--travel-text);
+
+      font-size: 16px;
+      font-weight: 800;
+
+      transition: color 0.2s ease;
+    }
+
+    .spot-card:hover .spot-body h3 {
+      color: var(--travel-primary);
+    }
+
+    .spot-body p {
+      min-height: 35px;
+
+      margin-bottom: 14px;
+
+      color: #728582;
+
+      font-size: 11px;
+      line-height: 1.7;
+
+      display: -webkit-box;
+
+      overflow: hidden;
+
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+
+    .rating {
+      color: #e6a827;
+      font-size: 12px;
+    }
+
+    .card-link {
+      color: var(--travel-primary);
+
+      font-size: 11px;
+      font-weight: 700;
+
+      transition: transform 0.2s ease;
+    }
+
+    .spot-card:hover .card-link {
+      transform: translateX(4px);
+    }
+
+
+    /* =========================================================
+   美食
+   ========================================================= */
+
+    .food-card {
+      height: 100%;
+
+      overflow: hidden;
+
+      border: 1px solid var(--travel-border);
+      border-radius: 16px;
+
+      background: #fff;
+
+      box-shadow: 0 3px 12px rgba(39, 94, 88, 0.04);
+
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+    }
+
+    .food-card:hover {
+      transform: translateY(-7px);
+
+      box-shadow: var(--travel-shadow-hover);
+    }
+
+    .food-image {
+      display: block;
+
+      width: 100%;
+      height: 190px;
+
+      object-fit: cover;
+
+      transition: transform 0.5s ease;
+    }
+
+    .food-card:hover .food-image {
+      transform: scale(1.045);
+    }
+
+    .food-body {
+      padding: 19px;
+    }
+
+    .food-tag {
+      display: inline-block;
+
+      margin-bottom: 8px;
+
+      padding: 5px 9px;
+
+      border-radius: 50px;
+
+      background: #eaf7f3;
+      color: var(--travel-primary);
+
+      font-size: 9px;
+      font-weight: 700;
+    }
+
+    .food-body h3 {
+      margin-bottom: 8px;
+
+      color: var(--travel-text);
+
+      font-size: 16px;
+      font-weight: 800;
+
+      transition: color 0.2s ease;
+    }
+
+    .food-card:hover .food-body h3 {
+      color: var(--travel-primary);
+    }
+
+    .food-body p {
+      display: -webkit-box;
+
+      min-height: 37px;
+      margin-bottom: 0;
+
+      overflow: hidden;
+
+      color: #718480;
+
+      font-size: 11px;
+      line-height: 1.7;
+
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+
+    .food-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      margin-top: 17px;
+      padding-top: 13px;
+
+      border-top: 1px solid #edf2f1;
+
+      color: #8a9a97;
+
+      font-size: 10px;
+    }
+
+    .food-bottom strong {
+      color: var(--travel-primary);
+
+      font-size: 10px;
+    }
+
+
+    /* =========================================================
+   CTA
+   ========================================================= */
+
+    .cta {
+      position: relative;
+
+      overflow: hidden;
+
+      padding: 30px 34px;
+
+      border-radius: 18px;
+
+      background:
+        linear-gradient(120deg,
+          #158d88,
+          #3ca99a);
+
+      color: #fff;
+
+      box-shadow: 0 10px 30px rgba(22, 143, 138, 0.18);
+    }
+
+    .cta::after {
+      content: "";
+
+      position: absolute;
+
+      width: 180px;
+      height: 180px;
+
+      right: -60px;
+      top: -80px;
+
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 50%;
+    }
+
+    .cta h3 {
+      position: relative;
+      z-index: 1;
+
+      margin-bottom: 6px;
+
+      font-size: 21px;
+      font-weight: 800;
+    }
+
+    .cta p {
+      position: relative;
+      z-index: 1;
+
+      margin: 0;
+
+      font-size: 11px;
+
+      opacity: 0.9;
+    }
+
+    .cta-btn {
+      position: relative;
+      z-index: 2;
+
+      display: inline-block;
+
+      padding: 10px 20px;
+
+      border: 0;
+      border-radius: 50px;
+
+      background: #fff;
+      color: var(--travel-primary);
+
+      font-size: 11px;
+      font-weight: 800;
+
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+    .cta-btn:hover {
+      color: var(--travel-primary-dark);
+
+      transform: translateY(-2px);
+
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.13);
+    }
+
+
+    /* =========================================================
+   住宿
+   ========================================================= */
+
+    .hotel-card {
+      height: 100%;
+
+      overflow: hidden;
+
+      border: 1px solid var(--travel-border);
+      border-radius: 16px;
+
+      background: #fff;
+
+      box-shadow: 0 3px 12px rgba(39, 94, 88, 0.04);
+
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+    }
+
+    .hotel-card:hover {
+      transform: translateY(-6px);
+
+      box-shadow: var(--travel-shadow-hover);
+    }
+
+    .hotel-image {
+      display: block;
+
+      width: 100%;
+      height: 155px;
+
+      object-fit: cover;
+
+      transition: transform 0.5s ease;
+    }
+
+    .hotel-card:hover .hotel-image {
+      transform: scale(1.045);
+    }
+
+    .hotel-body {
+      padding: 15px;
+    }
+
+    .hotel-stars {
+      color: #e6a827;
+
+      font-size: 10px;
+      letter-spacing: 1px;
+    }
+
+    .hotel-body h3 {
+      margin: 7px 0 9px;
+
+      color: var(--travel-text);
+
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .hotel-tags {
+      display: flex;
+      flex-wrap: wrap;
+
+      gap: 5px;
+    }
+
+    .hotel-tags span {
+      padding: 4px 8px;
+
+      border-radius: 50px;
+
+      background: #edf7f6;
+      color: #4c807b;
+
+      font-size: 9px;
+    }
+
+    .hotel-price {
+      color: var(--travel-primary);
+
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .hotel-btn {
+      padding: 6px 12px;
+
+      border-radius: 50px;
+
+      background: var(--travel-primary);
+      color: #fff;
+
+      font-size: 9px;
+      font-weight: 700;
+
+      transition: background 0.2s ease;
+    }
+
+    .hotel-card:hover .hotel-btn {
+      background: var(--travel-primary-dark);
+    }
+
+
+    /* =========================================================
+   交通
+   ========================================================= */
+
+    .traffic-card {
+      position: relative;
+
+      height: 100%;
+
+      padding: 25px;
+
+      overflow: hidden;
+
+      border: 1px solid transparent;
+      border-radius: 17px;
+
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+    }
+
+    .traffic-card::after {
+      content: "";
+
+      position: absolute;
+
+      width: 100px;
+      height: 100px;
+
+      right: -35px;
+      bottom: -40px;
+
+      border-radius: 50%;
+
+      background: rgba(255, 255, 255, 0.45);
+    }
+
+    .traffic-card:hover {
+      transform: translateY(-5px);
+
+      box-shadow: var(--travel-shadow);
+    }
+
+    .traffic-card i {
+      display: block;
+
+      margin-bottom: 13px;
+
+      font-size: 28px;
+    }
+
+    .traffic-card h3 {
+      margin-bottom: 8px;
+
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .traffic-card p {
+      margin-bottom: 15px;
+
+      color: #667c79;
+
+      font-size: 10px;
+      line-height: 1.7;
+    }
+
+    .traffic-card .tra-btn {
+      position: relative;
+      z-index: 2;
+
+      display: inline-block;
+
+      margin-top: 5px;
+
+      padding: 6px 11px;
+
+      border: 1px solid currentColor;
+      border-radius: 50px;
+
+      font-size: 9px;
+
+      transition:
+        background 0.2s ease,
+        color 0.2s ease;
+    }
+
+    .traffic-card .tra-btn:hover {
+      background: currentColor;
+      color: #fff;
+    }
+
+
+    /* 不同交通類型 */
+
+    .traffic-blue {
+      background: #edf8fb;
+      color: #3187a3;
+      border-color: #d3ebf0;
+    }
+
+    .traffic-orange {
+      background: #fdf6ec;
+      color: #c8893d;
+      border-color: #f2e2c8;
+    }
+
+    .traffic-green {
+      background: #eef9f4;
+      color: #439878;
+      border-color: #d5ede1;
+    }
+
+    .traffic-yellow {
+      background: #faf8ed;
+      color: #aa8b32;
+      border-color: #ece4bf;
+    }
+
+    .traffic-cyan {
+      background: #edf9f8;
+      color: #3a9993;
+      border-color: #d2ece9;
+    }
+
+    .traffic-purple {
+      background: #f5f2fa;
+      color: #806caa;
+      border-color: #e4dff0;
+    }
+
+
+    /* =========================================================
+   地圖
+   ========================================================= */
+
+    .map-area {
+      position: relative;
+
+      height: 230px;
+
+      overflow: hidden;
+
+      border-radius: 18px;
+
+      background: #dceae5;
+
+      box-shadow: 0 5px 20px rgba(39, 94, 88, 0.08);
+    }
+
+    .map-area::after {
+      content: "";
+
+      position: absolute;
+      inset: 0;
+
+      background:
+        linear-gradient(90deg,
+          rgba(24, 73, 73, 0.62),
+          rgba(24, 73, 73, 0.18) 70%,
+          rgba(24, 73, 73, 0.05));
+
+      pointer-events: none;
+    }
+
+    .map-area img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+      opacity: 0.72;
+
+      transition: transform 0.6s ease;
+    }
+
+    .map-area:hover img {
+      transform: scale(1.025);
+    }
+
+    .map-content {
+      position: absolute;
+
+      z-index: 2;
+
+      left: 30px;
+      top: 50%;
+
+      transform: translateY(-50%);
+
+      color: #fff;
+
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    }
+
+    .map-content h3 {
+      margin-bottom: 6px;
+
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .map-content p {
+      margin-bottom: 15px;
+
+      font-size: 11px;
+    }
+
+    .map-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+
+      padding: 9px 17px;
+
+      border-radius: 50px;
+
+      background: var(--travel-primary);
+      color: #fff;
+
+      font-size: 10px;
+      font-weight: 700;
+
+      text-shadow: none;
+
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+
+      transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .map-btn:hover {
+      background: var(--travel-primary-dark);
+
+      transform: translateY(-2px);
+    }
+
+
+    /* =========================================================
+   RWD
+   ========================================================= */
+
+    @media (max-width: 991.98px) {
+
+      .hero-carousel {
+        height: 68svh;
+
+        min-height: 480px;
+        max-height: none;
+      }
+
+      .hero-content {
+        left: 7%;
+        right: 7%;
+      }
+
+      .hero-content h1 {
+        font-size: 38px;
+      }
+
+      .hero-carousel .carousel-control-prev,
+      .hero-carousel .carousel-control-next {
+        opacity: 1;
+      }
+
+      .section {
+        padding: 65px 0;
+      }
+
+      .news-image {
+        height: 190px;
+      }
+
+      .spot-image {
+        height: 190px;
+      }
+
+      .food-image {
+        height: 200px;
+      }
+
+      .hotel-image {
+        height: 165px;
+      }
+    }
+
+
+    @media (max-width: 767.98px) {
+
+      .hero-carousel {
+        height: 68svh;
+        min-height: 450px;
+      }
+
+      .hero-content {
+        left: 28px;
+        right: 28px;
+      }
+
+      .hero-content h1 {
+        font-size: 34px;
+
+        letter-spacing: 1px;
+      }
+
+      .hero-content p {
+        max-width: 430px;
+
+        font-size: 13px;
+      }
+
+      .section {
+        padding: 55px 0;
+      }
+
+      .section-title h2 {
+        font-size: 23px;
+      }
+
+      .section-more {
+        margin-bottom: 25px;
+      }
+
+      .news-image {
+        height: 180px;
+      }
+
+      .map-area {
+        height: 250px;
+      }
+
+      .map-content {
+        left: 22px;
+      }
+
+      .cta {
+        padding: 25px;
+      }
+    }
+
+
+    @media (max-width: 575.98px) {
+
+      .hero-carousel {
+        height: 62svh;
+        min-height: 420px;
+      }
+
+      .hero-content {
+        left: 22px;
+        right: 22px;
+      }
+
+      .hero-tag {
+        padding: 6px 12px;
+
+        margin-bottom: 13px;
+
+        font-size: 10px;
+      }
+
+      .hero-content h1 {
+        font-size: 29px;
+
+        line-height: 1.3;
+      }
+
+      .hero-content p {
+        margin-bottom: 20px;
+
+        font-size: 12px;
+        line-height: 1.7;
+      }
+
+      .hero-btn {
+        padding: 10px 18px;
+
+        font-size: 11px;
+      }
+
+      .section {
+        padding: 45px 0;
+      }
+
+      .section-title h2 {
+        font-size: 20px;
+      }
+
+      .section-subtitle {
+        margin-bottom: 22px;
+
+        font-size: 11px;
+      }
+
+      .section-more {
+        font-size: 10px;
+      }
+
+      .news-image,
+      .spot-image,
+      .food-image {
+        height: 180px;
+      }
+
+      .news-body,
+      .spot-body,
+      .food-body {
+        padding: 15px;
+      }
+
+      .food-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+
+        gap: 7px;
+      }
+
+      .cta {
+        padding: 22px;
+      }
+
+      .cta h3 {
+        font-size: 18px;
+      }
+
+      .cta-btn {
+        margin-top: 15px;
+      }
+
+      .map-area {
+        height: 230px;
+      }
+
+      .map-content h3 {
+        font-size: 17px;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+  <div id="navbarApp">
+    <!-- Top Bar -->
+    <nav class="navbar top-navbar">
+      <div class="container-fluid top-wrap">
+        <div class="gov-name">
+          台中市政府觀光旅遊局
+        </div>
+
+        <div class="lang-group">
+          <a href="#">EN</a>
+          <span>|</span>
+          <a href="#">日本語</a>
+          <span>|</span>
+          <a href="#">한국어</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Navbar -->
+    <nav class="navbar navbar-expand-lg main-navbar">
+      <div class="container-lg">
+
+        <a class="navbar-brand logo-group" href="/index">
+          <img src="[[ url_for('static', filename='image/Logo_S.png') ]]" alt="Logo">
+          <div class="logo-text">
+            <div class="tw">台中旅遊</div>
+            <div class="en">TAICHUNG TOURISM</div>
+          </div>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav mx-auto">
+            <a class="nav-link" href="#scroll0">
+              年度活動
+            </a>
+            <a class="nav-link" href="#scroll1">
+              熱門景點
+            </a>
+            <a class="nav-link" href="#scroll2">
+              美食巡禮
+            </a>
+            <a class="nav-link" href="#scroll3">
+              旅遊住宿
+            </a>
+            <a class="nav-link" href="#scroll4">
+              交通情報
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </nav>
+  </div>
+
+  <div id="app">
+    <!-- Carousel -->
+    <div id="heroCarousel" class="top-area carousel slide hero-carousel" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <!-- Slide 1 -->
+        <div class="carousel-item active">
+          <img src="[[ url_for('static', filename='image/index/carousel_01.png') ]]" alt="精選推薦">
+          <div class="hero-content">
+            <span class="hero-tag">精選推薦</span>
+            <h1>台中，每一刻都精彩</h1>
+            <p>探索百年古蹟、品味在地美食，感受台中獨特的城市魅力</p>
+
+            <a href="#" class="hero-btn">
+              立即探索
+              <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+
+        <!-- Slide 2 -->
+        <div class="carousel-item">
+          <img src="[[ url_for('static', filename='image/index/carousel_02.png') ]]" alt="夜生活">
+          <div class="hero-content">
+            <span class="hero-tag">夜生活</span>
+            <h1>逢甲夜市，台中最愛</h1>
+            <p>全台知名夜市，美食匯聚，夜夜精彩，是旅人必訪之地</p>
+
+            <a href="#" class="hero-btn">
+              美食探索
+              <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+
+        <!-- Slide 3 -->
+
+        <div class="carousel-item">
+          <img src="[[ url_for('static', filename='image/index/carousel_03.png') ]]" alt="自然生態">
+          <div class="hero-content">
+            <span class="hero-tag">自然生態</span>
+            <h1>大坑雲海，壯闊天地</h1>
+            <p>台中山林之美，邀您踏上一場山與雲的邂逅</p>
+
+            <a href="#" class="hero-btn">
+              探索景點
+              <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+
+    </div>
+
+    <!-- =====================================================
+    年度活動
+  ====================================================== -->
+
+    <section class="section section-gray" id="scroll0">
+
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-end">
+
+          <div>
+            <div class="section-title">
+              <h2>年度活動</h2>
+            </div>
+
+            <div class="section-subtitle">
+              掌握台中最新旅遊資訊
+            </div>
+          </div>
+
+          <a href="/event" class="section-more">
+            查看更多 →
+          </a>
+        </div>
+
+
+        <div class="row g-3">
+
+          <!-- 左側新聞 -->
+
+          <div class="col-lg-8">
+            <div class="row g-3">
+
+              <div class="col-md-6">
+                <a :href="'/event/'+item.id" class="news-card d-block">
+                  <img :src="'/static/image/event/thumbnail/'+item.image" class="news-image" alt="">
+                  <div class="news-body">
+                    <span class="news-tag">
+                      活動
+                    </span>
+
+                    <span class="news-date">
+                      2026/8/6 下午2:49:30
+                    </span>
+
+                    <h3 class="news-title">
+                      台中夏日藝文生活節
+                    </h3>
+                  </div>
+                </a>
+              </div>
+
+              <div class="col-md-6">
+                <a :href="'/event/'+item.id" class="news-card d-block">
+                  <img :src="'/static/image/event/thumbnail/'+item.image" class="news-image" alt="">
+                  <div class="news-body">
+                    <span class="news-tag">
+                      活動
+                    </span>
+
+                    <span class="news-date">
+                      2026/8/6 下午2:15:32
+                    </span>
+
+                    <h3 class="news-title">
+                      2026大甲鐵砧山劍井取午時水活動
+                    </h3>
+                  </div>
+                </a>
+              </div>
+
+              <div class="col-md-6">
+                <a :href="'/event/'+item.id" class="news-card d-block">
+                  <img :src="'/static/image/event/thumbnail/'+item.image" class="news-image" alt="">
+                  <div class="news-body">
+                    <span class="news-tag">
+                      活動
+                    </span>
+
+                    <span class="news-date">
+                      2026/8/6 下午2:06:01
+                    </span>
+
+                    <h3 class="news-title">
+                      2026台中夏日馬戲節
+                    </h3>
+                  </div>
+                </a>
+              </div>
+
+              <div class="col-md-6">
+                <a :href="'/event/'+item.id" class="news-card d-block">
+                  <img :src="'/static/image/event/thumbnail/'+item.image" class="news-image" alt="">
+                  <div class="news-body">
+                    <span class="news-tag">
+                      活動
+                    </span>
+
+                    <span class="news-date">
+                      2026/8/6 下午2:03:31
+                    </span>
+
+                    <h3 class="news-title">
+                      2026梧棲逍遙音樂町－夏夜星河．愛在梧棲音樂會
+                    </h3>
+                  </div>
+                </a>
+              </div>
+
+            </div>
+          </div>
+
+
+          <!-- 右側消息列表 -->
+
+          <div class="col-lg-4">
+            <div class="news-list">
+              <div class="news-list-title">
+                最新消息
+              </div>
+
+              <a :href="'/event/'+item.id">
+                台中夏日藝文生活節
+              </a>
+              <a :href="'/event/'+item.id">
+                2026大甲鐵砧山劍井取午時水活動
+              </a>
+              <a :href="'/event/'+item.id">
+                2026台中夏日馬戲節
+              </a>
+              <a :href="'/event/'+item.id">
+                2026梧棲逍遙音樂町－夏夜星河．愛在梧棲音樂會
+              </a>
+              <a :href="'/event/'+item.id">
+                115年和平區泰雅族語歌謠競 賽文化活動
+              </a>
+              <a :href="'/event/'+item.id">
+                2026臺中國際踩舞嘉年華
+              </a>
+              <a :href="'/event/'+item.id">
+                ART TAICHUNG 2026 台中國際藝術博覽會
+              </a>
+              <a :href="'/event/'+item.id">
+                2026臺中市逍遙音樂町－金曲大肚・追分開唱
+              </a>
+              <a :href="'/event/'+item.id">
+                台灣好行套票登錄抽好禮
+              </a>
+              <a :href="'/event/'+item.id">
+                2026幸福台中家庭月系列活動-歡慶515國際家庭日
+              </a>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+    熱門景點
+  ====================================================== -->
+
+    <section class="section" id="scroll1">
+
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-end">
+          <div>
+            <div class="section-title">
+              <h2>熱門景點</h2>
+            </div>
+            <div class="section-subtitle">
+              台中最值得造訪的熱門景點
+            </div>
+          </div>
+          <a href="/attractions" class="section-more">
+            查看更多景點 →
+          </a>
+        </div>
+
+        <!-- <div class="category-tabs">
+        <a href="#" class="active">全部</a>
+        <a href="#">自然生態</a>
+        <a href="#">文化景觀</a>
+        <a href="#">親子同遊</a>
+        <a href="#">網美景點</a>
+        <a href="#">戶外行程</a>
+      </div> -->
+
+        <div class="row g-3">
+          <!-- 大卡 -->
+          <div class="col-lg-4">
+            <a :href="'/attractions/'+attr[0]?.id" class="spot-card d-block">
+              <img :src="'/static/image/attractions/thumbnail/'+attr[0]?.image" class="spot-image"
+                :alt="attr[0]?.title">
+              <div class="spot-body">
+                <h3>星河湖畔生態園區</h3>
+                <p>
+                  星河湖畔生態園區是一座以自然生態、湖畔景...
+                </p>
+
+                <div class="d-flex justify-content-end">
+                  <!-- <span class="rating">
+                  ★ 4.9
+                </span> -->
+                  <span class="card-link">
+                    了解更多 →
+                  </span>
+                </div>
+              </div>
+            </a>
+          </div>
+
+
+          <!-- 右側 -->
+
+          <div class="col-lg-8">
+            <div class="row g-3">
+
+              <div class="col-md-6">
+                <a :href="'/attractions/'+item.id" class="spot-card d-block">
+                  <img :src="'/static/image/attractions/thumbnail/'+item.image" class="spot-image" :alt="item.title">
+                  <div class="spot-body">
+                    <h3>獨角仙生態公園</h3>
+                    <p>
+                      一、公園說明：公園總面積約4,400平方...
+                    </p>
+                    <div class="d-flex justify-content-end">
+                      <!-- <span class="rating">★ 4.7</span> -->
+                      <span class="card-link">了解更多 →</span>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <div class="col-md-6">
+                <a :href="'/attractions/'+item.id" class="spot-card d-block">
+                  <img :src="'/static/image/attractions/thumbnail/'+item.image" class="spot-image" :alt="item.title">
+                  <div class="spot-body">
+                    <h3>1035 collab</h3>
+                    <p>
+                      1035 collab 興建於 1916...
+                    </p>
+                    <div class="d-flex justify-content-end">
+                      <!-- <span class="rating">★ 4.7</span> -->
+                      <span class="card-link">了解更多 →</span>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <div class="col-md-6">
+                <a :href="'/attractions/'+item.id" class="spot-card d-block">
+                  <img :src="'/static/image/attractions/thumbnail/'+item.image" class="spot-image" :alt="item.title">
+                  <div class="spot-body">
+                    <h3>湖心亭</h3>
+                    <p>
+                      位於臺中公園內的「湖心亭」，是臺中市的重...
+                    </p>
+                    <div class="d-flex justify-content-end">
+                      <!-- <span class="rating">★ 4.7</span> -->
+                      <span class="card-link">了解更多 →</span>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <div class="col-md-6">
+                <a :href="'/attractions/'+item.id" class="spot-card d-block">
+                  <img :src="'/static/image/attractions/thumbnail/'+item.image" class="spot-image" :alt="item.title">
+                  <div class="spot-body">
+                    <h3>東勢溫泉</h3>
+                    <p>
+                      東勢溫泉位於東勢林場遊樂區內，是園區內成...
+                    </p>
+                    <div class="d-flex justify-content-end">
+                      <!-- <span class="rating">★ 4.7</span> -->
+                      <span class="card-link">了解更多 →</span>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+    美食巡禮
+  ====================================================== -->
+
+    <section class="section section-warm" id="scroll2">
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-end">
+          <div>
+            <div class="section-title">
+              <h2>美食巡禮</h2>
+            </div>
+            <div class="section-subtitle">
+              從在地小吃到特色餐廳，品味台中美食
+            </div>
+          </div>
+          <a href="/food" class="section-more">
+            查看更多美食 →
+          </a>
+        </div>
+
+        <!-- <div class="category-tabs">
+        <a href="#" class="active">全部美食</a>
+        <a href="#">在地小吃</a>
+        <a href="#">特色餐廳</a>
+        <a href="#">伴手禮</a>
+        <a href="#">下午茶</a>
+      </div> -->
+
+        <div class="row g-4">
+
+          <!-- Food 1 -->
+          <div class="col-md-6 col-lg-4">
+            <a :href="'/food/'+item.id" class="food-card d-block">
+              <img :src="'/static/image/food/thumbnail/'+item.image" class="food-image" :alt="item.title">
+              <div class="food-body">
+                <span class="food-tag me-1">
+                  餐飲
+                </span>
+                <h3>巷弄炭香・台中小灶</h3>
+                <p>巷弄炭香・台中小灶是一間以台灣家常料理與...</p>
+                <div class="food-bottom">
+                  <span>📍 西區</span>
+                  <strong>查看詳情 →</strong>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- Food 1 -->
+          <div class="col-md-6 col-lg-4">
+            <a :href="'/food/'+item.id" class="food-card d-block">
+              <img :src="'/static/image/food/thumbnail/'+item.image" class="food-image" :alt="item.title">
+              <div class="food-body">
+                <span class="food-tag me-1">
+                  餐飲
+                </span>
+                <span class="food-tag me-1">
+                  伴手禮
+                </span>
+                <h3>三風麵館</h3>
+                <p>一碗麵，傳遞簡單的美味，更吃入心崁的情感...</p>
+                <div class="food-bottom">
+                  <span>📍 大雅區</span>
+                  <strong>查看詳情 →</strong>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- Food 1 -->
+          <div class="col-md-6 col-lg-4">
+            <a :href="'/food/'+item.id" class="food-card d-block">
+              <img :src="'/static/image/food/thumbnail/'+item.image" class="food-image" :alt="item.title">
+              <div class="food-body">
+                <span class="food-tag me-1">
+                  餐飲
+                </span>
+                <h3>帝一食補碳燒薑母鴨</h3>
+                <p>帝一聞香傳千里，美味真心好滋味。歡迎各位...</p>
+                <div class="food-bottom">
+                  <span>📍 大雅區</span>
+                  <strong>查看詳情 →</strong>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- Food 1 -->
+          <div class="col-md-6 col-lg-4">
+            <a :href="'/food/'+item.id" class="food-card d-block">
+              <img :src="'/static/image/food/thumbnail/'+item.image" class="food-image" :alt="item.title">
+              <div class="food-body">
+                <span class="food-tag me-1">
+                  伴手禮
+                </span>
+                <h3>小林煎餅</h3>
+                <p>「小林煎餅」堅持以真材實料的用心，每一口...</p>
+                <div class="food-bottom">
+                  <span>📍 大雅區</span>
+                  <strong>查看詳情 →</strong>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- Food 1 -->
+          <div class="col-md-6 col-lg-4">
+            <a :href="'/food/'+item.id" class="food-card d-block">
+              <img :src="'/static/image/food/thumbnail/'+item.image" class="food-image" :alt="item.title">
+              <div class="food-body">
+                <span class="food-tag me-1">
+                  餐飲
+                </span>
+                <h3>石全石美石鍋專賣店</h3>
+                <p>近來哈韓風在台灣快速蔓延，韓國飲食在台灣...</p>
+                <div class="food-bottom">
+                  <span>📍 潭子區</span>
+                  <strong>查看詳情 →</strong>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- Food 1 -->
+          <div class="col-md-6 col-lg-4">
+            <a :href="'/food/'+item.id" class="food-card d-block">
+              <img :src="'/static/image/food/thumbnail/'+item.image" class="food-image" :alt="item.title">
+              <div class="food-body">
+                <span class="food-tag me-1">
+                  餐飲
+                </span>
+                <span class="food-tag me-1">
+                  休閒娛樂
+                </span>
+                <h3>安妮公主花園</h3>
+                <p>位於新社的安妮公主花園是一個山中祕境，隱...</p>
+                <div class="food-bottom">
+                  <span>📍 新社區</span>
+                  <strong>查看詳情 →</strong>
+                </div>
+              </div>
+            </a>
+          </div>
+
+        </div>
+
+
+        <!-- CTA -->
+        <div class="cta mt-4">
+          <div class="row align-items-center">
+            <div class="col-md-8">
+              <h3>
+                台中美食地圖
+              </h3>
+
+              <p>
+                一次探索台中各地人氣美食與特色店家
+              </p>
+            </div>
+
+            <div class="col-md-4 text-md-end">
+              <div class="cta-btn btn">
+                立即下載地圖
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+    住宿
+  ====================================================== -->
+
+    <section class="section" id="scroll3">
+
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-end">
+          <div>
+            <div class="section-title">
+              <h2>旅遊住宿</h2>
+            </div>
+
+            <div class="section-subtitle">
+              精選台中優質住宿，讓旅程更加舒適
+            </div>
+
+          </div>
+
+          <div class="section-more pointer">
+            查看所有住宿 →
+          </div>
+        </div>
+
+        <!-- <div class="category-tabs">
+        <a href="#" class="active">全部</a>
+        <a href="#">五星飯店</a>
+        <a href="#">特色民宿</a>
+        <a href="#">商務住宿</a>
+        <a href="#">親子住宿</a>
+      </div> -->
+
+        <div class="row g-3">
+
+          <div class="col-6 col-lg-3">
+            <div class="hotel-card d-block pointer">
+              <img src="[[ url_for('static', filename='image/index/Hotel01.avif') ]]" class="hotel-image" alt="">
+              <div class="hotel-body">
+                <div class="hotel-stars">★★★★★</div>
+                <h3>台中高級飯店</h3>
+                <div class="hotel-tags">
+                  <span>早餐</span>
+                  <span>停車</span>
+                  <span>Wi-Fi</span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                  <span class="hotel-price">NT$6,800 起</span>
+                  <span class="hotel-btn">查看房型</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-6 col-lg-3">
+            <div class="hotel-card d-block pointer">
+              <img src="[[ url_for('static', filename='image/index/Hotel02.avif') ]]" class="hotel-image" alt="">
+              <div class="hotel-body">
+                <div class="hotel-stars">★★★★★</div>
+                <h3>日月千禧台中</h3>
+                <div class="hotel-tags">
+                  <span>早餐</span>
+                  <span>泳池</span>
+                  <span>Wi-Fi</span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                  <span class="hotel-price">NT$3,200 起</span>
+                  <span class="hotel-btn">查看房型</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-6 col-lg-3">
+            <div class="hotel-card d-block pointer">
+              <img src="[[ url_for('static', filename='image/index/Hotel03.avif') ]]" class="hotel-image" alt="">
+              <div class="hotel-body">
+                <div class="hotel-stars">★★★★★</div>
+                <h3>新社景觀民宿</h3>
+                <div class="hotel-tags">
+                  <span>景觀</span>
+                  <span>早餐</span>
+                  <span>停車</span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                  <span class="hotel-price">NT$2,400 起</span>
+                  <span class="hotel-btn">查看房型</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-6 col-lg-3">
+            <div class="hotel-card d-block pointer">
+              <img src="[[ url_for('static', filename='image/index/Hotel04.avif') ]]" class="hotel-image" alt="">
+              <div class="hotel-body">
+                <div class="hotel-stars">★★★★★</div>
+                <h3>清境山景住宿</h3>
+                <div class="hotel-tags">
+                  <span>景觀</span>
+                  <span>停車</span>
+                  <span>Wi-Fi</span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                  <span class="hotel-price">NT$4,500 起</span>
+                  <span class="hotel-btn">查看房型</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+    交通
+  ====================================================== -->
+
+    <section class="section section-gray" id="scroll4">
+
+      <div class="container">
+        <div class="section-title">
+          <h2>交通情報</h2>
+        </div>
+        <div class="section-subtitle">
+          完整台中交通資訊，輕鬆規劃你的旅程
+        </div>
+
+        <div class="row g-3">
+
+          <div class="col-md-6 col-lg-4">
+            <div class="traffic-card traffic-blue">
+              <i class="bi bi-airplane"></i>
+              <h3>航空｜台中</h3>
+              <p>台中國際機場航班資訊與交通方式。</p>
+              <div class="me-1 pointer tra-btn">查看航班</div>
+              <div class="me-1 pointer tra-btn">交通方式</div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div class="traffic-card traffic-orange">
+              <i class="bi bi-train-front"></i>
+              <h3>高鐵｜台灣高鐵</h3>
+              <p>高鐵台中站相關交通與轉乘資訊。</p>
+              <div class="me-1 pointer tra-btn">時刻表</div>
+              <div class="me-1 pointer tra-btn">交通資訊</div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div class="traffic-card traffic-green">
+              <i class="bi bi-bus-front"></i>
+              <h3>台中捷運</h3>
+              <p>台中捷運路線、站點與乘車資訊。</p>
+              <div class="me-1 pointer tra-btn">路線資訊</div>
+              <div class="me-1 pointer tra-btn">周邊景點</div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div class="traffic-card traffic-yellow">
+              <i class="bi bi-bus-front-fill"></i>
+              <h3>市區公車</h3>
+              <p>台中市區公車路線與即時資訊。</p>
+              <div class="me-1 pointer tra-btn">公車資訊</div>
+              <div class="me-1 pointer tra-btn">路線查詢</div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div class="traffic-card traffic-cyan">
+              <i class="bi bi-bicycle"></i>
+              <h3>YouBike 2.0</h3>
+              <p>台中市公共自行車租借服務。</p>
+              <div class="me-1 pointer tra-btn">站點資訊</div>
+              <div class="me-1 pointer tra-btn">租借方式</div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div class="traffic-card traffic-purple">
+              <i class="bi bi-taxi-front"></i>
+              <h3>租車｜計程車</h3>
+              <p>台中租車及計程車相關交通服務。</p>
+              <div class="me-1 pointer tra-btn">租車資訊</div>
+              <div class="me-1 pointer tra-btn">計程車</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 地圖 -->
+        <div class="map-area mt-4">
+          <img src="[[ url_for('static', filename='image/index/map.png') ]]" alt="台中地圖">
+          <div class="map-content">
+            <h3>台中交通導航地圖</h3>
+            <p>快速找到景點、交通與周邊資訊</p>
+            <div class="map-btn pointer">
+              <i class="bi bi-navigation"></i>
+              開始導航
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="row g-4 mt-3">
+        <!-- Logo -->
+        <div class="col-lg-4">
+          <div class="footer-brand d-flex align-items-center gap-1">
+            <img src="[[ url_for('static', filename='image/Logo_S.png') ]]" alt="Logo">
+
+            <strong>
+              台中旅遊
+            </strong>
+          </div>
+          <p>
+            台中市政府觀光旅遊局<br>
+            提供完整的台中旅遊、景點、美食、住宿與交通資訊。
+          </p>
+
+          <div class="social-icons">
+
+            <a href="#">
+              <i class="bi bi-facebook"></i>
+            </a>
+
+            <a href="#">
+              <i class="bi bi-instagram"></i>
+            </a>
+
+            <a href="#">
+              <i class="bi bi-youtube"></i>
+            </a>
+
+            <a href="#">
+              <i class="bi bi-line"></i>
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <div class="col-6 col-lg-2">
+
+          <div class="footer-title">
+            景點資訊
+          </div>
+
+          <div class="footer-links">
+
+            <a href="#">熱門景點</a>
+            <a href="#">自然生態</a>
+            <a href="#">文化景觀</a>
+            <a href="#">親子旅遊</a>
+
+          </div>
+
+        </div>
+
+
+        <div class="col-6 col-lg-2">
+
+          <div class="footer-title">
+            美食推薦
+          </div>
+
+          <div class="footer-links">
+
+            <a href="#">在地小吃</a>
+            <a href="#">特色餐廳</a>
+            <a href="#">夜市美食</a>
+            <a href="#">伴手禮</a>
+
+          </div>
+
+        </div>
+
+
+        <div class="col-6 col-lg-2">
+
+          <div class="footer-title">
+            住宿資訊
+          </div>
+
+          <div class="footer-links">
+
+            <a href="#">飯店</a>
+            <a href="#">民宿</a>
+            <a href="#">親子住宿</a>
+            <a href="#">住宿推薦</a>
+
+          </div>
+
+        </div>
+
+
+        <div class="col-6 col-lg-2">
+
+          <div class="footer-title">
+            相關資訊
+          </div>
+
+          <div class="footer-links">
+
+            <a href="#">交通資訊</a>
+            <a href="#">最新消息</a>
+            <a href="#">網站導覽</a>
+            <a href="#">聯絡我們</a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="copyright">
+
+        © 2026 台中市政府觀光旅遊局　All Rights Reserved.
+
+      </div>
+
+    </div>
+
+  </footer>
+
+  <!-- Vue -->
+  <script src="[[ url_for('static', filename='js/vue.global.js') ]]"></script>
+
+  <!-- Bootstrap JS -->
+  <script src="[[ url_for('static', filename='js/bootstrap.bundle.min.js') ]]"></script>
+
+  <!-- axios -->
+  <script src="[[ url_for('static', filename='js/axios.min.js') ]]"></script>
+
+  <!-- sweetalert2 JS -->
+  <script src="[[ url_for('static', filename='js/sweetalert2.all.min.js') ]]"></script>
+
+  <script src="[[ url_for('static', filename='js/layout/navbar.js') ]]"></script>
+  <script src="[[ url_for('static', filename='js/front/index.js') ]]"></script>
+</body>
+
+</html>

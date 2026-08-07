@@ -6,13 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>台中市政府觀光旅遊局</title>
   <link rel="stylesheet" href="[[ url_for('static', filename='css/bootstrap.min.css') ]]">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="[[ url_for('static', filename='css/all.min.css') ]]">
   <link rel="stylesheet" href="[[ url_for('static', filename='css/front/front.css') ]]">
   {% block style_sheet %}
   {% endblock %}
 </head>
 
-<body>
+<body data-current-type="{{ current_type }}>
   {% include "layout/navbar.html" %}
 
   {% block content %}
@@ -20,8 +21,18 @@
 
   {% include "layout/footer.html" %}
 
-  <script src="[[ url_for('static', filename='js/bootstrap.bundle.min.js') ]]"></script>
+
+  <!-- Vue -->
   <script src="[[ url_for('static', filename='js/vue.global.js') ]]"></script>
+
+  <!-- Bootstrap JS -->
+  <script src="[[ url_for('static', filename='js/bootstrap.bundle.min.js') ]]"></script>
+
+  <!-- axios -->
+  <script src="[[ url_for('static', filename='js/axios.min.js') ]]"></script>
+
+  <!-- sweetalert2 JS -->
+  <script src="[[ url_for('static', filename='js/sweetalert2.all.min.js') ]]"></script>
   
   {% block page_script %}
   {% endblock %}

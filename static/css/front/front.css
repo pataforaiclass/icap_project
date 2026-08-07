@@ -1,153 +1,443 @@
-/* ===========================
-  Top Navbar
-=========================== */
+/* =========================================================
+  基本設定
+========================================================= */
 
-.top-navbar {
-  background: #195d32;
-  height: 28px;
-  padding: 0;
-  font-size: 13px;
+:root {
+  --primary: #f26b21;
+  --primary-dark: #e6530e;
+  --green: #13794b;
+
+  --body-bg: #ffffff;
+  --section-bg: #f7f8f8;
+  --warm-bg: #fff8f2;
+
+  --text-dark: #222;
+  --text-gray: #777;
+
+  --border: #e8e8e8;
+
+  --footer-bg: #101b2d;
 }
 
-.top-wrap {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 100%;
+* {
+  box-sizing: border-box;
 }
 
-.gov-name {
-  color: #fff;
-  font-weight: 600;
+html {
+  scroll-behavior: smooth;
 }
 
-.lang-group {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+body {
+  margin: 0;
+  font-family:
+    "Noto Sans TC",
+    "Microsoft JhengHei",
+    Arial,
+    sans-serif;
+
+  color: var(--text-dark);
+  background: var(--body-bg);
 }
 
-.lang-group span {
-  color: rgba(255, 255, 255, .45);
-}
-
-.lang-group a {
-  color: #fff;
+a {
   text-decoration: none;
-  font-size: 13px;
+  color: inherit;
 }
 
-.lang-group a:hover {
-  opacity: .8;
+img {
+  display: block;
+  width: 100%;
 }
 
+#navbarApp {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
 
-/* ===========================
-  Main Navbar
-=========================== */
+/* =========================================================
+   Front Navbar
+   ========================================================= */
+
+.top-navbar{
+  background-color: #173f3d;
+  font-weight: bold;
+  color: #fff;
+}
 
 .main-navbar {
-  background: #fff;
-  height: 64px;
-  border-bottom: 1px solid #ececec;
-  padding: 0;
+  position: relative;
+  z-index: 1000;
+
+  min-height: 92px;
+
+  background: rgba(255, 255, 255, 0.96) !important;
+
+  border-bottom: 1px solid #e2eeeb;
+
+  box-shadow: 0 3px 18px rgba(39, 94, 88, 0.06);
+
+  backdrop-filter: blur(12px);
 }
 
-.main-navbar .container-lg {
-  display: flex;
-  align-items: center;
-}
 
-
-/* ===========================
-  Logo
-=========================== */
+/* Logo */
 
 .logo-group {
   display: flex;
   align-items: center;
-  text-decoration: none;
+
+  gap: 10px;
+
+  color: #23413f !important;
 }
 
 .logo-group img {
   width: 48px;
   height: 48px;
-  margin-right: 10px;
+
+  object-fit: contain;
 }
 
 .logo-text {
-  line-height: 1.1;
+  line-height: 1.15;
 }
 
 .logo-text .tw {
-  color: #e96521;
-  font-size: 26px;
-  font-weight: 700;
+  color: #23413f;
+
+  font-size: 18px;
+  font-weight: 800;
+
+  letter-spacing: 2px;
 }
 
 .logo-text .en {
   margin-top: 4px;
-  color: #8a8a8a;
-  font-size: 11px;
-  letter-spacing: 1px;
+
+  color: #6c8581;
+
+  font-size: 7px;
+  font-weight: 700;
+
+  letter-spacing: 1.5px;
 }
 
 
-/* ===========================
-  Menu
-=========================== */
+/* Navbar menu */
 
-.navbar-nav {
-  gap: 12px;
+.main-navbar .navbar-nav {
+  gap: 5px;
 }
 
-.nav-link {
-  color: #333;
+.main-navbar .nav-link {
+  position: relative;
+
+  padding: 12px 16px !important;
+
+  color: #526d69 !important;
+
+  font-size: 13px;
   font-weight: 600;
-  font-size: 16px;
-  padding: 12px 18px !important;
-  border-radius: 999px;
-  transition: .25s;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease;
 }
 
-.nav-link:hover {
-  color: #f26522;
+.main-navbar .nav-link::after {
+  content: "";
+
+  position: absolute;
+
+  left: 50%;
+  bottom: 4px;
+
+  width: 0;
+  height: 2px;
+
+  transform: translateX(-50%);
+
+  border-radius: 5px;
+
+  background: #168f8a;
+
+  transition: width 0.25s ease;
 }
 
-.nav-link.active {
-  background: #f26522;
-  color: #fff !important;
+.main-navbar .nav-link:hover,
+.main-navbar .nav-link.active {
+  color: #168f8a !important;
+}
+
+.main-navbar .nav-link:hover::after,
+.main-navbar .nav-link.active::after {
+  width: 22px;
 }
 
 
-/* ===========================
-  Mobile
-=========================== */
+/* 語言 */
 
-@media (max-width:991px) {
+.lang-group {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  margin-left: 15px;
+
+  color: #8ca09d;
+
+  font-size: 10px;
+}
+
+.lang-group a {
+  color: #637976;
+
+  transition: color 0.2s ease;
+}
+
+.lang-group a:hover {
+  color: #168f8a;
+}
+
+
+/* 手機選單按鈕 */
+
+.main-navbar .navbar-toggler {
+  padding: 7px 9px;
+
+  border: 1px solid #d8e9e6;
+  border-radius: 8px;
+}
+
+.main-navbar .navbar-toggler:focus {
+  box-shadow: 0 0 0 3px rgba(22, 143, 138, 0.12);
+}
+
+
+/* =========================================================
+   Navbar RWD
+   ========================================================= */
+
+@media (max-width: 991.98px) {
 
   .main-navbar {
-    height: auto;
-    padding: 10px 0;
+    min-height: 75px;
   }
 
-  .navbar-nav {
-    margin-top: 15px;
-    gap: 0;
-  }
-
-  .nav-link {
-    padding: 10px 5px !important;
-    border-radius: 3px;
-  }
-
-  .search-btn {
-    margin: 15px auto 0;
-    display: block;
+  .logo-group img {
+    width: 42px;
+    height: 42px;
   }
 
   .logo-text .tw {
-    font-size: 22px;
+    font-size: 16px;
   }
 
+  .main-navbar .navbar-nav {
+    padding: 15px 0;
+  }
+
+  .main-navbar .nav-link {
+    padding: 10px 5px !important;
+  }
+
+  .main-navbar .nav-link::after {
+    left: 0;
+
+    transform: none;
+  }
+
+  .lang-group {
+    justify-content: center;
+
+    margin: 0 0 15px;
+  }
+}
+
+
+@media (max-width: 575.98px) {
+
+  .main-navbar {
+    min-height: 68px;
+  }
+
+  .logo-group img {
+    width: 38px;
+    height: 38px;
+  }
+
+  .logo-text .tw {
+    font-size: 15px;
+  }
+
+  .logo-text .en {
+    font-size: 6px;
+  }
+}
+
+/* =========================================================
+   Footer
+   ========================================================= */
+
+footer {
+  background: #173f3d;
+
+  color: #d9e9e6;
+}
+
+footer img{
+  width: 48px;
+  height: 48px;
+
+  object-fit: contain;
+}
+
+
+/* Footer 主區 */
+
+footer .footer-title {
+  position: relative;
+
+  margin-bottom: 17px;
+
+  color: #ffffff;
+
+  font-size: 13px;
+  font-weight: 800;
+}
+
+footer .footer-title::after {
+  content: "";
+
+  display: block;
+
+  width: 25px;
+  height: 2px;
+
+  margin-top: 8px;
+
+  border-radius: 5px;
+
+  background: #53b6a5;
+}
+
+
+footer strong {
+  color: #ffffff;
+
+  font-size: 20px;
+  font-weight: 800;
+
+  letter-spacing: 2px;
+}
+
+
+footer p {
+  margin-top: 12px;
+
+  color: #a9c4c0;
+
+  font-size: 11px;
+  line-height: 1.9;
+}
+
+
+/* Footer Links */
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+
+  gap: 9px;
+}
+
+.footer-links a {
+  color: #a9c4c0;
+
+  font-size: 11px;
+
+  transition:
+    color 0.2s ease,
+    padding-left 0.2s ease;
+}
+
+.footer-links a:hover {
+  padding-left: 4px;
+
+  color: #72cabb;
+}
+
+
+/* Social */
+
+.social-icons {
+  display: flex;
+  gap: 8px;
+
+  margin-top: 17px;
+}
+
+.social-icons a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 34px;
+  height: 34px;
+
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.06);
+
+  color: #d9e9e6;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.social-icons a:hover {
+  background: #168f8a;
+
+  color: #fff;
+
+  transform: translateY(-3px);
+}
+
+
+/* Copyright */
+
+.copyright {
+  margin-top: 45px;
+  padding-top: 18px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+  color: #88aaa5;
+
+  font-size: 9px;
+
+  text-align: center;
+}
+
+
+@media (max-width: 575.98px) {
+
+  footer .footer-title {
+    margin-top: 15px;
+  }
+
+  footer strong {
+    font-size: 18px;
+  }
+
+  .copyright {
+    margin-top: 30px;
+
+    line-height: 1.7;
+  }
 }

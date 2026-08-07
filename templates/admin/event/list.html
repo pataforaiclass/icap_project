@@ -1,0 +1,57 @@
+{% extends "layout/adminBase.html" %}
+{% block style_sheet %}
+
+{% endblock %}
+{% block content %}
+<main class="admin-content" id="app" data-current-page="[[ current_type ]]">
+  <div class="page-title">
+    <h1>年度活動列表</h1>
+  </div>
+
+  <div class="d-flex p-1 gap-1">
+    <div class="btn btn-success" @click="gotoAdd()">新增</div>
+    <button type="button" class="btn btn-danger" @click="deleteSelected">
+      刪除
+    </button>
+  </div>
+
+  <table class="table table-bordered">
+    <thead class="text-center">
+      <tr>
+        <th class="col-1">
+          <input type="checkbox" class="form-check-input" v-model="allChecked">
+        </th>
+        <th class="col-2">標題</th>
+        <th class="col-4">內容</th>
+        <th class="col-1">主辦單位</th>
+        <th class="col-1">地址</th>
+        <th class="col-1">圖片數量</th>
+        <th class="col-1">#</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-if="dataList[current_type]?.length == 0">
+        <td colspan="7">
+          <div class="alert alert-warning text-center">查無資料</div>
+        </td>
+      </tr>
+      <tr v-for="item in dataList.event" :key="item.id">
+        <td class="text-center">
+          <input type="checkbox" class="form-check-input" v-model="item.checked">
+        </td>
+        <td>{{ item.title }}</td>
+        <td v-html="item.content"></td>
+        <td>{{ item.organizer }}</td>
+        <td>{{ item.postalCode+' '+item.city+item.district+item.address }}</td>
+        <td>{{ item.images }}</td>
+        <td>
+          <a :href="'/admin/event/edit/'+item.id" class="btn btn-info">修改</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</main>
+{% endblock %}
+{% block page_script %}
+<script src="[[ url_for('static', filename='js/admin/list.js') ]]"></script>
+{% endblock %}

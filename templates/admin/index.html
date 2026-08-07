@@ -1,0 +1,254 @@
+{% extends "layout/adminBase.html" %}
+{% block style_sheet %}
+<link rel="stylesheet" href="[[ url_for('static', filename='css/admin/index.css') ]]">
+{% endblock %}
+{% block content %}
+<!-- ==========================
+  右側主要內容
+========================== -->
+
+<main class="admin-content" id="app">
+
+  <!-- 頁面標題 -->
+
+  <div class="page-title">
+
+    <h1>管理首頁</h1>
+
+    <p>
+      歡迎回來，{{ manager.userName }}！
+    </p>
+
+  </div>
+
+  <!-- ==========================
+             下方內容
+        ========================== -->
+
+  <div class="row g-4">
+
+
+    <!-- 管理者資訊 -->
+
+    <div class="col-12">
+
+      <div class="dashboard-card">
+
+        <div class="dashboard-card-title">
+
+          <span>
+            <i class="fa-solid fa-user me-2"></i>
+            管理者資訊
+          </span>
+
+          <!-- <a href="#" class="btn btn-sm btn-outline-success">
+            編輯資料
+          </a> -->
+
+        </div>
+
+
+        <div class="manager-info">
+
+          <div class="label">
+            管理者帳號
+          </div>
+
+          <div class="value">
+            {{ manager.account }}
+          </div>
+
+
+          <div class="label">
+            姓名
+          </div>
+
+          <div class="value">
+            {{ manager.userName }}
+          </div>
+
+
+          <div class="label">
+            Email
+          </div>
+
+          <div class="value">
+            {{ manager.email }}
+          </div>
+
+
+          <div class="label">
+            手機
+          </div>
+
+          <div class="value">
+            {{ manager.mobile }}
+          </div>
+
+
+          <div class="label">
+            建立時間
+          </div>
+
+          <div class="value">
+            {{ manager.createTime }}
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- 資料統計圓餅圖 -->
+    <div class="col-12 col-lg-7">
+      <div class="dashboard-card">
+        <div class="dashboard-card-title">
+          <span>
+            <i class="fa-solid fa-chart-pie me-2"></i>
+            資料統計
+          </span>
+        </div>
+        <canvas id="pieChart" class="pieChart"></canvas>
+      </div>
+    </div>
+
+    <!-- 快速操作 -->
+
+    <div class="col-12 col-lg-5">
+
+      <div class="dashboard-card">
+
+        <div class="dashboard-card-title">
+          <span>
+            <i class="fa-solid fa-bolt me-2"></i>
+            快速操作
+          </span>
+        </div>
+
+
+        <a href="[[url_for('web.admin.event_add')]]" class="quick-action">
+
+          <i class="fa-solid fa-plus"></i>
+
+          <span>
+            新增年度活動
+          </span>
+
+        </a>
+
+
+        <a href="[[url_for('web.admin.attr_add')]]" class="quick-action">
+
+          <i class="fa-solid fa-plus"></i>
+
+          <span>
+            新增熱門景點
+          </span>
+
+        </a>
+
+
+        <a href="[[url_for('web.admin.food_add')]]" class="quick-action">
+
+          <i class="fa-solid fa-plus"></i>
+
+          <span>
+            新增美食巡禮
+          </span>
+
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <!-- 最近更新 -->
+
+    <div class="col-12">
+
+      <div class="dashboard-card">
+
+        <div class="dashboard-card-title">
+
+          <span>
+            <i class="fa-solid fa-clock-rotate-left me-2"></i>
+            最近更新
+          </span>
+<!-- 
+          <a href="#">
+            查看全部
+          </a> -->
+
+        </div>
+
+
+        <div class="recent-item">
+
+          <div>
+            <div class="name">
+              台中觀光活動
+            </div>
+
+            <div class="time">
+              年度活動
+            </div>
+          </div>
+
+          <span class="badge text-bg-success">
+            已更新
+          </span>
+
+        </div>
+
+
+        <div class="recent-item">
+
+          <div>
+            <div class="name">
+              景點資料
+            </div>
+
+            <div class="time">
+              熱門景點
+            </div>
+          </div>
+
+          <span class="badge text-bg-success">
+            已更新
+          </span>
+
+        </div>
+
+
+        <div class="recent-item">
+
+          <div>
+            <div class="name">
+              美食巡禮
+            </div>
+
+            <div class="time">
+              美食資料
+            </div>
+          </div>
+
+          <span class="badge text-bg-success">
+            已更新
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</main>
+{% endblock %}
+{% block page_script %}
+<script src="[[ url_for('static', filename='js/chart.js') ]]"></script>
+<script src="[[ url_for('static', filename='js/admin/index.js') ]]"></script>
+{% endblock %}

@@ -1,0 +1,68 @@
+<!-- ==========================
+  左側 Navbar
+========================== -->
+<aside class="admin-sidebar" id="navbarApp">
+  <!-- 管理介面標題 -->
+  <div class="admin-logo">
+    <i class="fa-solid fa-gauge-high"></i>
+    <span>管理介面</span>
+  </div>
+
+  <!-- 選單 -->
+  <nav class="admin-menu">
+
+    <div class="admin-menu-title">
+      資料管理
+    </div>
+
+    <a href="[[ url_for('web.admin.index') ]]"
+      {% if current_type == "index" %}
+      class="active"
+      {% endif %}
+    >
+      <i class="fa-solid fa-house"></i>
+      <span>管理首頁</span>
+    </a>
+
+    <a href="[[ url_for('web.admin.event_list') ]]"
+      {% if current_type == "event" %}
+      class="active"
+      {% endif %}
+    >
+      <i class="fa-solid fa-calendar-days"></i>
+      <span>年度活動列表</span>
+    </a>
+
+    <a href="[[ url_for('web.admin.attr_list') ]]"
+      {% if current_type == "attractions" %}
+      class="active"
+      {% endif %}
+    >
+      <i class="fa-solid fa-location-dot"></i>
+      <span>熱門景點列表</span>
+    </a>
+
+    <a href="[[ url_for('web.admin.food_list') ]]"
+      {% if current_type == "food" %}
+      class="active"
+      {% endif %}
+    >
+      <i class="fa-solid fa-utensils"></i>
+      <span>美食巡禮列表</span>
+    </a>
+
+  </nav>
+
+
+  <!-- 登出 -->
+
+  <div class="admin-logout">
+
+    <a @click="logout()">
+      <i class="fa-solid fa-right-from-bracket"></i>
+      <span>登出</span>
+    </a>
+
+  </div>
+
+</aside>

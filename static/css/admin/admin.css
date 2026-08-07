@@ -1,0 +1,191 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: #f5f6f8;
+  color: #333;
+}
+
+/* ==========================
+       整體 Layout
+    ========================== */
+
+.admin-layout {
+  min-height: 100vh;
+  display: flex;
+}
+
+/* ==========================
+       Sidebar
+    ========================== */
+
+.admin-sidebar {
+  width: 260px;
+  min-height: 100vh;
+  background-color: #195d32;
+  color: white;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 管理介面標題 */
+
+.admin-logo {
+  min-height: 90px;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.admin-logo i {
+  font-size: 28px;
+  margin-right: 12px;
+}
+
+.admin-logo span {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* Sidebar Menu */
+
+.admin-menu {
+  padding: 20px 12px;
+  flex-grow: 1;
+}
+
+.admin-menu-title {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+  padding: 0 12px;
+  margin-bottom: 10px;
+}
+
+.admin-menu a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  color: white;
+  text-decoration: none;
+
+  padding: 13px 15px;
+  margin-bottom: 5px;
+
+  border-radius: 8px;
+
+  transition: 0.2s;
+}
+
+.admin-menu a:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.admin-menu a.active {
+  background-color: rgba(255, 255, 255, 0.18);
+}
+
+.admin-menu a i {
+  width: 20px;
+  text-align: center;
+}
+
+/* 登出 */
+
+.admin-logout {
+  padding: 15px 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.admin-logout a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 13px 15px;
+
+  color: white;
+  text-decoration: none;
+
+  border-radius: 8px;
+}
+
+.admin-logout a:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+/* 頁面標題 */
+
+.admin-content {
+  width: calc(100% - 260px);
+  margin-left: 260px;
+  padding: 35px;
+}
+
+.page-title {
+  margin-bottom: 30px;
+}
+
+.page-title h1 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.page-title p {
+  margin: 0;
+  color: #777;
+}
+
+/* ==========================
+    RWD
+========================== */
+
+@media (max-width: 992px) {
+
+  .admin-sidebar {
+    width: 220px;
+  }
+
+  .admin-content {
+    width: calc(100% - 220px);
+    margin-left: 220px;
+    padding: 25px;
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  .admin-sidebar {
+    position: relative;
+    width: 100%;
+    min-height: auto;
+  }
+
+  .admin-content {
+    width: 100%;
+    margin-left: 0;
+    padding: 20px;
+  }
+
+  .admin-layout {
+    display: block;
+  }
+
+  .admin-menu {
+    padding: 10px 12px;
+  }
+
+  .admin-logout {
+    border-top: none;
+  }
+
+}

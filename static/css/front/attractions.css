@@ -1,0 +1,1040 @@
+/* =========================================================
+   Event Page
+   Natural Fresh Travel Style
+   ========================================================= */
+
+:root {
+  --attractions-primary: #168f8a;
+  --attractions-primary-dark: #0f716e;
+  --attractions-secondary: #4fae9f;
+
+  --attractions-bg: #f5faf9;
+  --attractions-bg-green: #eef8f5;
+
+  --attractions-white: #ffffff;
+
+  --attractions-text: #23413f;
+  --attractions-text-light: #718581;
+
+  --attractions-border: #dcebe8;
+
+  --attractions-shadow: 0 8px 28px rgba(39, 94, 88, 0.08);
+  --attractions-shadow-hover: 0 16px 36px rgba(39, 94, 88, 0.15);
+}
+
+
+/* =========================================================
+   基本
+   ========================================================= */
+
+#app {
+  color: var(--attractions-text);
+
+  background: var(--attractions-white);
+}
+
+#app a {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+/* =========================================================
+   Hero
+   ========================================================= */
+
+.attractions-hero {
+  position: relative;
+
+  min-height: 280px;
+
+  display: flex;
+  align-items: center;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      120deg,
+      #e7f5f2,
+      #f4faf9
+    );
+}
+
+
+/* 裝飾圓 */
+
+.attractions-hero::before {
+  content: "";
+
+  position: absolute;
+
+  width: 350px;
+  height: 350px;
+
+  right: 8%;
+  top: -180px;
+
+  border-radius: 50%;
+
+  background: rgba(79, 174, 159, 0.12);
+}
+
+.attractions-hero::after {
+  content: "";
+
+  position: absolute;
+
+  width: 220px;
+  height: 220px;
+
+  right: 25%;
+  bottom: -150px;
+
+  border-radius: 50%;
+
+  background: rgba(22, 143, 138, 0.07);
+}
+
+
+.attractions-hero-content {
+  position: relative;
+
+  z-index: 2;
+
+  padding: 55px 0;
+}
+
+
+.attractions-hero-tag {
+  display: inline-flex;
+  align-items: center;
+
+  margin-bottom: 14px;
+
+  padding: 6px 13px;
+
+  border: 1px solid rgba(22, 143, 138, 0.2);
+  border-radius: 50px;
+
+  background: rgba(255, 255, 255, 0.65);
+
+  color: var(--attractions-primary);
+
+  font-size: 9px;
+  font-weight: 800;
+
+  letter-spacing: 2px;
+}
+
+
+.attractions-hero h1 {
+  margin: 0 0 10px;
+
+  color: var(--attractions-text);
+
+  font-size: clamp(32px, 4vw, 48px);
+
+  font-weight: 800;
+
+  letter-spacing: 2px;
+}
+
+
+.attractions-hero p {
+  max-width: 600px;
+
+  margin: 0;
+
+  color: var(--attractions-text-light);
+
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+
+/* =========================================================
+   Main
+   ========================================================= */
+
+.attractions-main {
+  padding: 60px 0 80px;
+
+  background: var(--attractions-bg);
+}
+
+
+/* =========================================================
+   Page Heading
+   ========================================================= */
+
+.attractions-page-heading {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: flex-end;
+
+  margin-bottom: 18px;
+}
+
+
+.attractions-page-heading .section-title {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  margin-bottom: 7px;
+
+  padding-left: 14px;
+}
+
+
+.attractions-page-heading .section-title::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  top: 50%;
+
+  width: 5px;
+  height: 28px;
+
+  transform: translateY(-50%);
+
+  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      180deg,
+      var(--attractions-primary),
+      var(--attractions-secondary)
+    );
+}
+
+
+.attractions-page-heading .section-title h2 {
+  margin: 0;
+
+  color: var(--attractions-text);
+
+  font-size: 25px;
+
+  font-weight: 800;
+
+  letter-spacing: 1px;
+}
+
+
+.attractions-page-heading .section-subtitle {
+  margin: 0;
+
+  color: var(--attractions-text-light);
+
+  font-size: 11px;
+}
+
+
+.attractions-count {
+  padding-bottom: 3px;
+
+  color: #8a9d99;
+
+  font-size: 11px;
+}
+
+
+.attractions-count strong {
+  color: var(--attractions-primary);
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   Pagination
+   ========================================================= */
+
+.attractions-pagination {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  gap: 6px;
+}
+
+
+.attractions-pagination-top {
+  margin-bottom: 22px;
+}
+
+
+.attractions-pagination-bottom {
+  margin-top: 38px;
+}
+
+
+.page-btn {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-width: 34px;
+  height: 34px;
+
+  padding: 0 8px;
+
+  border: 1px solid var(--attractions-border);
+  border-radius: 8px;
+
+  background: #fff;
+
+  color: #657b77;
+
+  font-size: 11px;
+
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+.page-btn:hover:not(:disabled) {
+  border-color: var(--attractions-primary);
+
+  color: var(--attractions-primary);
+
+  transform: translateY(-1px);
+}
+
+
+.page-btn.active {
+  border-color: var(--attractions-primary);
+
+  background: var(--attractions-primary);
+
+  color: #fff;
+
+  box-shadow:
+    0 5px 12px rgba(22, 143, 138, 0.2);
+}
+
+
+.page-btn:disabled {
+  opacity: 0.35;
+
+  cursor: not-allowed;
+}
+
+
+.page-arrow {
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   Search / Filter
+   ========================================================= */
+
+.attractions-filter {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 20px;
+
+  margin-bottom: 28px;
+
+  padding: 17px;
+
+  border: 1px solid var(--attractions-border);
+  border-radius: 14px;
+
+  background: #fff;
+
+  box-shadow:
+    0 4px 15px rgba(39, 94, 88, 0.04);
+}
+
+
+/* Search */
+
+.attractions-search {
+  display: flex;
+  align-items: center;
+
+  flex: 1;
+
+  max-width: 550px;
+
+  height: 42px;
+
+  overflow: hidden;
+
+  border: 1px solid var(--attractions-border);
+  border-radius: 9px;
+
+  background: #fafdfe;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+.attractions-search:focus-within {
+  border-color: var(--attractions-primary);
+
+  box-shadow:
+    0 0 0 3px rgba(22, 143, 138, 0.08);
+}
+
+
+.attractions-search > i {
+  margin-left: 14px;
+
+  color: #8ba19d;
+
+  font-size: 13px;
+}
+
+
+.attractions-search input {
+  flex: 1;
+
+  min-width: 0;
+
+  height: 100%;
+
+  padding: 0 12px;
+
+  border: 0;
+  outline: none;
+
+  background: transparent;
+
+  color: var(--attractions-text);
+
+  font-size: 12px;
+}
+
+
+.attractions-search input::placeholder {
+  color: #a5b4b1;
+}
+
+
+.attractions-search button {
+  height: 100%;
+
+  padding: 0 20px;
+
+  border: 0;
+
+  background: var(--attractions-primary);
+
+  color: #fff;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: background 0.2s ease;
+}
+
+
+.attractions-search button:hover {
+  background: var(--attractions-primary-dark);
+}
+
+
+/* 每頁筆數 */
+
+.attractions-per-page {
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  color: #758985;
+
+  font-size: 11px;
+}
+
+
+.attractions-per-page label {
+  margin: 0;
+
+  white-space: nowrap;
+}
+
+
+.attractions-per-page select {
+  min-width: 90px;
+
+  height: 38px;
+
+  padding: 0 28px 0 10px;
+
+  border: 1px solid var(--attractions-border);
+  border-radius: 8px;
+
+  outline: none;
+
+  background-color: #fff;
+
+  color: var(--attractions-text);
+
+  font-size: 11px;
+
+  cursor: pointer;
+}
+
+
+.attractions-per-page select:focus {
+  border-color: var(--attractions-primary);
+
+  box-shadow:
+    0 0 0 3px rgba(22, 143, 138, 0.08);
+}
+
+
+/* =========================================================
+   Event List
+   ========================================================= */
+
+.attractions-list {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 22px;
+}
+
+
+/* =========================================================
+   Event Card
+   ========================================================= */
+
+.attractions-card {
+  display: block;
+
+  height: 100%;
+
+  overflow: hidden;
+
+  border: 1px solid var(--attractions-border);
+  border-radius: 16px;
+
+  background: #fff;
+
+  box-shadow:
+    0 3px 12px rgba(39, 94, 88, 0.04);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+
+.attractions-card:hover {
+  transform: translateY(-7px);
+
+  box-shadow: var(--attractions-shadow-hover);
+}
+
+
+/* 圖片 */
+
+.attractions-image-wrap {
+  position: relative;
+
+  height: 190px;
+
+  overflow: hidden;
+
+  background: #e6f0ee;
+}
+
+
+.attractions-image {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transition: transform 0.5s ease;
+}
+
+
+.attractions-card:hover .attractions-image {
+  transform: scale(1.05);
+}
+
+
+/* 活動標籤 */
+
+.attractions-card-tags {
+  position: absolute;
+
+  left: 14px;
+  right: 14px;
+  top: 14px;
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  overflow: hidden;
+  white-space: nowrap;
+
+  z-index: 2;
+}
+
+.attractions-card-tag {
+  flex-shrink: 0;
+
+  padding: 5px 10px;
+
+  border-radius: 50px;
+
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--attractions-primary);
+
+  font-size: 9px;
+  font-weight: 800;
+
+  box-shadow:
+    0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+
+/* Card Body */
+
+.attractions-card-body {
+  padding: 18px;
+}
+
+
+.attractions-date {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  margin-bottom: 9px;
+
+  color: #819490;
+
+  font-size: 10px;
+}
+
+
+.attractions-date i {
+  color: var(--attractions-primary);
+
+  font-size: 11px;
+}
+
+
+.attractions-title {
+  display: -webkit-box;
+
+  min-height: 46px;
+
+  margin: 0;
+
+  overflow: hidden;
+
+  color: var(--attractions-text);
+
+  font-size: 16px;
+
+  font-weight: 800;
+
+  line-height: 1.6;
+
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+
+  transition: color 0.2s ease;
+}
+
+
+.attractions-card:hover .attractions-title {
+  color: var(--attractions-primary);
+}
+
+.attractions-content {
+  margin: 10px 0 0;
+
+  color: #657876;
+  font-size: 13px;
+  line-height: 1.8;
+  letter-spacing: 0.2px;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+
+  /* min-height: calc(13px * 1.8 * 3); */
+  word-break: break-word;
+}
+
+
+/* 查看詳情 */
+
+.attractions-card-more {
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  margin-top: 15px;
+  padding-top: 13px;
+
+  border-top: 1px solid #edf2f1;
+
+  color: var(--attractions-primary);
+
+  font-size: 10px;
+
+  font-weight: 700;
+}
+
+
+.attractions-card-more i {
+  transition: transform 0.2s ease;
+}
+
+
+.attractions-card:hover .attractions-card-more i {
+  transform: translateX(4px);
+}
+
+
+/* =========================================================
+   一頁一筆
+   ========================================================= */
+
+.attractions-list-single {
+  grid-template-columns: 1fr;
+
+  gap: 20px;
+}
+
+
+.attractions-list-single .attractions-card {
+  display: grid;
+
+  grid-template-columns: 38% 1fr;
+
+  min-height: 240px;
+}
+
+
+.attractions-list-single .attractions-image-wrap {
+  height: 100%;
+  min-height: 240px;
+}
+
+
+.attractions-list-single .attractions-card-body {
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  padding: 35px;
+}
+
+
+.attractions-list-single .attractions-title {
+  min-height: auto;
+
+  max-width: 700px;
+
+  font-size: 22px;
+}
+
+
+.attractions-list-single .attractions-card-more {
+  width: fit-content;
+
+  margin-top: 22px;
+}
+
+
+/* =========================================================
+   無資料
+   ========================================================= */
+
+.attractions-empty {
+  grid-column: 1 / -1;
+
+  padding: 80px 20px;
+
+  border: 1px dashed var(--attractions-border);
+  border-radius: 16px;
+
+  background: #fff;
+
+  text-align: center;
+}
+
+
+.attractions-empty-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 60px;
+  height: 60px;
+
+  margin: 0 auto 15px;
+
+  border-radius: 50%;
+
+  background: var(--attractions-bg-green);
+
+  color: var(--attractions-primary);
+
+  font-size: 24px;
+}
+
+
+.attractions-empty h3 {
+  margin-bottom: 7px;
+
+  color: var(--attractions-text);
+
+  font-size: 17px;
+
+  font-weight: 800;
+}
+
+
+.attractions-empty p {
+  margin: 0;
+
+  color: #8a9d99;
+
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   RWD
+   ========================================================= */
+
+@media (max-width: 991.98px) {
+
+  .attractions-hero {
+    min-height: 250px;
+  }
+
+  .attractions-hero-content {
+    padding: 45px 0;
+  }
+
+  .attractions-main {
+    padding: 50px 0 70px;
+  }
+
+  .attractions-list {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+  }
+
+  .attractions-image-wrap {
+    height: 180px;
+  }
+
+  .attractions-list-single .attractions-card {
+    grid-template-columns: 42% 1fr;
+  }
+
+}
+
+
+/* =========================================================
+   Tablet
+   ========================================================= */
+
+@media (max-width: 767.98px) {
+
+  .attractions-page-heading {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 8px;
+  }
+
+  .attractions-count {
+    padding: 0;
+  }
+
+  .attractions-filter {
+    align-items: stretch;
+
+    flex-direction: column;
+  }
+
+  .attractions-search {
+    max-width: none;
+
+    width: 100%;
+  }
+
+  .attractions-per-page {
+    justify-content: space-between;
+  }
+
+  .attractions-list {
+    grid-template-columns: 1fr;
+  }
+
+  .attractions-list-single .attractions-card {
+    display: block;
+
+    min-height: auto;
+  }
+
+  .attractions-list-single .attractions-image-wrap {
+    height: 220px;
+
+    min-height: 0;
+  }
+
+  .attractions-list-single .attractions-card-body {
+    display: block;
+
+    padding: 20px;
+  }
+
+  .attractions-list-single .attractions-title {
+    font-size: 18px;
+  }
+
+  .attractions-list-single .attractions-card-more {
+    margin-top: 15px;
+  }
+
+}
+
+
+/* =========================================================
+   Mobile
+   ========================================================= */
+
+@media (max-width: 575.98px) {
+
+  .attractions-hero {
+    min-height: 230px;
+  }
+
+  .attractions-hero-content {
+    padding: 38px 0;
+  }
+
+  .attractions-hero-tag {
+    margin-bottom: 10px;
+
+    font-size: 8px;
+  }
+
+  .attractions-hero h1 {
+    font-size: 30px;
+
+    letter-spacing: 1px;
+  }
+
+  .attractions-hero p {
+    font-size: 11px;
+
+    line-height: 1.8;
+  }
+
+  .attractions-main {
+    padding: 40px 0 55px;
+  }
+
+  .attractions-page-heading .section-title h2 {
+    font-size: 21px;
+  }
+
+  .attractions-page-heading .section-subtitle {
+    font-size: 10px;
+  }
+
+  .attractions-filter {
+    padding: 13px;
+
+    gap: 13px;
+  }
+
+  .attractions-search {
+    height: 40px;
+  }
+
+  .attractions-search button {
+    padding: 0 15px;
+  }
+
+  .attractions-per-page select {
+    height: 36px;
+  }
+
+  .attractions-image-wrap {
+    height: 190px;
+  }
+
+  .attractions-card-body {
+    padding: 16px;
+  }
+
+  .attractions-title {
+    font-size: 14px;
+  }
+
+  .attractions-pagination {
+    gap: 4px;
+  }
+
+  .page-btn {
+    min-width: 31px;
+    height: 31px;
+
+    font-size: 10px;
+  }
+
+  .attractions-pagination-top {
+    margin-bottom: 17px;
+  }
+
+  .attractions-pagination-bottom {
+    margin-top: 28px;
+  }
+
+}

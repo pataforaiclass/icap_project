@@ -1,12 +1,22 @@
 # import sqlite3
 from flask import Flask, redirect, url_for, render_template
 from routes import web
+import secrets
+from datetime import timedelta
 
 from database import init_db
 
 app = Flask(__name__)
 app.jinja_env.variable_start_string = '[['
 app.jinja_env.variable_end_string = ']]'
+
+SECRET_KEY = secrets.token_hex(32)
+print(SECRET_KEY)
+app.config["SECRET_KEY"] = SECRET_KEY
+
+# 設定 session 存活時間為 30 分鐘
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=60)
+
 NAV_ITEMS = [
     ("event", "年度活動"),
     ("attr", "熱門景點"),

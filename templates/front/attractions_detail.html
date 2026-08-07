@@ -1,0 +1,114 @@
+{% extends "layout/base.html" %}
+{% block style_sheet %}
+<link rel="stylesheet" href="[[ url_for('static', filename='css/front/attractions_detail.css') ]]">
+{% endblock %}
+{% block content %}
+<div id="attractionsDetailApp">
+  <div class="attractions-detail">
+
+    <!-- 載入中 -->
+    <div v-if="loading" class="attractions-loading">
+      <div class="spinner-border" role="status"></div>
+      <p>景點資料載入中...</p>
+    </div>
+
+    <!-- 載入失敗 -->
+    <div v-else-if="error" class="attractions-error">
+      <h2>無法取得景點資料</h2>
+      <p>{{ error }}</p>
+    </div>
+
+    <!-- 景點內容 -->
+    <template v-else-if="attractions">
+
+      <!-- 首張圖片 -->
+      <div class="attractions-hero" v-if="attractions.images">
+        <img :src="getImageUrl(attractions.images[0])" :alt="attractions.title">
+      </div>
+
+
+      <!-- 標題 -->
+      <div class="attractions-title">
+        <h1>{{ attractions.title }}</h1>
+      </div>
+
+
+      <!-- 建立時間 -->
+      <div class="attractions-time">
+        發布時間：{{ attractions.createTime }}
+      </div>
+
+      <!-- 主題分類 -->
+      <div class="attractions-topics">
+        <span class="attractions-topic" v-for="(item, index) in attractions.topic" :key="index">
+          {{ item }}
+        </span>
+      </div>
+
+      <!-- 景點資訊 -->
+      <div class="attractions-info">
+
+        <div class="attractions-info-row">
+          <div class="attractions-info-label">
+            主辦單位
+          </div>
+
+          <div class="attractions-info-value">
+            {{ attractions.organizer }}
+          </div>
+        </div>
+
+
+        <div class="attractions-info-row">
+          <div class="attractions-info-label">
+            景點地址
+          </div>
+
+          <div class="attractions-info-value">
+            {{ attractions.postalCode+' '+attractions.city+attractions.district+attractions.address }}
+          </div>
+        </div>
+
+      </div>
+
+
+      <!-- 景點內容 -->
+      <div class="attractions-content" v-html="attractions.content"></div>
+
+
+      <!-- 圖片輪播 -->
+      <div class="attractions-gallery" v-if="attractions.images && attractions.images.length > 0">
+        <h2>景點照片</h2>
+        <div class="attractions-carousel">
+          <div v-for="(image, index) in attractions.images" :key="index" class="attractions-slide"
+            :class="{ active: currentSlide === index }">
+            <img :src="getImageUrl(image)" :alt="attractions.title + ' - 景點照片 ' + (index + 1)">
+          </div>
+          <!-- 左右按鈕 -->
+          <template v-if="attractions.images.length > 1">
+            <button type="button" class="attractions-prev" @click="changeSlide(-1)" aria-label="上一張">
+              &#10094;
+            </button>
+
+            <button type="button" class="attractions-next" @click="changeSlide(1)" aria-label="下一張">
+              &#10095;
+            </button>
+          </template>
+        </div>
+
+
+        <!-- 圓點 -->
+        <div class="attractions-dots" v-if="attractions.images.length > 1">
+          <button v-for="(image, index) in attractions.images" :key="index" type="button" class="attractions-dot"
+            :class="{ active: currentSlide === index }" @click="showSlide(index)"
+            :aria-label="'顯示第 ' + (index + 1) + ' 張圖片'"></button>
+        </div>
+
+      </div>
+    </template>
+  </div>
+</div>
+{% endblock %}
+{% block page_script %}
+<script src="[[ url_for('static', filename='js/front/attractions_detail.js') ]]"></script>
+{% endblock %}

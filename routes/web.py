@@ -10,35 +10,35 @@ bp.register_blueprint(front.bp)
 # 首頁
 @bp.route("/")
 def toIndex():
-  return redirect(url_for("index"))
+  return redirect(url_for("web.index"))
 
 @bp.route("/index")
 def index():
   return render_template(
     "front/index.html",
-    current_page="index"
+    current_type="index"
   )
 
-# 美食巡禮
+# 年度活動
 @bp.route("/event")
 def eventPage():
-    return render_template(
-        "front/event.html",
-        current_page="event"
-    )
+  return render_template(
+    "front/event.html",
+    current_type="event"
+  )
 
-# 美食巡禮
+# 熱門景點
 @bp.route("/attr")
 def attrPage():
-    return render_template(
-        "front/attractions.html",
-        current_page="attractions"
-    )
+  return render_template(
+    "front/attractions.html",
+    current_type="attractions"
+  )
 
 # 美食巡禮
 @bp.route("/food")
 def foodPage():
-    return render_template(
-        "front/food.html",
-        current_page="food"
-    )
+  return render_template(
+    "front/food.html",
+    current_type="food"
+  )

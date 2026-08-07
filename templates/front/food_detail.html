@@ -1,0 +1,114 @@
+{% extends "layout/base.html" %}
+{% block style_sheet %}
+<link rel="stylesheet" href="[[ url_for('static', filename='css/front/food_detail.css') ]]">
+{% endblock %}
+{% block content %}
+<div id="foodDetailApp">
+  <div class="food-detail">
+
+    <!-- 載入中 -->
+    <div v-if="loading" class="food-loading">
+      <div class="spinner-border" role="status"></div>
+      <p>地點資料載入中...</p>
+    </div>
+
+    <!-- 載入失敗 -->
+    <div v-else-if="error" class="food-error">
+      <h2>無法取得地點資料</h2>
+      <p>{{ error }}</p>
+    </div>
+
+    <!-- 地點內容 -->
+    <template v-else-if="food">
+
+      <!-- 首張圖片 -->
+      <div class="food-hero" v-if="food.images">
+        <img :src="getImageUrl(food.images[0])" :alt="food.title">
+      </div>
+
+
+      <!-- 標題 -->
+      <div class="food-title">
+        <h1>{{ food.title }}</h1>
+      </div>
+
+
+      <!-- 建立時間 -->
+      <div class="food-time">
+        發布時間：{{ food.createTime }}
+      </div>
+
+      <!-- 主題分類 -->
+      <div class="food-topics">
+        <span class="food-topic" v-for="(item, index) in food.topic" :key="index">
+          {{ item }}
+        </span>
+      </div>
+
+      <!-- 地點資訊 -->
+      <div class="food-info">
+
+        <div class="food-info-row">
+          <div class="food-info-label">
+            主辦單位
+          </div>
+
+          <div class="food-info-value">
+            {{ food.organizer }}
+          </div>
+        </div>
+
+
+        <div class="food-info-row">
+          <div class="food-info-label">
+            地點地址
+          </div>
+
+          <div class="food-info-value">
+            {{ food.postalCode+' '+food.city+food.district+food.address }}
+          </div>
+        </div>
+
+      </div>
+
+
+      <!-- 地點內容 -->
+      <div class="food-content" v-html="food.content"></div>
+
+
+      <!-- 圖片輪播 -->
+      <div class="food-gallery" v-if="food.images && food.images.length > 0">
+        <h2>地點照片</h2>
+        <div class="food-carousel">
+          <div v-for="(image, index) in food.images" :key="index" class="food-slide"
+            :class="{ active: currentSlide === index }">
+            <img :src="getImageUrl(image)" :alt="food.title + ' - 地點照片 ' + (index + 1)">
+          </div>
+          <!-- 左右按鈕 -->
+          <template v-if="food.images.length > 1">
+            <button type="button" class="food-prev" @click="changeSlide(-1)" aria-label="上一張">
+              &#10094;
+            </button>
+
+            <button type="button" class="food-next" @click="changeSlide(1)" aria-label="下一張">
+              &#10095;
+            </button>
+          </template>
+        </div>
+
+
+        <!-- 圓點 -->
+        <div class="food-dots" v-if="food.images.length > 1">
+          <button v-for="(image, index) in food.images" :key="index" type="button" class="food-dot"
+            :class="{ active: currentSlide === index }" @click="showSlide(index)"
+            :aria-label="'顯示第 ' + (index + 1) + ' 張圖片'"></button>
+        </div>
+
+      </div>
+    </template>
+  </div>
+</div>
+{% endblock %}
+{% block page_script %}
+<script src="[[ url_for('static', filename='js/front/food_detail.js') ]]"></script>
+{% endblock %}

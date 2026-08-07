@@ -8,7 +8,7 @@ from PIL import Image
 
 
 def save_image(
-  image_data: dict,
+  image_data,
   upload_folder: str,
   thumbnail_folder: str,
   thumbnail_size=(400, 300),
@@ -18,11 +18,8 @@ def save_image(
 
   Parameters
   ----------
-  image_data : dict
-    {
-      "filename": "abc.jpg",
-      "content": "data:image/jpeg;base64,..."
-    }
+  image_data : FileStorage
+    Flask request.files 取得的圖片
 
   upload_folder : str
     原圖資料夾
@@ -39,20 +36,24 @@ def save_image(
     新檔名
   """
 
-  if not image_data:
+  if not image_data or not image_data.filename:
     return None
 
   os.makedirs(upload_folder, exist_ok=True)
   os.makedirs(thumbnail_folder, exist_ok=True)
 
+  # =========================
   # 副檔名
-  ext = os.path.splitext(image_data["filename"])[1].lower()
+  # =========================
+  ext = os.path.splitext(image_data.filename)[1].lower()
 
   if ext == "":
-      ext = ".jpg"
+    ext = ".jpg"
 
+  # =========================
   # 新檔名
-  # yyyyMMddHHmmssffffff+隨機碼3碼
+  # yyyyMMddHHmmssSSS + 隨機碼6碼
+  # =========================
   filename = (
     datetime.now().strftime("%Y%m%d%H%M%S%f")[:-3]
     + "_"
@@ -60,25 +61,36 @@ def save_image(
     + ext
   )
 
-  upload_path = os.path.join(upload_folder, filename)
+  upload_path = os.path.join(
+    upload_folder,
+    filename
+  )
 
-  thumbnail_path = os.path.join(thumbnail_folder, filename)
+  thumbnail_path = os.path.join(
+    thumbnail_folder,
+    filename
+  )
 
-  # Base64 -> Image
-  base64_str = image_data["content"]
+  # =========================
+  # 讀取圖片
+  # =========================
+  image = Image.open(image_data)
 
-  if "," in base64_str:
-    base64_str = base64_str.split(",")[1]
-
-  image_bytes = base64.b64decode(base64_str)
-  image = Image.open(BytesIO(image_bytes))
-
+  # =========================
   # 儲存原圖
+  # =========================
   image.save(upload_path)
 
+  # =========================
   # 建立縮圖
+  # =========================
   thumb = image.copy()
-  thumb.thumbnail(thumbnail_size, Image.Resampling.LANCZOS)
+
+  thumb.thumbnail(
+    thumbnail_size,
+    Image.Resampling.LANCZOS
+  )
+
   thumb.save(thumbnail_path)
 
   return filename

@@ -1,0 +1,143 @@
+{% extends "layout/base.html" %}
+{% block style_sheet %}
+<link rel="stylesheet" href="[[ url_for('static', filename='css/front/event_detail.css') ]]">
+{% endblock %}
+{% block content %}
+<div id="eventDetailApp">
+  <div class="event-detail">
+
+    <!-- 載入中 -->
+    <div v-if="loading" class="event-loading">
+      <div class="spinner-border" role="status"></div>
+      <p>活動資料載入中...</p>
+    </div>
+
+    <!-- 載入失敗 -->
+    <div v-else-if="error" class="event-error">
+      <h2>無法取得活動資料</h2>
+      <p>{{ error }}</p>
+    </div>
+
+    <!-- 活動內容 -->
+    <template v-else-if="event">
+
+      <!-- 首張圖片 -->
+      <div class="event-hero" v-if="event.images">
+        <img
+          :src="getImageUrl(event.images[0])"
+          :alt="event.title"
+        >
+      </div>
+
+
+      <!-- 標題 -->
+      <div class="event-title">
+        <h1>{{ event.title }}</h1>
+      </div>
+
+
+      <!-- 建立時間 -->
+      <div class="event-time">
+        發布時間：{{ event.createTime }}
+      </div>
+
+
+      <!-- 活動資訊 -->
+      <div class="event-info">
+
+        <div class="event-info-row">
+          <div class="event-info-label">
+            主辦單位
+          </div>
+
+          <div class="event-info-value">
+            {{ event.organizer }}
+          </div>
+        </div>
+
+
+        <div class="event-info-row">
+          <div class="event-info-label">
+            活動地址
+          </div>
+
+          <div class="event-info-value">
+            {{ event.postalCode+' '+event.city+event.district+event.address }}
+          </div>
+        </div>
+
+      </div>
+
+
+      <!-- 活動內容 -->
+      <div
+        class="event-content"
+        v-html="event.content"
+      ></div>
+
+
+      <!-- 圖片輪播 -->
+      <div
+        class="event-gallery"
+        v-if="event.images && event.images.length > 0"
+      >
+        <h2>活動照片</h2>
+        <div class="event-carousel">
+          <div
+            v-for="(image, index) in event.images"
+            :key="index"
+            class="event-slide"
+            :class="{ active: currentSlide === index }"
+          >
+            <img
+              :src="getImageUrl(image)"
+              :alt="event.title + ' - 活動照片 ' + (index + 1)"
+            >
+          </div>
+          <!-- 左右按鈕 -->
+          <template v-if="event.images.length > 1">
+            <button
+              type="button"
+              class="event-prev"
+              @click="changeSlide(-1)"
+              aria-label="上一張"
+            >
+              &#10094;
+            </button>
+
+            <button
+              type="button"
+              class="event-next"
+              @click="changeSlide(1)"
+              aria-label="下一張"
+            >
+              &#10095;
+            </button>
+          </template>
+        </div>
+
+
+        <!-- 圓點 -->
+        <div
+          class="event-dots"
+          v-if="event.images.length > 1"
+        >
+          <button
+            v-for="(image, index) in event.images"
+            :key="index"
+            type="button"
+            class="event-dot"
+            :class="{ active: currentSlide === index }"
+            @click="showSlide(index)"
+            :aria-label="'顯示第 ' + (index + 1) + ' 張圖片'"
+          ></button>
+        </div>
+
+      </div>
+    </template>
+  </div>
+</div>
+{% endblock %}
+{% block page_script %}
+<script src="[[ url_for('static', filename='js/front/event_detail.js') ]]"></script>
+{% endblock %}

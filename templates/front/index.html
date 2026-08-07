@@ -4,48 +4,520 @@
 {% endblock %}
 {% block content %}
 <div id="app">
-  <!-- 首頁輪播 -->
-  <div id="carouselIndexCaptions" class="carousel slide" data-bs-ride="false">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselIndexCaptions" data-bs-slide-to="0" class="active"
-        aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselIndexCaptions" data-bs-slide-to="1"
-        aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carouselIndexCaptions" data-bs-slide-to="2"
-        aria-label="Slide 3"></button>
-    </div>
+  <!-- Carousel -->
+  <div id="heroCarousel" class="top-area carousel slide hero-carousel" data-bs-ride="carousel">
     <div class="carousel-inner">
+      <!-- Slide 1 -->
       <div class="carousel-item active">
-        <img src="[[ url_for('static', filename='image/index/carousel_01.png') ]]" class="d-block w-100" alt="...">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>First slide label</h5>
-          <p>Some representative placeholder content for the first slide.</p>
+        <img src="[[ url_for('static', filename='image/index/carousel_01.png') ]]" alt="精選推薦">
+        <div class="hero-content">
+          <span class="hero-tag">精選推薦</span>
+          <h1>台中，每一刻都精彩</h1>
+          <p>探索百年古蹟、品味在地美食，感受台中獨特的城市魅力</p>
+
+          <a href="#" class="hero-btn">
+            立即探索
+            <i class="bi bi-arrow-right"></i>
+          </a>
         </div>
       </div>
+
+
+      <!-- Slide 2 -->
       <div class="carousel-item">
-        <img src="[[ url_for('static', filename='image/index/carousel_02.png') ]]" class="d-block w-100" alt="...">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Second slide label</h5>
-          <p>Some representative placeholder content for the second slide.</p>
+        <img src="[[ url_for('static', filename='image/index/carousel_02.png') ]]" alt="夜生活">
+        <div class="hero-content">
+          <span class="hero-tag">夜生活</span>
+          <h1>逢甲夜市，台中最愛</h1>
+          <p>全台知名夜市，美食匯聚，夜夜精彩，是旅人必訪之地</p>
+
+          <a href="#" class="hero-btn">
+            美食探索
+            <i class="bi bi-arrow-right"></i>
+          </a>
         </div>
       </div>
+
+
+      <!-- Slide 3 -->
+
       <div class="carousel-item">
-        <img src="[[ url_for('static', filename='image/index/carousel_03.png') ]]" class="d-block w-100" alt="...">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Third slide label</h5>
-          <p>Some representative placeholder content for the third slide.</p>
+        <img src="[[ url_for('static', filename='image/index/carousel_03.png') ]]" alt="自然生態">
+        <div class="hero-content">
+          <span class="hero-tag">自然生態</span>
+          <h1>大坑雲海，壯闊天地</h1>
+          <p>台中山林之美，邀您踏上一場山與雲的邂逅</p>
+
+          <a href="#" class="hero-btn">
+            探索景點
+            <i class="bi bi-arrow-right"></i>
+          </a>
         </div>
       </div>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselIndexCaptions" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
     </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselIndexCaptions" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
+    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
     </button>
+
   </div>
+
+  <!-- =====================================================
+    年度活動
+  ====================================================== -->
+
+  <section class="section section-gray" id="scroll0">
+
+    <div class="container">
+
+      <div class="d-flex justify-content-between align-items-end">
+
+        <div>
+          <div class="section-title">
+            <h2>年度活動</h2>
+          </div>
+
+          <div class="section-subtitle">
+            掌握台中最新旅遊資訊
+          </div>
+        </div>
+
+        <a href="/event" class="section-more">
+          查看更多 →
+        </a>
+      </div>
+
+
+      <div class="row g-3">
+
+        <!-- 左側新聞 -->
+
+        <div class="col-lg-8">
+          <div class="row g-3">
+
+            <div class="col-md-6" v-for="item in event.slice(0, 4)">
+              <a :href="'/event/'+item.id" class="news-card d-block">
+                <img :src="'/static/image/event/thumbnail/'+item.image" class="news-image" alt="">
+                <div class="news-body">
+                  <span class="news-tag">
+                    活動
+                  </span>
+
+                  <span class="news-date">
+                    {{item.createTime}}
+                  </span>
+
+                  <h3 class="news-title">
+                    {{item.title}}
+                  </h3>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- 右側消息列表 -->
+
+        <div class="col-lg-4">
+          <div class="news-list">
+            <div class="news-list-title">
+              最新消息
+            </div>
+
+            <a :href="'/event/'+item.id" v-for="item in event">
+              {{item.title}}
+            </a>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+    熱門景點
+  ====================================================== -->
+
+  <section class="section" id="scroll1">
+
+    <div class="container">
+
+      <div class="d-flex justify-content-between align-items-end">
+        <div>
+          <div class="section-title">
+            <h2>熱門景點</h2>
+          </div>
+          <div class="section-subtitle">
+            台中最值得造訪的熱門景點
+          </div>
+        </div>
+        <a href="/attr" class="section-more">
+          查看更多景點 →
+        </a>
+      </div>
+
+      <!-- <div class="category-tabs">
+        <a href="#" class="active">全部</a>
+        <a href="#">自然生態</a>
+        <a href="#">文化景觀</a>
+        <a href="#">親子同遊</a>
+        <a href="#">網美景點</a>
+        <a href="#">戶外行程</a>
+      </div> -->
+
+      <div class="row g-3">
+        <!-- 大卡 -->
+        <div class="col-lg-4">
+          <a :href="'/attr/'+attr[0]?.id" class="spot-card d-block">
+            <img :src="'/static/image/attractions/thumbnail/'+attr[0]?.image" class="spot-image" :alt="attr[0]?.title">
+            <div class="spot-body">
+              <span class="food-tag me-1" v-for="topic in attr[0]?.topics">
+                {{topic}}
+              </span>
+              <h3>{{attr[0]?.title}}</h3>
+              <p>
+                {{attr[0]?.content}}
+              </p>
+
+              <div class="d-flex justify-content-end">
+                <!-- <span class="rating">
+                  ★ 4.9
+                </span> -->
+                <span class="card-link">
+                  了解更多 →
+                </span>
+              </div>
+            </div>
+          </a>
+        </div>
+
+
+        <!-- 右側 -->
+
+        <div class="col-lg-8">
+          <div class="row g-3">
+
+            <div class="col-md-6" v-for="item in attr.slice(1, 5)">
+              <a :href="'/attr/'+item.id" class="spot-card d-block">
+                <img :src="'/static/image/attractions/thumbnail/'+item.image" class="spot-image" :alt="item.title">
+                <div class="spot-body">
+                  <span class="food-tag me-1" v-for="topic in item.topics">
+                    {{topic}}
+                  </span>
+                  <h3>{{item.title}}</h3>
+                  <p>
+                    {{item.content}}
+                  </p>
+                  <div class="d-flex justify-content-end">
+                    <!-- <span class="rating">★ 4.7</span> -->
+                    <span class="card-link">了解更多 →</span>
+                  </div>
+                </div>
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =====================================================
+    美食巡禮
+  ====================================================== -->
+
+  <section class="section section-warm" id="scroll2">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-end">
+        <div>
+          <div class="section-title">
+            <h2>美食巡禮</h2>
+          </div>
+          <div class="section-subtitle">
+            從在地小吃到特色餐廳，品味台中美食
+          </div>
+        </div>
+        <a href="/food" class="section-more">
+          查看更多美食 →
+        </a>
+      </div>
+
+      <!-- <div class="category-tabs">
+        <a href="#" class="active">全部美食</a>
+        <a href="#">在地小吃</a>
+        <a href="#">特色餐廳</a>
+        <a href="#">伴手禮</a>
+        <a href="#">下午茶</a>
+      </div> -->
+
+      <div class="row g-4">
+
+        <!-- Food 1 -->
+        <div class="col-md-6 col-lg-4" v-for="item in food">
+          <a :href="'/food/'+item.id" class="food-card d-block">
+            <img :src="'/static/image/food/thumbnail/'+item.image" class="food-image" :alt="item.title">
+            <div class="food-body">
+              <span class="food-tag me-1" v-for="topic in item.topics">
+                {{topic}}
+              </span>
+              <h3>{{item.title}}</h3>
+              <p>{{item.content}}</p>
+              <div class="food-bottom">
+                <span>📍 {{item.district}}</span>
+                <strong>查看詳情 →</strong>
+              </div>
+            </div>
+          </a>
+        </div>
+
+      </div>
+
+
+      <!-- CTA -->
+      <div class="cta mt-4">
+        <div class="row align-items-center">
+          <div class="col-md-8">
+            <h3>
+              台中美食地圖
+            </h3>
+
+            <p>
+              一次探索台中各地人氣美食與特色店家
+            </p>
+          </div>
+
+          <div class="col-md-4 text-md-end">
+            <div class="cta-btn btn">
+              立即下載地圖
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+    住宿
+  ====================================================== -->
+
+  <section class="section" id="scroll3">
+
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-end">
+        <div>
+          <div class="section-title">
+            <h2>旅遊住宿</h2>
+          </div>
+
+          <div class="section-subtitle">
+            精選台中優質住宿，讓旅程更加舒適
+          </div>
+
+        </div>
+
+        <div class="section-more pointer">
+          查看所有住宿 →
+        </div>
+      </div>
+
+      <!-- <div class="category-tabs">
+        <a href="#" class="active">全部</a>
+        <a href="#">五星飯店</a>
+        <a href="#">特色民宿</a>
+        <a href="#">商務住宿</a>
+        <a href="#">親子住宿</a>
+      </div> -->
+
+      <div class="row g-3">
+
+        <div class="col-6 col-lg-3">
+          <div class="hotel-card d-block pointer">
+            <img src="[[ url_for('static', filename='image/index/Hotel01.avif') ]]" class="hotel-image" alt="">
+            <div class="hotel-body">
+              <div class="hotel-stars">★★★★★</div>
+              <h3>台中高級飯店</h3>
+              <div class="hotel-tags">
+                <span>早餐</span>
+                <span>停車</span>
+                <span>Wi-Fi</span>
+              </div>
+              <div class="d-flex justify-content-between align-items-center mt-3">
+                <span class="hotel-price">NT$6,800 起</span>
+                <span class="hotel-btn">查看房型</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-6 col-lg-3">
+          <div class="hotel-card d-block pointer">
+            <img src="[[ url_for('static', filename='image/index/Hotel02.avif') ]]" class="hotel-image" alt="">
+            <div class="hotel-body">
+              <div class="hotel-stars">★★★★★</div>
+              <h3>日月千禧台中</h3>
+              <div class="hotel-tags">
+                <span>早餐</span>
+                <span>泳池</span>
+                <span>Wi-Fi</span>
+              </div>
+              <div class="d-flex justify-content-between align-items-center mt-3">
+                <span class="hotel-price">NT$3,200 起</span>
+                <span class="hotel-btn">查看房型</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-6 col-lg-3">
+          <div class="hotel-card d-block pointer">
+            <img src="[[ url_for('static', filename='image/index/Hotel03.avif') ]]" class="hotel-image" alt="">
+            <div class="hotel-body">
+              <div class="hotel-stars">★★★★★</div>
+              <h3>新社景觀民宿</h3>
+              <div class="hotel-tags">
+                <span>景觀</span>
+                <span>早餐</span>
+                <span>停車</span>
+              </div>
+              <div class="d-flex justify-content-between align-items-center mt-3">
+                <span class="hotel-price">NT$2,400 起</span>
+                <span class="hotel-btn">查看房型</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-6 col-lg-3">
+          <div class="hotel-card d-block pointer">
+            <img src="[[ url_for('static', filename='image/index/Hotel04.avif') ]]" class="hotel-image" alt="">
+            <div class="hotel-body">
+              <div class="hotel-stars">★★★★★</div>
+              <h3>清境山景住宿</h3>
+              <div class="hotel-tags">
+                <span>景觀</span>
+                <span>停車</span>
+                <span>Wi-Fi</span>
+              </div>
+              <div class="d-flex justify-content-between align-items-center mt-3">
+                <span class="hotel-price">NT$4,500 起</span>
+                <span class="hotel-btn">查看房型</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =====================================================
+    交通
+  ====================================================== -->
+
+  <section class="section section-gray" id="scroll4">
+
+    <div class="container">
+      <div class="section-title">
+        <h2>交通情報</h2>
+      </div>
+      <div class="section-subtitle">
+        完整台中交通資訊，輕鬆規劃你的旅程
+      </div>
+
+      <div class="row g-3">
+
+        <div class="col-md-6 col-lg-4">
+          <div class="traffic-card traffic-blue">
+            <i class="bi bi-airplane"></i>
+            <h3>航空｜台中</h3>
+            <p>台中國際機場航班資訊與交通方式。</p>
+            <div class="me-1 pointer tra-btn">查看航班</div>
+            <div class="me-1 pointer tra-btn">交通方式</div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="traffic-card traffic-orange">
+            <i class="bi bi-train-front"></i>
+            <h3>高鐵｜台灣高鐵</h3>
+            <p>高鐵台中站相關交通與轉乘資訊。</p>
+            <div class="me-1 pointer tra-btn">時刻表</div>
+            <div class="me-1 pointer tra-btn">交通資訊</div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="traffic-card traffic-green">
+            <i class="bi bi-bus-front"></i>
+            <h3>台中捷運</h3>
+            <p>台中捷運路線、站點與乘車資訊。</p>
+            <div class="me-1 pointer tra-btn">路線資訊</div>
+            <div class="me-1 pointer tra-btn">周邊景點</div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="traffic-card traffic-yellow">
+            <i class="bi bi-bus-front-fill"></i>
+            <h3>市區公車</h3>
+            <p>台中市區公車路線與即時資訊。</p>
+            <div class="me-1 pointer tra-btn">公車資訊</div>
+            <div class="me-1 pointer tra-btn">路線查詢</div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="traffic-card traffic-cyan">
+            <i class="bi bi-bicycle"></i>
+            <h3>YouBike 2.0</h3>
+            <p>台中市公共自行車租借服務。</p>
+            <div class="me-1 pointer tra-btn">站點資訊</div>
+            <div class="me-1 pointer tra-btn">租借方式</div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="traffic-card traffic-purple">
+            <i class="bi bi-taxi-front"></i>
+            <h3>租車｜計程車</h3>
+            <p>台中租車及計程車相關交通服務。</p>
+            <div class="me-1 pointer tra-btn">租車資訊</div>
+            <div class="me-1 pointer tra-btn">計程車</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 地圖 -->
+      <div class="map-area mt-4">
+        <img src="[[ url_for('static', filename='image/index/map.png') ]]" alt="台中地圖">
+        <div class="map-content">
+          <h3>台中交通導航地圖</h3>
+          <p>快速找到景點、交通與周邊資訊</p>
+          <div class="map-btn pointer">
+            <i class="bi bi-navigation"></i>
+            開始導航
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
 </div>
 {% endblock %}
 {% block page_script %}

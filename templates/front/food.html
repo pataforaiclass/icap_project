@@ -1,0 +1,186 @@
+{% extends "layout/base.html" %}
+{% block style_sheet %}
+<link rel="stylesheet" href="[[ url_for('static', filename='css/front/food.css') ]]">
+{% endblock %}
+{% block content %}
+<div id="app">
+  <!-- =====================================================
+    Page Hero
+  ====================================================== -->
+  <section class="food-hero">
+    <div class="container">
+      <div class="food-hero-content">
+        <span class="food-hero-tag">
+          TAICHUNG FOOD
+        </span>
+        <h1>
+          美食巡禮
+        </h1>
+        <p>
+          走進台中的街巷與市場，從傳統小吃、在地老店到特色餐廳， 品味豐富多元的台中滋味，尋找屬於你的美食旅程。
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =====================================================
+    Main
+  ====================================================== -->
+
+  <main class="food-main">
+    <div class="container">
+
+      <!-- =================================================
+        上方標題
+      ================================================== -->
+
+      <div class="food-page-heading">
+        <div>
+          <div class="section-title">
+            <h2>美食列表</h2>
+          </div>
+          <div class="section-subtitle">
+            探索台中在地美食與特色店家，從街頭小吃到人氣餐廳，滿足每一趟旅程的味蕾
+          </div>
+        </div>
+        <div class="food-count">
+          共 <strong>{{ food?.length }}</strong> 項地點
+        </div>
+      </div>
+
+
+      <!-- =================================================
+        上方分頁
+      ================================================== -->
+
+      <div class="food-pagination food-pagination-top">
+        <button class="page-btn page-arrow" type="button" :disabled="currentPage === 1"
+          @click="changePage(currentPage - 1)">
+          <i class="bi bi-chevron-left"></i>
+        </button>
+
+        <button v-for="page in pageNumbers" :key="page" type="button" class="page-btn"
+          :class="{ active: currentPage === page }" @click="changePage(page)">
+          {{ page }}
+        </button>
+
+        <button class="page-btn page-arrow" type="button" :disabled="currentPage === totalPages"
+          @click="changePage(currentPage + 1)">
+          <i class="bi bi-chevron-right"></i>
+        </button>
+      </div>
+
+
+      <!-- =================================================
+        Search
+      ================================================== -->
+
+      <div class="food-filter">
+        <div class="food-search">
+          <i class="bi bi-search"></i>
+          <input type="text" v-model="keyword" @keyup.enter="searchFood" placeholder="搜尋地點名稱...">
+          <button type="button" @click="searchFood">
+            搜尋
+          </button>
+        </div>
+        
+        <div class="food-per-page">
+          <label for="pageSize">
+            主題分類
+          </label>
+          <select id="pageSize" v-model="targetTopic" @change="searchFood">
+            <option value="">-----</option>
+            <option :value="item" v-for="item in topics">
+              {{item}}
+            </option>
+          </select>
+        </div>
+
+        <div class="food-per-page">
+          <label for="pageSize">
+            每頁顯示
+          </label>
+          <select id="pageSize" v-model.number="pageSize" @change="changePageSize">
+            <option value="1">1 筆</option>
+            <option value="6">6 筆</option>
+            <option value="9">9 筆</option>
+            <option value="12">12 筆</option>
+            <option value="18">18 筆</option>
+          </select>
+        </div>
+
+      </div>
+
+      <!-- =================================================
+        地點列表
+      ================================================== -->
+
+      <div class="food-list" :class="{ 'food-list-single': pageSize === 1 }">
+        <div class="food-item" v-for="item in paginatedFood" :key="item.id">
+          <a :href="'/food/'+item.id" class="food-card">
+            <div class="food-image-wrap">
+              <img :src="'/static/image/food/thumbnail/' + item.image" class="food-image"
+                :alt="item.title">
+              <div class="food-card-tags">
+                <span class="food-card-tag" v-for="topic in item.topics">
+                  {{topic}}
+                </span>
+              </div>
+            </div>
+
+            <div class="food-card-body">
+              <h3 class="food-title">
+                {{ item.title }}
+              </h3>
+              <p class="food-content">
+                {{item.contentShort}}
+              </p>
+              <div class="food-card-more">
+                了解更多
+                <i class="bi bi-arrow-right"></i>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- 無資料 -->
+
+        <div class="food-empty" v-if="paginatedFood?.length === 0">
+          <div class="food-empty-icon">
+            <i class="bi bi-calendar-x"></i>
+          </div>
+          <h3>找不到相關地點</h3>
+          <p>請嘗試其他關鍵字，或清除搜尋條件。</p>
+        </div>
+      </div>
+
+
+      <!-- =================================================
+        下方分頁
+      ================================================== -->
+
+      <div class="food-pagination food-pagination-bottom" v-if="totalPages > 1">
+        <button class="page-btn page-arrow" type="button" :disabled="currentPage === 1"
+          @click="changePage(currentPage - 1)">
+          <i class="bi bi-chevron-left"></i>
+        </button>
+        <button v-for="page in pageNumbers" :key="page" type="button" class="page-btn"
+          :class="{ active: currentPage === page }" @click="changePage(page)">
+          {{ page }}
+        </button>
+        <button class="page-btn page-arrow" type="button" :disabled="currentPage === totalPages"
+          @click="changePage(currentPage + 1)">
+          <i class="bi bi-chevron-right"></i>
+        </button>
+      </div>
+
+    </div>
+  </main>
+</div>
+{% endblock %}
+
+
+{% block page_script %}
+<script src="[[ url_for('static', filename='js/front/food.js') ]]"></script>
+{% endblock %}

@@ -1,0 +1,172 @@
+/* ==========================
+    右側內容
+========================== */
+
+/* ==========================
+    統計卡片
+========================== */
+
+.stat-card {
+  background-color: white;
+  border-radius: 12px;
+  padding: 20px;
+
+  display: flex;
+  align-items: center;
+  gap: 18px;
+
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+
+  height: 100%;
+}
+
+.stat-icon {
+  width: 55px;
+  height: 55px;
+
+  border-radius: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #eef5ef;
+  color: #195d32;
+
+  font-size: 23px;
+}
+
+.stat-info small {
+  color: #777;
+}
+
+.stat-info h3 {
+  margin: 3px 0 0;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+/* ==========================
+    卡片
+========================== */
+
+.dashboard-card {
+  background-color: white;
+  border-radius: 12px;
+  padding: 25px;
+
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+
+  height: 100%;
+}
+
+.dashboard-card-title {
+  font-size: 19px;
+  font-weight: bold;
+
+  margin-bottom: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ==========================
+    管理者資訊
+========================== */
+
+.manager-info {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  row-gap: 15px;
+}
+
+.manager-info .label {
+  color: #777;
+  font-weight: 500;
+}
+
+.manager-info .value {
+  font-weight: 500;
+  word-break: break-all;
+}
+
+/* ==========================
+    資料統計
+========================== */
+
+.pieChart {
+  max-height: 300px;
+}
+
+/* ==========================
+    快速操作
+========================== */
+
+.quick-action {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 13px 15px;
+
+  border: 1px solid #eee;
+  border-radius: 8px;
+
+  color: #333;
+  text-decoration: none;
+
+  margin-bottom: 10px;
+
+  transition: 0.2s;
+}
+
+.quick-action:hover {
+  border-color: #195d32;
+  color: #195d32;
+  background-color: #f7faf7;
+}
+
+.quick-action i {
+  width: 22px;
+  text-align: center;
+}
+
+/* ==========================
+    最近活動
+========================== */
+
+.recent-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 12px 0;
+
+  border-bottom: 1px solid #eee;
+}
+
+.recent-item:last-child {
+  border-bottom: none;
+}
+
+.recent-item .name {
+  font-weight: 500;
+}
+
+.recent-item .time {
+  font-size: 13px;
+  color: #888;
+}
+
+/* ==========================
+    RWD
+========================== */
+
+@media (max-width: 768px) {
+
+  .manager-info {
+    grid-template-columns: 100px 1fr;
+  }
+
+}

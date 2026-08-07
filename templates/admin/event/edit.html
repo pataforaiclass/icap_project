@@ -1,0 +1,90 @@
+{% extends "layout/adminBase.html" %}
+{% block style_sheet %}
+<link rel="stylesheet" href="[[ url_for('static', filename='css/admin/edit.css') ]]">
+{% endblock %}
+{% block content %}
+<main class="admin-content" id="app" data-current-page="[[ current_type ]]" data-event-id="[[ eventId ]]">
+  <div class="page-title">
+    <h1>年度活動修改</h1>
+  </div>
+
+  <div class="dashboard-card">
+    <form @submit.prevent="updateData" enctype="multipart/form-data">
+      <table class="table table-borderless">
+        <tr>
+          <th class="col-3">標題</th>
+          <td class="col-9">
+            <input type="text" class="form-control" :class="{'is-invalid':titleInvalid}" @blur="titleWatch" v-model="title" required>
+            <div class="invalid-feedback">此為必要欄位</div>
+          </td>
+        </tr>
+        <tr>
+          <th class="col-3">內容</th>
+          <td class="col-9">
+            <div :class="{'is-invalid':contentInvalid}">
+              <textarea id="editor"></textarea>
+            </div>
+            <div class="invalid-feedback">此為必要欄位</div>
+          </td>
+        </tr>
+        <tr>
+          <th class="col-3">主辦單位</th>
+          <td class="col-9">
+            <input type="text" class="form-control" v-model="organizer">
+          </td>
+        </tr>
+        <tr>
+          <th class="col-3">郵遞區號</th>
+          <td class="col-9">
+            <input type="text" class="form-control" :class="{'is-invalid':postalCodeInvalid}" @blur="postalCodeWatch" v-model="postalCode">
+            <div class="invalid-feedback">郵遞區號為3、5或6碼數字</div>
+          </td>
+        </tr>
+        <tr>
+          <th class="col-3">城市</th>
+          <td class="col-9">
+            <input type="text" class="form-control" v-model="city">
+          </td>
+        </tr>
+        <tr>
+          <th class="col-3">鄉鎮</th>
+          <td class="col-9">
+            <input type="text" class="form-control" v-model="district">
+          </td>
+        </tr>
+        <tr>
+          <th class="col-3">地址</th>
+          <td class="col-9">
+            <input type="text" class="form-control" v-model="address">
+          </td>
+        </tr>
+        <tr>
+          <th class="col-3">圖檔</th>
+          <td class="col-9">
+            <input type="file" class="form-control" name="image" accept="image/jpeg, image/png" multiple @change="handleFileChange">
+          </td>
+        </tr>
+        <tr>
+          <th class="col-3">現有圖檔</th>
+          <td class="col-9">
+            <div class="row">
+              <div class="alert alert-warning col-12" v-if="dataImg.length == 0">尚無圖檔</div>
+              <div class="dataImg col-sm-6 col-lg-3 p-1 mt-1" v-for="item in dataImg">
+                <img :src="'/static/image/event/thumbnail/'+item" class="img-thumbnail">
+                <div class="btn btn-danger btn-sm" @click="deleteImg(item)">刪除此圖檔</div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </table>
+      <div class="d-flex align-content-end">
+        <input type="submit" class="btn btn-success">
+      </div>
+    </form>
+  </div>
+</main>
+{% endblock %}
+{% block page_script %}
+<script src="[[ url_for('static', filename='js/ckeditor.js') ]]"></script>
+<script src="[[ url_for('static', filename='js/admin/event_edit.js') ]]"></script>
+{% endblock %}

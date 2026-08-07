@@ -20,7 +20,7 @@
   <nav class="navbar navbar-expand-lg main-navbar">
     <div class="container-lg">
 
-      <a class="navbar-brand logo-group" href="#">
+      <a class="navbar-brand logo-group" href="/index">
         <img src="[[ url_for('static', filename='image/Logo_S.png') ]]" alt="Logo">
         <div class="logo-text">
           <div class="tw">台中旅遊</div>
@@ -34,7 +34,7 @@
 
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav mx-auto">
-          {% if current_page == "index" %}
+          {% if current_type == "index" %}
           {% for key, value in nav_items %}
           <a class="nav-link" href="#scroll[[ loop.index0 ]]">
             [[ value ]]
@@ -42,11 +42,20 @@
           {% endfor %}
           {% else %}
           {% for key, value in nav_items %}
-          <a class="nav-link {% if current_page == key %}active{% endif %}" href="[[ url_for(key) ]]">
+          {% if key in ['acco','traffic'] %}
+          <a class="nav-link" href="#">
             [[ value ]]
           </a>
+          {% else %}
+          <a class="nav-link {% if current_type == key %}active{% endif %}" href="[[ url_for('web.'+key+'Page') ]]">
+            [[ value ]]
+          </a>
+          {% endif %}
           {% endfor %}
           {% endif %}
+          <a class="nav-link" href="[[ url_for('web.admin.index') ]]">
+            管理員頁面
+          </a>
         </div>
       </div>
 

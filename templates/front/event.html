@@ -1,0 +1,237 @@
+{% extends "layout/base.html" %}
+{% block style_sheet %}
+<link rel="stylesheet" href="[[ url_for('static', filename='css/front/event.css') ]]">
+{% endblock %}
+{% block content %}
+<div id="app">
+  <!-- =====================================================
+    Page Hero
+  ====================================================== -->
+  <section class="event-hero">
+    <div class="container">
+      <div class="event-hero-content">
+        <span class="event-hero-tag">
+          TAICHUNG EVENTS
+        </span>
+        <h1>
+          年度活動
+        </h1>
+        <p>
+          探索台中全年精彩活動，從文化節慶、城市活動到特色展覽，
+          找到屬於你的台中旅遊時光。
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =====================================================
+    Main
+  ====================================================== -->
+
+  <main class="event-main">
+    <div class="container">
+
+      <!-- =================================================
+        上方標題
+      ================================================== -->
+
+      <div class="event-page-heading">
+        <div>
+          <div class="section-title">
+            <h2>活動列表</h2>
+          </div>
+          <div class="section-subtitle">
+            掌握台中最新活動資訊，規劃你的旅遊行程
+          </div>
+        </div>
+        <div class="event-count">
+          共 <strong>{{ event?.length }}</strong> 項活動
+        </div>
+      </div>
+
+
+      <!-- =================================================
+        上方分頁
+      ================================================== -->
+
+      <div class="event-pagination event-pagination-top">
+        <button
+          class="page-btn page-arrow"
+          type="button"
+          :disabled="currentPage === 1"
+          @click="changePage(currentPage - 1)"
+        >
+          <i class="bi bi-chevron-left"></i>
+        </button>
+
+        <button
+          v-for="page in pageNumbers"
+          :key="page"
+          type="button"
+          class="page-btn"
+          :class="{ active: currentPage === page }"
+          @click="changePage(page)"
+        >
+          {{ page }}
+        </button>
+
+        <button
+          class="page-btn page-arrow"
+          type="button"
+          :disabled="currentPage === totalPages"
+          @click="changePage(currentPage + 1)"
+        >
+          <i class="bi bi-chevron-right"></i>
+        </button>
+      </div>
+
+
+      <!-- =================================================
+        Search
+      ================================================== -->
+
+      <div class="event-filter">
+        <div class="event-search">
+          <i class="bi bi-search"></i>
+          <input
+            type="text"
+            v-model="keyword"
+            @keyup.enter="searchEvent"
+            placeholder="搜尋活動名稱..."
+          >
+          <button
+            type="button"
+            @click="searchEvent"
+          >
+            搜尋
+          </button>
+        </div>
+
+
+        <div class="event-per-page">
+          <label for="pageSize">
+            每頁顯示
+          </label>
+          <select
+            id="pageSize"
+            v-model.number="pageSize"
+            @change="changePageSize"
+          >
+            <option value="1">1 筆</option>
+            <option value="6">6 筆</option>
+            <option value="9">9 筆</option>
+            <option value="12">12 筆</option>
+            <option value="18">18 筆</option>
+          </select>
+        </div>
+
+      </div>
+
+      <!-- =================================================
+        活動列表
+      ================================================== -->
+
+      <div
+        class="event-list"
+        :class="{ 'event-list-single': pageSize === 1 }"
+      >
+        <div
+          class="event-item"
+          v-for="item in paginatedEvents"
+          :key="item.id"
+        >
+          <a
+            :href="'/event/'+item.id"
+            class="event-card"
+          >
+            <div class="event-image-wrap">
+              <img
+                :src="'/static/image/event/thumbnail/' + item.image"
+                class="event-image"
+                :alt="item.title"
+              >
+              <span class="event-card-tag">
+                活動
+              </span>
+            </div>
+
+            <div class="event-card-body">
+              <div class="event-date">
+                <i class="bi bi-calendar3"></i>
+                <span>
+                  {{ item.createTime }}
+                </span>
+              </div>
+              <h3 class="event-title">
+                {{ item.title }}
+              </h3>
+              <div class="event-card-more">
+                查看活動詳情
+                <i class="bi bi-arrow-right"></i>
+              </div>
+            </div>
+          </a>
+        </div>
+
+
+        <!-- 無資料 -->
+
+        <div
+          class="event-empty"
+          v-if="paginatedEvents?.length === 0"
+        >
+          <div class="event-empty-icon">
+            <i class="bi bi-calendar-x"></i>
+          </div>
+          <h3>找不到相關活動</h3>
+          <p>請嘗試其他關鍵字，或清除搜尋條件。</p>
+        </div>
+      </div>
+
+
+      <!-- =================================================
+        下方分頁
+      ================================================== -->
+
+      <div
+        class="event-pagination event-pagination-bottom"
+        v-if="totalPages > 1"
+      >
+        <button
+          class="page-btn page-arrow"
+          type="button"
+          :disabled="currentPage === 1"
+          @click="changePage(currentPage - 1)"
+        >
+          <i class="bi bi-chevron-left"></i>
+        </button>
+        <button
+          v-for="page in pageNumbers"
+          :key="page"
+          type="button"
+          class="page-btn"
+          :class="{ active: currentPage === page }"
+          @click="changePage(page)"
+        >
+          {{ page }}
+        </button>
+        <button
+          class="page-btn page-arrow"
+          type="button"
+          :disabled="currentPage === totalPages"
+          @click="changePage(currentPage + 1)"
+        >
+          <i class="bi bi-chevron-right"></i>
+        </button>
+      </div>
+
+    </div>
+  </main>
+</div>
+{% endblock %}
+
+
+{% block page_script %}
+<script src="[[ url_for('static', filename='js/front/event.js') ]]"></script>
+{% endblock %}

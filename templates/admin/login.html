@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>管理者登入</title>
+
+  <link rel="stylesheet" href="[[ url_for('static', filename='css/bootstrap.min.css') ]]">
+
+  <style>
+    body {
+      min-height: 100svh;
+      margin: 0;
+      background: #f4f7d6;
+    }
+
+    .login-wrapper {
+      min-height: 100svh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 420px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+      overflow: hidden;
+    }
+
+    .login-header {
+      padding: 30px 30px 25px;
+      background: #195d32;
+      color: #fff;
+      text-align: center;
+    }
+
+    .login-header h1 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .login-header p {
+      margin: 8px 0 0;
+      opacity: 0.9;
+    }
+
+    .login-body {
+      padding: 30px;
+    }
+
+    .form-label {
+      font-weight: 600;
+      color: #333;
+    }
+
+    .form-control {
+      min-height: 46px;
+      border-radius: 8px;
+    }
+
+    .form-control:focus {
+      border-color: #195d32;
+      box-shadow: 0 0 0 0.2rem rgba(25, 93, 50, 0.15);
+    }
+
+    .password-wrapper {
+      position: relative;
+    }
+
+    .password-wrapper .form-control {
+      padding-right: 45px;
+    }
+
+    .password-toggle {
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      transform: translateY(-50%);
+      border: none;
+      background: transparent;
+      color: #666;
+      cursor: pointer;
+    }
+
+    .login-btn {
+      width: 100%;
+      min-height: 46px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 8px;
+      background: #195d32;
+      color: #fff;
+      font-size: 17px;
+      font-weight: bold;
+    }
+
+    .login-btn:hover {
+      background: #124824;
+    }
+
+    .login-footer {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 14px;
+      color: #777;
+    }
+
+    .error-message {
+      display: none;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="login-wrapper">
+
+    <div class="login-card">
+
+      <!-- 標題 -->
+      <div class="login-header">
+        <h1>管理者登入</h1>
+        <p>Taichung Tourism Management</p>
+      </div>
+
+      <div class="login-body">
+
+        <!-- 登入錯誤訊息 -->
+        <div id="errorMessage" class="alert alert-danger error-message" role="alert">
+          帳號或密碼錯誤，請重新輸入。
+        </div>
+
+        <form id="loginForm">
+
+          <!-- 帳號 -->
+          <div class="mb-3">
+            <label for="account" class="form-label">
+              管理者帳號
+            </label>
+
+            <input type="text" id="account" name="account" class="form-control" placeholder="請輸入管理者帳號"
+              autocomplete="username" required>
+            <!-- <div class="password-wrapper">
+              <input type="text" id="account" name="account" class="form-control" placeholder="請輸入管理者帳號"
+              autocomplete="username" required>
+            </div> -->
+          </div>
+
+          <!-- 密碼 -->
+          <div class="mb-3">
+            <label for="password" class="form-label">
+              密碼
+            </label>
+
+            <div class="password-wrapper">
+
+              <input type="password" id="password" name="password" class="form-control" placeholder="請輸入密碼"
+                autocomplete="current-password" required>
+
+              <button type="button" id="passwordToggle" class="password-toggle" title="顯示密碼">
+                👁
+              </button>
+
+            </div>
+          </div>
+
+          <!-- 登入 -->
+          <button type="submit" class="login-btn">
+            登入
+          </button>
+
+        </form>
+
+        <div class="login-footer">
+          管理者專用登入頁面
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="[[ url_for('static', filename='js/bootstrap.bundle.min.js') ]]"></script>
+  <script src="[[ url_for('static', filename='js/vue.global.js') ]]"></script>
+  <script src="[[ url_for('static', filename='js/axios.min.js') ]]"></script>
+  <script>
+    const password = document.querySelector("#password");
+    const passwordToggle = document.querySelector("#passwordToggle");
+    const loginForm = document.querySelector("#loginForm");
+    const errorMessage = document.querySelector("#errorMessage");
+
+    // 顯示 / 隱藏密碼
+    passwordToggle.addEventListener("click", () => {
+      if (password.type === "password") {
+        password.type = "text";
+        passwordToggle.textContent = "🙈";
+        passwordToggle.title = "隱藏密碼";
+      } else {
+        password.type = "password";
+        passwordToggle.textContent = "👁";
+        passwordToggle.title = "顯示密碼";
+      }
+    });
+
+    // 登入
+    loginForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      errorMessage.style.display = "none";
+
+      const account = document.querySelector("#account").value;
+      const pwd = document.querySelector("#password").value;
+
+      console.log({
+        account: account,
+        pwd: pwd
+      });
+
+      
+      //之後可以在這裡使用 axios：
+      axios.post("/admin/login", {
+        account: account,
+        pwd: pwd
+      })
+      .then(response => {
+        window.location.href = response.data.redirect
+      })
+      .catch(error => {
+        // 登入失敗
+      });
+      
+    });
+  </script>
+
+</body>
+
+</html>

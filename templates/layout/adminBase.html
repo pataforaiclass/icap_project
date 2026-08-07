@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>管理介面</title>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="[[ url_for('static', filename='css/bootstrap.min.css') ]]">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="[[ url_for('static', filename='css/all.min.css') ]]">
+
+  <!-- sweetalert2 -->
+  <link rel="stylesheet" href="[[ url_for('static', filename='css/sweetalert2.min.css') ]]">
+
+  <!-- 管理頁面CSS -->
+  <link rel="stylesheet" href="[[ url_for('static', filename='css/admin/admin.css') ]]">
+
+  {% block style_sheet %}
+  {% endblock %}
+</head>
+
+<body>
+
+  <div class="admin-layout">
+    {% include "layout/adminNav.html" %}
+
+    {% block content %}
+    {% endblock %}
+
+  </div>
+
+  <!-- Vue -->
+  <script src="[[ url_for('static', filename='js/vue.global.js') ]]"></script>
+
+  <!-- Bootstrap JS -->
+  <script src="[[ url_for('static', filename='js/bootstrap.bundle.min.js') ]]"></script>
+
+  <!-- axios -->
+  <script src="[[ url_for('static', filename='js/axios.min.js') ]]"></script>
+
+  <!-- sweetalert2 JS -->
+  <script src="[[ url_for('static', filename='js/sweetalert2.all.min.js') ]]"></script>
+
+  {% block page_script %}
+  {% endblock %}
+
+  <script src="[[ url_for('static', filename='js/layout/adminNavbar.js') ]]"></script>
+</body>
+
+</html>
+
