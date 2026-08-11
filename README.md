@@ -1,4 +1,4 @@
-<img width="1920" height="1068" alt="index" src="https://github.com/user-attachments/assets/e726f33b-246b-4347-ba58-9e09ba118202" /># AI Travel Guide Website
+# AI Travel Guide Website
 ## 專題簡介
 本專題以「AI 輔助旅遊景點推薦平台」為題，使用 Bootstrap 製作 RWD 前端頁面，使用 Vue.js 呼叫 Flask API，並以 SQLite 儲存景點與分類資料。
 
@@ -15,14 +15,14 @@
 |版本管理|Git、GitHub|
 
 ## 系統功能說明
-|頁面或功能|說明|截圖位置|
+|頁面或功能|說明|
 |:---|:---|:---|
-|首頁|以一頁式導覽的格式顯示各個主題的區塊，並且能連結至各主題的列表。||
-|列表|以卡片呈現資料，可使用關鍵字及分類查詢，並支援排序與分頁。||
-|詳細內容|顯示單一資料的圖片、名稱、城市、分類、介紹文字與建立時間。||
-|燈箱|點擊圖片能在同一頁面中放大檢視，若有多張圖片還能如幻燈片般切換。||
-|簡易管理功能|可新增、修改、刪除資料資料，並有表單欄位檢查與操作回饋。||
-|統計圖表|從後端 API 取得統計資料，使用 Chart.js 顯示各城市景點數量與各分類景點比例。||
+|首頁|以一頁式導覽的格式顯示各個主題的區塊，並且能連結至各主題的列表。|
+|列表|以卡片呈現資料，可使用關鍵字及分類查詢，並支援排序與分頁。|
+|詳細內容|顯示單一資料的圖片、名稱、城市、分類、介紹文字與建立時間。|
+|燈箱|點擊圖片能在同一頁面中放大檢視，若有多張圖片還能如幻燈片般切換。|
+|簡易管理功能|可新增、修改、刪除資料資料，並有表單欄位檢查與操作回饋。|
+|統計圖表|從後端 API 取得統計資料，使用 Chart.js 顯示各城市景點數量與各分類景點比例。|
 
 ### 截圖說明
 實際截圖放在 `static/screenshots/` 資料夾，檔名如下：
@@ -32,8 +32,9 @@
 |index.png|首頁畫面|
 |attractions.png|景點列表、搜尋、篩選、排序、分頁畫面|
 |detail.png|景點詳細內容畫面|
-|admin.png|管理頁新增、修改、刪除畫面|
-|charts.png|管理頁統計圖表畫面|
+|admin.png|管理頁管理員個人資訊及統計圖表畫面|
+|admin_list.png|管理頁景點列表畫面|
+|admin_edit.png|管理頁修改資料畫面|
 |rwd-1200.png|桌機寬度 1200px|
 |rwd-768.png|平板寬度 768px|
 |rwd-375.png|手機寬度 375px|
@@ -41,35 +42,39 @@
 ### 專案畫面截圖
 首頁
 
-
+![首頁畫面](/static/screenshots/index.png)
 
 列表
 
-(放圖片)
+![景點列表](/static/screenshots/attractions.png)
 
 詳細內容
 
-(放圖片)
+![詳細內容](/static/screenshots/detail.png)
 
-管理列
+管理頁及圖表
 
-(放圖片)
+![管理頁](/static/screenshots/admin.png)
 
-統計圖表
+管理頁景點列表
 
-(放圖片)
+![管理頁景點列表](/static/screenshots/admin_list.png)
+
+管理頁修改資料
+
+![管理頁修改資料](/static/screenshots/admin_edit.png)
 
 桌機寬度 1200px 截圖
 
-(放圖片)
+![景點列表](/static/screenshots/rwd-1200.png)
 
 平板寬度 768px 截圖
 
-(放圖片)
+![景點列表](/static/screenshots/rwd-768.png)
 
 手機寬度 375px 截圖
 
-(放圖片)
+![景點列表](/static/screenshots/rwd-375.png)
 
 ## 資料庫設計說明
 本專題使用 SQLite，資料庫檔案為 database.db。程式啟動時會自動建立資料表與預設資料。
