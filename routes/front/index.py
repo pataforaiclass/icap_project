@@ -11,7 +11,7 @@ bp.register_blueprint(event.bp, url_prefix="/api/event")
 bp.register_blueprint(food.bp, url_prefix="/api/food")
 bp.register_blueprint(member.bp, url_prefix="/api/member")
 
-@bp.get('/index/data')
+@bp.get('/api/index')
 def get_index_data():
   conn = sqlite3.connect("database/database.db")
   conn.row_factory = sqlite3.Row

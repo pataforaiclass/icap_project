@@ -340,16 +340,16 @@
 
 
 /* =========================================================
-   Search / Filter
-   ========================================================= */
+  Search / Filter
+========================================================= */
 
 .event-filter {
-  display: flex;
+  display: grid;
 
-  justify-content: space-between;
-  align-items: center;
+  grid-template-columns: 1fr auto auto;
+  grid-template-rows: auto auto;
 
-  gap: 20px;
+  gap: 12px 20px;
 
   margin-bottom: 28px;
 
@@ -364,16 +364,32 @@
     0 4px 15px rgba(39, 94, 88, 0.04);
 }
 
+/* 搜尋列：第一行，佔滿整行 */
+.event-search {
+  grid-column: 1 / -1;
+  grid-row: 1;
+}
+
+/* 排序：第二行 */
+.event-sort {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+/* 每頁筆數：第二行 */
+.event-per-page {
+  grid-column: 3;
+  grid-row: 2;
+}
 
 /* Search */
-
 .event-search {
   display: flex;
   align-items: center;
 
   flex: 1;
 
-  max-width: 550px;
+  /* max-width: 550px; */
 
   height: 42px;
 
@@ -456,9 +472,54 @@
   background: var(--event-primary-dark);
 }
 
+/* 排序 */
+.event-sort {
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  color: #758985;
+
+  font-size: 11px;
+}
+
+.event-sort label {
+  margin: 0;
+
+  white-space: nowrap;
+}
+
+.event-sort select {
+  min-width: 110px;
+
+  height: 38px;
+
+  padding: 0 28px 0 10px;
+
+  border: 1px solid var(--event-border);
+  border-radius: 8px;
+
+  outline: none;
+
+  background-color: #fff;
+
+  color: var(--event-text);
+
+  font-size: 11px;
+
+  cursor: pointer;
+}
+
+.event-sort select:focus {
+  border-color: var(--event-primary);
+
+  box-shadow:
+    0 0 0 3px rgba(22, 143, 138, 0.08);
+}
 
 /* 每頁筆數 */
-
 .event-per-page {
   display: flex;
 
@@ -869,16 +930,26 @@
     align-items: stretch;
 
     flex-direction: column;
+
+    grid-template-columns: 1fr 1fr;
   }
 
   .event-search {
     max-width: none;
 
     width: 100%;
+
+    grid-column: 1 / -1;
+  }
+
+  .event-sort {
+    justify-content: space-between;
+    grid-column: 1;
   }
 
   .event-per-page {
     justify-content: space-between;
+    grid-column: 2;
   }
 
   .event-list {
@@ -962,6 +1033,8 @@
     padding: 13px;
 
     gap: 13px;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto auto;
   }
 
   .event-search {
@@ -972,6 +1045,18 @@
     padding: 0 15px;
   }
 
+  .event-sort {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .event-per-page {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  .event-topic select,
+  .event-sort select,
   .event-per-page select {
     height: 36px;
   }

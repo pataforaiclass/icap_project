@@ -45,7 +45,7 @@
           </div>
         </div>
         <div class="food-count">
-          共 <strong>{{ food?.length }}</strong> 項地點
+          共 <strong>{{ food?.length }}</strong> 項店家
         </div>
       </div>
 
@@ -79,13 +79,13 @@
       <div class="food-filter">
         <div class="food-search">
           <i class="bi bi-search"></i>
-          <input type="text" v-model="keyword" @keyup.enter="searchFood" placeholder="搜尋地點名稱...">
+          <input type="text" v-model="keyword" @keyup.enter="searchFood" placeholder="搜尋店家名稱...">
           <button type="button" @click="searchFood">
             搜尋
           </button>
         </div>
         
-        <div class="food-per-page">
+        <div class="food-topic">
           <label for="pageSize">
             主題分類
           </label>
@@ -94,6 +94,19 @@
             <option :value="item" v-for="item in topics">
               {{item}}
             </option>
+          </select>
+        </div>
+
+        <div class="food-sort">
+          <label for="sortType">
+            排序
+          </label>
+          <select id="sortType" v-model="sortType" @change="changeSort">
+            <option value="newest">最新店家</option>
+            <option value="oldest">最舊店家</option>
+            <option value="titleAsc">名稱 A-Z</option>
+            <option value="titleDesc">名稱 Z-A</option>
+            <option value="district">區域排序</option>
           </select>
         </div>
 
@@ -113,7 +126,7 @@
       </div>
 
       <!-- =================================================
-        地點列表
+        店家列表
       ================================================== -->
 
       <div class="food-list" :class="{ 'food-list-single': pageSize === 1 }">
@@ -150,7 +163,7 @@
           <div class="food-empty-icon">
             <i class="bi bi-calendar-x"></i>
           </div>
-          <h3>找不到相關地點</h3>
+          <h3>找不到相關店家</h3>
           <p>請嘗試其他關鍵字，或清除搜尋條件。</p>
         </div>
       </div>

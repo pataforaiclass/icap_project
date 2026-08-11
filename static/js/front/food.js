@@ -7,6 +7,8 @@ const App = {
       topics: [],
       // 查詢關鍵字
       keyword: '',
+      // 排序分類
+      sortType: 'newest',
       // 查詢主題分類
       targetTopic: '',
       // 每頁顯示筆數
@@ -15,7 +17,9 @@ const App = {
       // 目前頁碼
       currentPage: 1,
       // API 載入狀態
-      loading: false
+      loading: false,
+      // 區域順序
+      districtOrder: ['中區', '東區', '南區', '西區', '北區', '北屯區', '西屯區', '南屯區', '太平區', '大里區', '霧峰區', '烏日區', '豐原區', '后里區', '石岡區', '東勢區', '和平區', '新社區', '潭子區', '大雅區', '神岡區', '大肚區', '沙鹿區', '龍井區', '梧棲區', '清水區', '大甲區', '外埔區', '大安區']
     }
   },
   computed: {
@@ -24,7 +28,8 @@ const App = {
       const keyword = this.keyword.trim().toLowerCase()
       const targetTopic = this.targetTopic.trim().toLowerCase()
 
-      return this.food.filter(item => {
+      // 先進行搜尋與 Topic 篩選
+      let result = this.food.filter(item => {
 
         // 關鍵字搜尋
         const matchKeyword =
@@ -42,6 +47,67 @@ const App = {
         // 兩個條件都符合才保留
         return matchKeyword && matchTopic
       })
+
+      // 複製陣列，避免直接修改 this.food
+      result = [...result]
+
+      // 排序
+      switch (this.sortType) {
+        // 最新景點
+        case 'newest':
+          result.sort((a, b) => {
+            return new Date(b.id) - new Date(a.id)
+          })
+          break
+        // 最舊景點
+        case 'oldest':
+          result.sort((a, b) => {
+            return new Date(a.id) - new Date(b.id)
+          })
+          break
+        // 名稱 A-Z
+        case 'titleAsc':
+          result.sort((a, b) => {
+            return a.title.localeCompare(b.title, 'zh-Hant')
+          })
+          break
+        // 名稱 Z-A
+        case 'titleDesc':
+          result.sort((a, b) => {
+            return b.title.localeCompare(a.title, 'zh-Hant')
+          })
+          break
+        // 台中行政區固定順序
+        case 'district':
+          result.sort((a, b) => {
+            const indexA = this.districtOrder.indexOf(a.district)
+            const indexB = this.districtOrder.indexOf(b.district)
+            // 都是空值
+            if (!a.district && !b.district) {
+              return 0
+            }
+            // 空值排最後
+            if (!a.district) {
+              return 1
+            }
+            if (!b.district) {
+              return -1
+            }
+            // 不在 districtOrder 的資料排最後
+            if (indexA === -1 && indexB === -1) {
+              return 0
+            }
+            if (indexA === -1) {
+              return 1
+            }
+            if (indexB === -1) {
+              return -1
+            }
+            return indexA - indexB
+          })
+          break
+      }
+      return result
     },
     // 總頁數
     totalPages() {
@@ -112,7 +178,7 @@ const App = {
       try {
         const response = await axios.get('/api/food')
         this.food = response.data.food
-        console.log('活動資料：', this.food)
+        // console.log('活動資料：', this.food)
 
         this.food.forEach(food => {
           food.topics.forEach(topic => {
@@ -151,6 +217,10 @@ const App = {
     clearSearch() {
       this.keyword = ''
       this.targetTopic = ''
+      this.currentPage = 1
+    },
+    // 改變排序
+    changeSort() {
       this.currentPage = 1
     },
     // 切換頁碼

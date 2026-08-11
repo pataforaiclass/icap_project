@@ -9,7 +9,7 @@ const App = {
   methods: {
     getData(){
       const vm = this;
-      axios.get('/index/data')
+      axios.get('/api/index')
         .then(response => {
           console.log(response.data.events);
           vm.event = response.data.events;

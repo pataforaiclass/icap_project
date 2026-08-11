@@ -3,31 +3,6 @@
    Natural Fresh Travel Style
    ========================================================= */
 
-:root {
-  --travel-primary: #168f8a;
-  --travel-primary-dark: #0f716e;
-  --travel-secondary: #4fae9f;
-
-  --travel-blue: #3c8dad;
-  --travel-blue-light: #eaf7fa;
-
-  --travel-green: #5aaa8b;
-  --travel-green-light: #edf8f3;
-
-  --travel-bg: #f5faf9;
-  --travel-bg-blue: #f1f8fa;
-  --travel-bg-green: #f2f9f6;
-
-  --travel-white: #ffffff;
-  --travel-text: #23413f;
-  --travel-text-light: #6f8582;
-
-  --travel-border: #dcebe8;
-
-  --travel-shadow: 0 8px 28px rgba(39, 94, 88, 0.08);
-  --travel-shadow-hover: 0 16px 36px rgba(39, 94, 88, 0.14);
-}
-
 
 /* =========================================================
    共用

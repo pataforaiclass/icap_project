@@ -5,13 +5,17 @@ const App = {
       event: [],
       // 查詢關鍵字
       keyword: '',
+      // 排序分類
+      sortType: 'newest',
       // 每頁顯示筆數
       // 1 為特殊需求：一頁只顯示一筆
       pageSize: 9,
       // 目前頁碼
       currentPage: 1,
       // API 載入狀態
-      loading: false
+      loading: false,
+      // 區域順序
+      districtOrder: ['中區', '東區', '南區', '西區', '北區', '北屯區', '西屯區', '南屯區', '太平區', '大里區', '霧峰區', '烏日區', '豐原區', '后里區', '石岡區', '東勢區', '和平區', '新社區', '潭子區', '大雅區', '神岡區', '大肚區', '沙鹿區', '龍井區', '梧棲區', '清水區', '大甲區', '外埔區', '大安區']
     }
   },
   computed: {
@@ -19,14 +23,74 @@ const App = {
     filteredEvents() {
       const keyword = this.keyword.trim().toLowerCase()
 
-      if (!keyword) {
-        return this.event
+      // 先搜尋
+      let result = this.event
+
+      if (keyword) {
+        result = this.event.filter(item => {
+          return item.title.toLowerCase().includes(keyword) ||
+            item.content.toLowerCase().includes(keyword)
+        })
       }
 
-      return this.event.filter(item => {
-        return item.title.toLowerCase().includes(keyword) ||
-          item.content.toLowerCase().includes(keyword)
-      })
+      // 再排序
+      result = [...result]
+
+      switch (this.sortType) {
+        case 'newest':
+          result.sort((a, b) => {
+            return new Date(b.id) - new Date(a.id)
+          })
+          break
+
+        case 'oldest':
+          result.sort((a, b) => {
+            return new Date(a.id) - new Date(b.id)
+          })
+          break
+
+        case 'titleAsc':
+          result.sort((a, b) => {
+            return a.title.localeCompare(b.title, 'zh-Hant')
+          })
+          break
+
+        case 'titleDesc':
+          result.sort((a, b) => {
+            return b.title.localeCompare(a.title, 'zh-Hant')
+          })
+          break
+
+        case 'district':
+          result.sort((a, b) => {
+            const indexA = this.districtOrder.indexOf(a.district)
+            const indexB = this.districtOrder.indexOf(b.district)
+            // 空值排最後
+            if (!a.district && !b.district) {
+              return 0
+            }
+            if (!a.district) {
+              return 1
+            }
+            if (!b.district) {
+              return -1
+            }
+            // 不在 districtOrder 中的資料也排最後
+            if (indexA === -1 && indexB === -1) {
+              return 0
+            }
+            if (indexA === -1) {
+              return 1
+            }
+            if (indexB === -1) {
+              return -1
+            }
+            return indexA - indexB
+          })
+          break
+      }
+
+      return result
     },
     // 總頁數
     totalPages() {
@@ -112,6 +176,10 @@ const App = {
     // 清除查詢
     clearSearch() {
       this.keyword = ''
+      this.currentPage = 1
+    },
+    // 改變排序
+    changeSort() {
       this.currentPage = 1
     },
     // 切換頁碼

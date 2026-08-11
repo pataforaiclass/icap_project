@@ -54,11 +54,9 @@
   overflow: hidden;
 
   background:
-    linear-gradient(
-      120deg,
+    linear-gradient(120deg,
       #e7f5f2,
-      #f4faf9
-    );
+      #f4faf9);
 }
 
 
@@ -206,11 +204,9 @@
   border-radius: 10px;
 
   background:
-    linear-gradient(
-      180deg,
+    linear-gradient(180deg,
       var(--attractions-primary),
-      var(--attractions-secondary)
-    );
+      var(--attractions-secondary));
 }
 
 
@@ -344,12 +340,12 @@
    ========================================================= */
 
 .attractions-filter {
-  display: flex;
+  display: grid;
 
-  justify-content: space-between;
-  align-items: center;
+  grid-template-columns: 1fr auto auto;
+  grid-template-rows: auto auto;
 
-  gap: 20px;
+  gap: 12px 20px;
 
   margin-bottom: 28px;
 
@@ -364,6 +360,30 @@
     0 4px 15px rgba(39, 94, 88, 0.04);
 }
 
+/* 搜尋列：第一行，佔滿整行 */
+.attractions-search {
+  grid-column: 1 / -1;
+  grid-row: 1;
+}
+
+/* 排序：主題 */
+.attractions-topic {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+/* 排序：第二行 */
+.attractions-sort {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+/* 每頁筆數：第二行 */
+.attractions-per-page {
+  grid-column: 3;
+  grid-row: 2;
+}
+
 
 /* Search */
 
@@ -373,7 +393,7 @@
 
   flex: 1;
 
-  max-width: 550px;
+  /* max-width: 550px; */
 
   height: 42px;
 
@@ -398,7 +418,7 @@
 }
 
 
-.attractions-search > i {
+.attractions-search>i {
   margin-left: 14px;
 
   color: #8ba19d;
@@ -456,6 +476,100 @@
   background: var(--attractions-primary-dark);
 }
 
+/* 排序 */
+.attractions-topic {
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  color: #758985;
+
+  font-size: 11px;
+}
+
+.attractions-topic label {
+  margin: 0;
+
+  white-space: nowrap;
+}
+
+.attractions-topic select {
+  min-width: 110px;
+
+  height: 38px;
+
+  padding: 0 28px 0 10px;
+
+  border: 1px solid var(--attractions-border);
+  border-radius: 8px;
+
+  outline: none;
+
+  background-color: #fff;
+
+  color: var(--attractions-text);
+
+  font-size: 11px;
+
+  cursor: pointer;
+}
+
+.attractions-topic select:focus {
+  border-color: var(--attractions-primary);
+
+  box-shadow:
+    0 0 0 3px rgba(22, 143, 138, 0.08);
+}
+
+
+/* 排序 */
+.attractions-sort {
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  color: #758985;
+
+  font-size: 11px;
+}
+
+.attractions-sort label {
+  margin: 0;
+
+  white-space: nowrap;
+}
+
+.attractions-sort select {
+  min-width: 110px;
+
+  height: 38px;
+
+  padding: 0 28px 0 10px;
+
+  border: 1px solid var(--attractions-border);
+  border-radius: 8px;
+
+  outline: none;
+
+  background-color: #fff;
+
+  color: var(--attractions-text);
+
+  font-size: 11px;
+
+  cursor: pointer;
+}
+
+.attractions-sort select:focus {
+  border-color: var(--attractions-primary);
+
+  box-shadow:
+    0 0 0 3px rgba(22, 143, 138, 0.08);
+}
 
 /* 每頁筆數 */
 
@@ -899,16 +1013,31 @@
     align-items: stretch;
 
     flex-direction: column;
+
+    grid-template-columns: 1fr 1fr;
   }
 
   .attractions-search {
     max-width: none;
 
     width: 100%;
+
+    grid-column: 1 / -1;
+  }
+
+  .attractions-topic {
+    justify-content: space-between;
+    grid-column: 1;
+  }
+
+  .attractions-sort {
+    justify-content: space-between;
+    grid-column: 2;
   }
 
   .attractions-per-page {
     justify-content: space-between;
+    grid-column: 3;
   }
 
   .attractions-list {
@@ -992,6 +1121,9 @@
     padding: 13px;
 
     gap: 13px;
+
+    grid-template-columns: auto;
+    grid-template-rows: auto auto auto auto;
   }
 
   .attractions-search {
@@ -1002,6 +1134,23 @@
     padding: 0 15px;
   }
 
+  .attractions-topic {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .attractions-sort {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  .attractions-per-page {
+    grid-column: 1;
+    grid-row: 4;
+  }
+
+  .attractions-topic select,
+  .attractions-sort select,
   .attractions-per-page select {
     height: 36px;
   }

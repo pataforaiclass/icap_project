@@ -1,5 +1,6 @@
 {% extends "layout/base.html" %}
 {% block style_sheet %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
 <link rel="stylesheet" href="[[ url_for('static', filename='css/front/attractions_detail.css') ]]">
 {% endblock %}
 {% block content %}
@@ -50,22 +51,21 @@
 
         <div class="attractions-info-row">
           <div class="attractions-info-label">
-            主辦單位
-          </div>
-
-          <div class="attractions-info-value">
-            {{ attractions.organizer }}
-          </div>
-        </div>
-
-
-        <div class="attractions-info-row">
-          <div class="attractions-info-label">
             景點地址
           </div>
 
           <div class="attractions-info-value">
             {{ attractions.postalCode+' '+attractions.city+attractions.district+attractions.address }}
+          </div>
+        </div>
+
+        <div class="attractions-info-row" v-if="attractions.tip!=''">
+          <div class="attractions-info-label">
+            旅遊叮嚀
+          </div>
+
+          <div class="attractions-info-value">
+            {{ attractions.tip }}
           </div>
         </div>
 
@@ -78,37 +78,46 @@
 
       <!-- 圖片輪播 -->
       <div class="attractions-gallery" v-if="attractions.images && attractions.images.length > 0">
-        <h2>景點照片</h2>
+        <h2>活動照片</h2>
         <div class="attractions-carousel">
+          <!-- 圖片 -->
           <div v-for="(image, index) in attractions.images" :key="index" class="attractions-slide"
             :class="{ active: currentSlide === index }">
-            <img :src="getImageUrl(image)" :alt="attractions.title + ' - 景點照片 ' + (index + 1)">
+            <!--
+              GLightbox
+              每張圖片都屬於 attractions-gallery 群組
+            -->
+            <a :href="getImageUrl(image)" class="attractions-lightbox" data-gallery="attractions-gallery"
+              :data-title="attractions.title + ' - 活動照片 ' + (index + 1)">
+              <img :src="getImageUrl(image)" :alt="attractions.title + ' - 活動照片 ' + (index + 1)">
+            </a>
           </div>
-          <!-- 左右按鈕 -->
+
+          <!-- 左右切換按鈕 -->
           <template v-if="attractions.images.length > 1">
             <button type="button" class="attractions-prev" @click="changeSlide(-1)" aria-label="上一張">
               &#10094;
             </button>
-
             <button type="button" class="attractions-next" @click="changeSlide(1)" aria-label="下一張">
               &#10095;
             </button>
           </template>
         </div>
 
-
         <!-- 圓點 -->
         <div class="attractions-dots" v-if="attractions.images.length > 1">
+
           <button v-for="(image, index) in attractions.images" :key="index" type="button" class="attractions-dot"
             :class="{ active: currentSlide === index }" @click="showSlide(index)"
             :aria-label="'顯示第 ' + (index + 1) + ' 張圖片'"></button>
         </div>
-
       </div>
+
     </template>
   </div>
 </div>
 {% endblock %}
 {% block page_script %}
+<script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
 <script src="[[ url_for('static', filename='js/front/attractions_detail.js') ]]"></script>
 {% endblock %}

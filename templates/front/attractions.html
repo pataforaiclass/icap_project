@@ -85,7 +85,7 @@
           </button>
         </div>
         
-        <div class="attractions-per-page">
+        <div class="attractions-topic">
           <label for="pageSize">
             主題分類
           </label>
@@ -94,6 +94,19 @@
             <option :value="item" v-for="item in topics">
               {{item}}
             </option>
+          </select>
+        </div>
+
+        <div class="attractions-sort">
+          <label for="sortType">
+            排序
+          </label>
+          <select id="sortType" v-model="sortType" @change="changeSort">
+            <option value="newest">最新景點</option>
+            <option value="oldest">最舊景點</option>
+            <option value="titleAsc">名稱 A-Z</option>
+            <option value="titleDesc">名稱 Z-A</option>
+            <option value="district">區域排序</option>
           </select>
         </div>
 
