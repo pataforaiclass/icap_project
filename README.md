@@ -217,13 +217,13 @@ API 成功時會回傳 message 與資料內容；失敗時會回傳錯誤原因�
 
 ## 測試紀錄
 |日期|測試項目|測試方法|結果|
+|:---|:---|:---|:---|
+|8/11|訪客頁面 API|呼叫 `GET /api/event/10`|回傳活動詳細資料以及圖片|
+|8/11|管理頁面 API|呼叫 `GET /admin/api/index`|回傳管理者個人用戶資料及圖表統計資料|
 
 ## 開發者資訊
 |項目|內容|
 |:---|:---|
 |開發者|陳禹樵|
 |專案名稱|AI Travel Guide Website|
-GitHub Repository	https://github.com/RichieChen222333/AI-Travel-Guide
-|:---|:---|:---|:---|
-|8/11|訪客頁面 API|呼叫 `GET /api/event/10`|回傳活動詳細資料以及圖片|
-|8/11|管理頁面 API|呼叫 `GET /admin/api/index`|回傳管理者個人用戶資料及圖表統計資料|
+|GitHub Repository|[https://github.com/RichieChen222333/AI-Travel-Guide](https://github.com/pataforaiclass/icap_project/)|
