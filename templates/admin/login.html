@@ -180,7 +180,8 @@
         </form>
 
         <div class="login-footer">
-          管理者專用登入頁面
+          <p>管理者專用登入頁面</p>
+          <a href="/index">回首頁</a>
         </div>
 
       </div>
@@ -192,6 +193,7 @@
   <script src="[[ url_for('static', filename='js/bootstrap.bundle.min.js') ]]"></script>
   <script src="[[ url_for('static', filename='js/vue.global.js') ]]"></script>
   <script src="[[ url_for('static', filename='js/axios.min.js') ]]"></script>
+  <script src="[[ url_for('static', filename='js/sweetalert2.all.min.js') ]]"></script>
   <script>
     const password = document.querySelector("#password");
     const passwordToggle = document.querySelector("#passwordToggle");
@@ -220,24 +222,22 @@
       const account = document.querySelector("#account").value;
       const pwd = document.querySelector("#password").value;
 
-      console.log({
-        account: account,
-        pwd: pwd
-      });
-
-      
       //之後可以在這裡使用 axios：
       axios.post("/admin/login", {
         account: account,
         pwd: pwd
       })
-      .then(response => {
-        window.location.href = response.data.redirect
-      })
-      .catch(error => {
-        // 登入失敗
-      });
-      
+        .then(response => {
+          window.location.href = response.data.redirect
+        })
+        .catch(error => {
+          console.log(error);
+          Swal.fire({
+            title: error.response.data.error,
+            icon: "error"
+          });
+        });
+
     });
   </script>
 
