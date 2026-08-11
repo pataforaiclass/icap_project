@@ -199,7 +199,6 @@ API 成功時會回傳 message 與資料內容；失敗時會回傳錯誤原因�
 |DELETE|`/admin/api/food/<id>`|刪除特定資料及相關分類和圖片|管理頁面|
 |---|
 |GET|`/api/index`|獲取首頁所需資料|訪客頁面|
-|---|
 |GET|`/api/event`|獲取 event 列表所需資訊|訪客頁面|
 |GET|`/api/event/<id>`|獲取 event 資料表中單一資料的詳細資訊|訪客頁面|
 |GET|`/api/attr`|獲取 attractions 列表所需資訊|訪客頁面|
