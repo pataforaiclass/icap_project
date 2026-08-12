@@ -10,9 +10,6 @@ from utils.imageUpload import save_image
 
 bp = Blueprint('food', __name__)
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DB_PATH = os.path.join(BASE_DIR, "database", "database.db")
-
 upload_folder = os.path.join(
     "static",
     "image",
@@ -177,7 +174,7 @@ def add_food():
   # =========================
   # 連線資料庫
   # =========================
-  conn = sqlite3.connect(DB_PATH)
+  conn = sqlite3.connect("database/database.db")
   cursor = conn.cursor()
 
   # 用來記錄已經成功儲存的圖片
@@ -332,7 +329,7 @@ def add_food():
 @bp.get('/')
 @api_manager_required
 def get_food():
-  conn = sqlite3.connect(DB_PATH)
+  conn = sqlite3.connect("database/database.db")
   cursor = conn.cursor()
 
   cursor.execute("""
@@ -394,7 +391,7 @@ def get_food():
 @api_manager_required
 def get_food_by_id(foodId):
   # 連線資料庫
-  conn = sqlite3.connect(DB_PATH)
+  conn = sqlite3.connect("database/database.db")
   cursor = conn.cursor()
 
   # 確認目標是否存在
@@ -445,7 +442,7 @@ def patch_food(foodId):
   # =========================
   # 連線資料庫
   # =========================
-  conn = sqlite3.connect(DB_PATH)
+  conn = sqlite3.connect("database/database.db")
   cursor = conn.cursor()
 
   try:
@@ -722,7 +719,7 @@ def delete_img(foodId, imgFileName):
   # =========================
   # 資料庫
   # =========================
-  conn = sqlite3.connect(DB_PATH)
+  conn = sqlite3.connect("database/database.db")
   cursor = conn.cursor()
 
   # 先確認圖片資料是否存在
@@ -789,7 +786,7 @@ def delete_img(foodId, imgFileName):
 @api_manager_required
 def delete_food(foodId):
   # 連線資料庫
-  conn = sqlite3.connect(DB_PATH)
+  conn = sqlite3.connect("database/database.db")
   cursor = conn.cursor()
 
   try:

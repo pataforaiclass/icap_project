@@ -1,15 +1,11 @@
 from flask import Blueprint, request, jsonify
 import sqlite3
 import re
-import os
 from werkzeug.security import generate_password_hash
 from utils.datetime import get_tw_time
 from utils.auth import api_manager_required
 
 bp = Blueprint('manager', __name__)
-
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DB_PATH = os.path.join(BASE_DIR, "database", "database.db")
 
 # 建檔，目前只能用 post man 使用
 @bp.post('/')
@@ -58,7 +54,7 @@ def register_manager():
     return jsonify({"error":"手機號碼不符合格式"}), 400
 
   # 連線資料庫
-  conn = sqlite3.connect(DB_PATH)
+  conn = sqlite3.connect("database/database.db")
   cursor = conn.cursor()
   dateNow = get_tw_time()
 

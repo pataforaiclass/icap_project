@@ -10,9 +10,6 @@ from utils.imageUpload import save_image
 
 bp = Blueprint("attr", __name__)
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DB_PATH = os.path.join(BASE_DIR, "database", "database.db")
-
 upload_folder = os.path.join("static", "image", "attractions")
 thumbnail_folder = os.path.join("static", "image", "attractions", "thumbnail")
 
@@ -164,7 +161,7 @@ def add_attr():
   # =========================
   # 連線資料庫
   # =========================
-  conn = sqlite3.connect(DB_PATH)
+  conn = sqlite3.connect("database/database.db")
   cursor = conn.cursor()
 
   # 用來記錄已經成功儲存的圖片
@@ -316,7 +313,7 @@ def add_attr():
 @bp.get("/")
 @api_manager_required
 def get_attr():
-  conn = sqlite3.connect(DB_PATH)
+  conn = sqlite3.connect("database/database.db")
   cursor = conn.cursor()
 
   cursor.execute("""
@@ -381,7 +378,7 @@ def get_attr():
 @api_manager_required
 def get_attr_by_id(attId):
   # 連線資料庫
-  conn = sqlite3.connect(DB_PATH)
+  conn = sqlite3.connect("database/database.db")
   cursor = conn.cursor()
 
   # 確認目標是否存在
@@ -434,7 +431,7 @@ def patch_attr(attId):
   # =========================
   # 連線資料庫
   # =========================
-  conn = sqlite3.connect(DB_PATH)
+  conn = sqlite3.connect("database/database.db")
   cursor = conn.cursor()
 
   try:
@@ -709,7 +706,7 @@ def delete_img(attId, imgFileName):
   # =========================
   # 資料庫
   # =========================
-  conn = sqlite3.connect(DB_PATH)
+  conn = sqlite3.connect("database/database.db")
   cursor = conn.cursor()
 
   # 先確認圖片資料是否存在
@@ -776,7 +773,7 @@ def delete_img(attId, imgFileName):
 @api_manager_required
 def delete_attr(attId):
   # 連線資料庫
-  conn = sqlite3.connect(DB_PATH)
+  conn = sqlite3.connect("database/database.db")
   cursor = conn.cursor()
 
   try:

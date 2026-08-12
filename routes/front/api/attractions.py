@@ -1,6 +1,5 @@
 from flask import Blueprint, request, jsonify
 import sqlite3
-import os
 from bs4 import BeautifulSoup
 
 from utils.datetime import get_tw_time
@@ -8,16 +7,13 @@ from utils.auth import api_login_required
 
 bp = Blueprint('attr', __name__)
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DB_PATH = os.path.join(BASE_DIR, "database", "database.db")
-
 upload_folder = f"static/image/attractions"
 thumbnail_folder = f"static/image/attractions/thumbnail"
 
 # 讀取
 @bp.get("/")
 def get_attr():
-  conn = sqlite3.connect(DB_PATH)
+  conn = sqlite3.connect("database/database.db")
   conn.row_factory = sqlite3.Row
   cursor = conn.cursor()
 
@@ -79,7 +75,7 @@ def get_attr():
 @bp.get("/<int:attId>")
 def get_attr_by_id(attId):
   # 連線資料庫
-  conn = sqlite3.connect(DB_PATH)
+  conn = sqlite3.connect("database/database.db")
   cursor = conn.cursor()
 
   # 確認目標是否存在
@@ -153,7 +149,7 @@ def add_comment():
     return jsonify({"error":"評分必須是數字"}), 400
 
   # 連線資料庫
-  conn = sqlite3.connect(DB_PATH)
+  conn = sqlite3.connect("database/database.db")
   cursor = conn.cursor()
   dateNow = get_tw_time()
 
