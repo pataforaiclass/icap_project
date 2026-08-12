@@ -1,11 +1,15 @@
 from flask import Blueprint, request, jsonify
 import sqlite3
+import os
 from bs4 import BeautifulSoup
 
 from utils.datetime import get_tw_time
 from utils.auth import api_login_required
 
 bp = Blueprint('food', __name__)
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DB_PATH = os.path.join(BASE_DIR, "database", "database.db")
 
 upload_folder = f"static/image/food"
 thumbnail_folder = f"static/image/food/thumbnail"

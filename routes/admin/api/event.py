@@ -9,6 +9,9 @@ from utils.imageUpload import save_image
 
 bp = Blueprint('event', __name__)
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DB_PATH = os.path.join(BASE_DIR, "database", "database.db")
+
 upload_folder = os.path.join(
     "static",
     "image",
@@ -126,7 +129,7 @@ def add_event():
   # =========================
   # 連線資料庫
   # =========================
-  conn = sqlite3.connect("database/database.db")
+  conn = sqlite3.connect(DB_PATH)
   cursor = conn.cursor()
 
   # 用來記錄已經成功儲存的圖片
@@ -259,7 +262,7 @@ def add_event():
 @bp.get('/')
 @api_manager_required
 def get_event():
-  conn = sqlite3.connect("database/database.db")
+  conn = sqlite3.connect(DB_PATH)
   cursor = conn.cursor()
 
   cursor.execute("""
@@ -313,7 +316,7 @@ def get_event():
 @api_manager_required
 def get_event_by_id(eventId):
   # 連線資料庫
-  conn = sqlite3.connect("database/database.db")
+  conn = sqlite3.connect(DB_PATH)
   cursor = conn.cursor()
 
   # 確認目標是否存在
@@ -356,7 +359,7 @@ def patch_event(eventId):
   # =========================
   # 連線資料庫
   # =========================
-  conn = sqlite3.connect("database/database.db")
+  conn = sqlite3.connect(DB_PATH)
   cursor = conn.cursor()
 
   try:
@@ -550,7 +553,7 @@ def delete_img(eventId, imgFileName):
   # =========================
   # 資料庫
   # =========================
-  conn = sqlite3.connect("database/database.db")
+  conn = sqlite3.connect(DB_PATH)
   cursor = conn.cursor()
 
   # 先確認圖片資料是否存在
@@ -616,7 +619,7 @@ def delete_img(eventId, imgFileName):
 @bp.delete('/<int:eventId>')
 @api_manager_required
 def delete_event(eventId):
-  conn = sqlite3.connect("database/database.db")
+  conn = sqlite3.connect(DB_PATH)
   cursor = conn.cursor()
 
   image_list = []

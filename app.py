@@ -1,6 +1,7 @@
 # import sqlite3
 from flask import Flask, redirect, url_for, render_template
 from routes import web
+import os
 import secrets
 from datetime import timedelta
 
@@ -10,8 +11,14 @@ app = Flask(__name__)
 app.jinja_env.variable_start_string = '[['
 app.jinja_env.variable_end_string = ']]'
 
-SECRET_KEY = secrets.token_hex(32)
-print(SECRET_KEY)
+initStr = init_db.init_db()
+if initStr:
+  print(f" * SQLITE 資料庫已初始化，初始化的資料表：{initStr}")
+
+SECRET_KEY = os.environ.get(
+    "SECRET_KEY",
+    secrets.token_hex(32)
+)
 app.config["SECRET_KEY"] = SECRET_KEY
 
 # 設定 session 存活時間為 30 分鐘
@@ -25,22 +32,24 @@ NAV_ITEMS = [
     ("traffic", "交通情報")
 ]
 
+
 @app.context_processor
 def inject_nav():
   return {
     "nav_items": NAV_ITEMS
   }
 
+
 app.register_blueprint(web.bp)
 
 # 測試
+
+
 @app.route("/test")
 def test():
   return render_template("test.html")
   # return jsonify({"message":"app is working"})
 
+
 if __name__ == '__main__':
-  initStr = init_db.init_db()
-  if initStr:
-    print(f" * SQLITE 資料庫已初始化，初始化的資料表：{initStr}")
   app.run(debug=True)

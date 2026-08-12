@@ -1,5 +1,6 @@
 from flask import Blueprint, redirect, url_for, render_template, request, jsonify, session
 import sqlite3
+import os
 from werkzeug.security import check_password_hash
 
 from routes.admin.api import attractions as attr, event, food, manager
@@ -11,6 +12,9 @@ bp.register_blueprint(attr.bp, url_prefix="/api/attractions")
 bp.register_blueprint(event.bp, url_prefix="/api/event")
 bp.register_blueprint(food.bp, url_prefix="/api/food")
 bp.register_blueprint(manager.bp, url_prefix="/api/manager")
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DB_PATH = os.path.join(BASE_DIR, "database", "database.db")
 
 #登入
 @bp.get('/login')
@@ -36,7 +40,7 @@ def login():
     }), 400
 
   # 驗證帳密
-  conn = sqlite3.connect("database/database.db")
+  conn = sqlite3.connect(DB_PATH)
   cursor = conn.cursor()
   cursor.execute(
     "SELECT * FROM manager WHERE account = ?",
@@ -74,7 +78,7 @@ def index():
 @bp.get('/api/index')
 @api_manager_required
 def get_index_data():
-  conn = sqlite3.connect("database/database.db")
+  conn = sqlite3.connect(DB_PATH)
   cursor = conn.cursor()
 
   cursor.execute(

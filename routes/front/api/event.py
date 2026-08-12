@@ -1,8 +1,12 @@
 from flask import Blueprint, request, jsonify
 import sqlite3
+import os
 from utils.auth import api_login_required
 
 bp = Blueprint('event', __name__)
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DB_PATH = os.path.join(BASE_DIR, "database", "database.db")
 
 upload_folder = f"static/image/event"
 thumbnail_folder = f"static/image/event/thumbnail"
@@ -10,7 +14,7 @@ thumbnail_folder = f"static/image/event/thumbnail"
 # 讀取
 @bp.get('/')
 def get_event():
-  conn = sqlite3.connect("database/database.db")
+  conn = sqlite3.connect(DB_PATH)
   conn.row_factory = sqlite3.Row
   cursor = conn.cursor()
 
@@ -56,7 +60,7 @@ def get_event():
 @bp.get('/<int:eventId>')
 def get_event_by_id(eventId):
   # 連線資料庫
-  conn = sqlite3.connect("database/database.db")
+  conn = sqlite3.connect(DB_PATH)
   cursor = conn.cursor()
 
   # 確認目標是否存在
@@ -88,7 +92,7 @@ def get_event_by_id(eventId):
   return jsonify({"message": "資料讀取成功", "event": event}), 200
 
   # 連線資料庫
-  conn = sqlite3.connect("database/database.db")
+  conn = sqlite3.connect(DB_PATH)
   cursor = conn.cursor()
   
   # 確認目標是否存在

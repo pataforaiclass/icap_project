@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template
 import sqlite3
+import os
 from bs4 import BeautifulSoup
 
 from routes.front.api import attractions as attr, event, food, member
@@ -11,9 +12,12 @@ bp.register_blueprint(event.bp, url_prefix="/api/event")
 bp.register_blueprint(food.bp, url_prefix="/api/food")
 bp.register_blueprint(member.bp, url_prefix="/api/member")
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DB_PATH = os.path.join(BASE_DIR, "database", "database.db")
+
 @bp.get('/api/index')
 def get_index_data():
-  conn = sqlite3.connect("database/database.db")
+  conn = sqlite3.connect(DB_PATH)
   conn.row_factory = sqlite3.Row
   cursor = conn.cursor()
 
