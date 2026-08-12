@@ -220,6 +220,29 @@ API 成功時會回傳 message 與資料內容；失敗時會回傳錯誤原因�
 |8/11|訪客頁面 API|呼叫 `GET /api/event/10`|回傳活動詳細資料以及圖片|
 |8/11|管理頁面 API|呼叫 `GET /admin/api/index`|回傳管理者個人用戶資料及圖表統計資料|
 
+## Render 部署說明
+本專案部署在 Render Web Service，讓前端頁面與 Flask API 皆能在線上展示。
+
+### Render 建立服務時的設定
+|欄位|設定|
+|:---|:---|
+|Service Type|Web Service|
+|Runtime|Python 3|
+|Branch|main|
+|Build Command|pip install -r requirements.txt|
+|Start Command|gunicorn app:app|
+|Root Directory|空白，因為專案檔案在 Repository 根目錄|
+
+### Python 版本
+專案根目錄已加入 .python-version，Render 會依照此檔案使用 Python 3.13。
+
+### SQLite 注意事項
+Render 免費服務的檔案系統不是永久保存空間，所以 database.db 會在服務啟動時自動建立，每次服務重啟時皆會還原資料庫內容。
+
+測試用管理員帳號： dsa
+
+測試用管理員密碼： asd123asd
+
 ## 開發者資訊
 |項目|內容|
 |:---|:---|
