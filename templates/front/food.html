@@ -60,10 +60,16 @@
           <i class="bi bi-chevron-left"></i>
         </button>
 
-        <button v-for="page in pageNumbers" :key="page" type="button" class="page-btn"
-          :class="{ active: currentPage === page }" @click="changePage(page)">
-          {{ page }}
-        </button>
+        <template v-for="page in pageNumbers">
+          <button :key="page" type="button" class="page-btn" :class="{ active: currentPage === page }"
+            @click="changePage(page)" v-if="page!='...'">
+            {{ page }}
+          </button>
+          <button :key="page" type="button" class="page-btn" 
+            @click="switchPage()" v-if="page==='...'">
+            {{ page }}
+          </button>
+        </template>
 
         <button class="page-btn page-arrow" type="button" :disabled="currentPage === totalPages"
           @click="changePage(currentPage + 1)">
@@ -178,10 +184,18 @@
           @click="changePage(currentPage - 1)">
           <i class="bi bi-chevron-left"></i>
         </button>
-        <button v-for="page in pageNumbers" :key="page" type="button" class="page-btn"
-          :class="{ active: currentPage === page }" @click="changePage(page)">
-          {{ page }}
-        </button>
+
+        <template v-for="page in pageNumbers">
+          <button :key="page" type="button" class="page-btn" :class="{ active: currentPage === page }"
+            @click="changePage(page)" v-if="page!='...'">
+            {{ page }}
+          </button>
+          <button :key="page" type="button" class="page-btn" 
+            @click="switchPage()" v-if="page==='...'">
+            {{ page }}
+          </button>
+        </template>
+        
         <button class="page-btn page-arrow" type="button" :disabled="currentPage === totalPages"
           @click="changePage(currentPage + 1)">
           <i class="bi bi-chevron-right"></i>

@@ -240,6 +240,20 @@ const App = {
         behavior: 'smooth'
       })
     },
+    // 依數字切換頁碼
+    switchPage() {
+      const vm = this;
+      Swal.fire({
+        title: "請輸入頁碼",
+        input: "number",
+        inputAttributes: { min: 1, max: vm.totalPages },
+        showCancelButton: true,
+        confirmButtonText: "確定",
+        cancelButtonText: "取消"
+      }).then((result) => {
+        if (result.isConfirmed) vm.currentPage = result.value;
+      });
+    },
     // 每頁筆數改變
     changePageSize() {
       // 改變每頁數量後回到第一頁
