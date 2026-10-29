@@ -1,4 +1,4 @@
-# AI Travel Guide Website
+# Taichung Travel Information System
 ## 專題簡介
 本專題以「AI 輔助旅遊景點推薦平台」為題，使用 Bootstrap 製作 RWD 前端頁面，使用 Vue.js 呼叫 Flask API，並以 SQLite 儲存景點與分類資料。
 
