@@ -1,6 +1,6 @@
 # Taichung Travel Information System
 ## 專題簡介
-本專題以「AI 輔助旅遊景點推薦平台」為題，使用 Bootstrap 製作 RWD 前端頁面，使用 Vue.js 呼叫 Flask API，並以 SQLite 儲存景點與分類資料。
+本專題以「台中旅遊資訊查詢與管理平台」為題，使用 Bootstrap 製作 RWD 前端頁面，使用 Vue.js 呼叫 Flask API，並以 SQLite 儲存景點與分類資料。
 
 網站使用者有訪客及管理員兩種身分，訪客可以瀏覽活動、景點及美食三大主題的資訊，以及查詢資訊和查看詳細內容，而管理員登入管理頁面之後能管理紀錄了前述三大主題資料表中的資料，並在管理頁顯示統計圖表。
 
